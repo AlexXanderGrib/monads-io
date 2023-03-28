@@ -21,6 +21,10 @@
 3. **Tested**. 100% coverage
 4. **Practical**. Just 2 wrappers: Either and Maybe - easy for non-fp people
 
+## Credits
+
+Huge credit to @JSMonk. This library is based on [`JSMonk/sweet-monads`](https://github.com/JSMonk/sweet-monads)
+
 ## 📦 Installation
 
 - **Using `npm`**
@@ -55,7 +59,7 @@ export async function getTargets(
   const { messagesService, chatsService } = getServices(api);
 
   ...
-  
+
   // 1. Get message
   // 2. Get message reply id (0 = no reply)
   // 3. Get reply message by message id

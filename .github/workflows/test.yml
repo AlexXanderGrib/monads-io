@@ -19,7 +19,7 @@ jobs:
         run: npm install
 
       - name: Run jest
-        run: npm test --coverage
+        run: npm test -- --coverage
 
       - name: Upload coverage to Codecov
         run: npx codecov
