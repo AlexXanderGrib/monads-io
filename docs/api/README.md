@@ -4,17 +4,17 @@ Package / [Exports](modules.md)
 
 > Package template that can get you `99%` quality and `33%` maintenance on `npm`
 
-[![Test Status](https://github.com/AlexXanderGrib/package-template/actions/workflows/test.yml/badge.svg)](https://github.com/AlexXanderGrib/package-template)
-[![Downloads](https://img.shields.io/npm/dt/package_template.svg)](https://npmjs.com/package/package_template)
-[![last commit](https://img.shields.io/github/last-commit/AlexXanderGrib/package-template.svg)](https://github.com/AlexXanderGrib/package-template)
-[![codecov](https://img.shields.io/codecov/c/github/AlexXanderGrib/package-template/main.svg)](https://codecov.io/gh/AlexXanderGrib/package-template)
-[![GitHub](https://img.shields.io/github/stars/AlexXanderGrib/package-template.svg)](https://github.com/AlexXanderGrib/package-template)
-[![package_template](https://snyk.io/advisor/npm-package/package_template/badge.svg)](https://snyk.io/advisor/npm-package/package_template)
-[![Known Vulnerabilities](https://snyk.io/test/npm/package_template/badge.svg)](https://snyk.io/test/npm/package_template)
-[![Quality](https://img.shields.io/npms-io/quality-score/package_template.svg?label=quality%20%28npms.io%29&)](https://npms.io/search?q=package_template)
-[![npm](https://img.shields.io/npm/v/package_template.svg)](https://npmjs.com/package/package_template)
-[![license MIT](https://img.shields.io/npm/l/package_template.svg)](https://github.com/AlexXanderGrib/package-template/blob/main/LICENSE.txt)
-[![Size](https://img.shields.io/bundlephobia/minzip/package_template)](https://bundlephobia.com/package/package_template)
+[![Test Status](https://github.com/AlexXanderGrib/monads-io/actions/workflows/test.yml/badge.svg)](https://github.com/AlexXanderGrib/monads-io)
+[![Downloads](https://img.shields.io/npm/dt/monads-io.svg)](https://npmjs.com/package/monads-io)
+[![last commit](https://img.shields.io/github/last-commit/AlexXanderGrib/monads-io.svg)](https://github.com/AlexXanderGrib/monads-io)
+[![codecov](https://img.shields.io/codecov/c/github/AlexXanderGrib/monads-io/main.svg)](https://codecov.io/gh/AlexXanderGrib/monads-io)
+[![GitHub](https://img.shields.io/github/stars/AlexXanderGrib/monads-io.svg)](https://github.com/AlexXanderGrib/monads-io)
+[![monads-io](https://snyk.io/advisor/npm-package/monads-io/badge.svg)](https://snyk.io/advisor/npm-package/monads-io)
+[![Known Vulnerabilities](https://snyk.io/test/npm/monads-io/badge.svg)](https://snyk.io/test/npm/monads-io)
+[![Quality](https://img.shields.io/npms-io/quality-score/monads-io.svg?label=quality%20%28npms.io%29&)](https://npms.io/search?q=monads-io)
+[![npm](https://img.shields.io/npm/v/monads-io.svg)](https://npmjs.com/package/monads-io)
+[![license MIT](https://img.shields.io/npm/l/monads-io.svg)](https://github.com/AlexXanderGrib/monads-io/blob/main/LICENSE.txt)
+[![Size](https://img.shields.io/bundlephobia/minzip/monads-io)](https://bundlephobia.com/package/monads-io)
 
 ## Why use this template
 
@@ -29,8 +29,8 @@ Package / [Exports](modules.md)
 ## What to do
 
 1. Replace package name and package description here and in [package.json](./package.json)
-2. Replace `AlexXanderGrib/package-template` to your repository
-3. Replace `package_template` to your package name
+2. Replace `AlexXanderGrib/monads-io` to your repository
+3. Replace `monads-io` to your package name
 4. Write some code and cover it with tests
 
 ### How to max `quality`
@@ -56,21 +56,21 @@ Upload 3 versions of your package in 24 hours. You can not get more than 33% mai
 
 - **Using `npm`**
   ```shell
-  npm i package_template
+  npm i monads-io
   ```
 - **Using `Yarn`**
   ```shell
-  yarn add package_template
+  yarn add monads-io
   ```
 - **Using `pnpm`**
   ```shell
-  pnpm add package_template
+  pnpm add monads-io
   ```
 
 ## ⚙️ Usage
 
 ```javascript
-import { Example } from "package_template";
+import { Example } from "monads-io";
 
 const container = new Example(10);
 

@@ -1,5 +1,5 @@
 {
-  "name": "package_template",
+  "name": "monads-io",
   "version": "1.0.0",
   "description": "🚀 Package template",
   "scripts": {
@@ -24,6 +24,19 @@
       "require": "./index.js",
       "import": "./index.mjs",
       "types": "./index.d.ts"
+    },
+    "./either": {
+      "require": "./dist/either.exports.js",
+      "import": "./dist/either.exports.mjs",
+      "types": "./dist/either.d.ts"
+    },
+    "./maybe": {
+      "require": "./dist/maybe.exports.js",
+      "import": "./dist/maybe.exports.mjs",
+      "types": "./dist/maybe.d.ts"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts"
     }
   },
   "publishConfig": {
@@ -31,7 +44,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlexXanderGrib/package-template.git"
+    "url": "git+https://github.com/AlexXanderGrib/monads-io.git"
   },
   "keywords": [],
   "files": [
@@ -55,9 +68,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AlexXanderGrib/package-template/issues"
+    "url": "https://github.com/AlexXanderGrib/monads-io/issues"
   },
-  "homepage": "https://github.com/AlexXanderGrib/package-template#readme",
+  "homepage": "https://github.com/AlexXanderGrib/monads-io#readme",
   "devDependencies": {
     "@types/jest": "^29.2.3",
     "@types/node": "^18.11.9",
