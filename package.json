@@ -1,7 +1,7 @@
 {
   "name": "monads-io",
-  "version": "1.0.0",
-  "description": "🚀 Package template",
+  "version": "1.0.1",
+  "description": "🚀 Efficient Monads for JS: Maybe (Option) and Either (Result)",
   "scripts": {
     "test": "jest",
     "build:dist": "rimraf dist && rollup -c",
@@ -46,7 +46,15 @@
     "type": "git",
     "url": "git+https://github.com/AlexXanderGrib/monads-io.git"
   },
-  "keywords": [],
+  "keywords": [
+    "monads",
+    "either",
+    "maybe",
+    "option",
+    "result",
+    "front-end",
+    "backend"
+  ],
   "files": [
     "dist/",
     "src/",
