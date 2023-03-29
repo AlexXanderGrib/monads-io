@@ -1,8 +1,8 @@
 Package / [Exports](modules.md)
 
-# Quality Package Template
+# Monads IO
 
-> Package template that can get you `99%` quality and `33%` maintenance on `npm`
+> 🚀 Efficient Monads for JS: Maybe (Option) and Either (Result)
 
 [![Test Status](https://github.com/AlexXanderGrib/monads-io/actions/workflows/test.yml/badge.svg)](https://github.com/AlexXanderGrib/monads-io)
 [![Downloads](https://img.shields.io/npm/dt/monads-io.svg)](https://npmjs.com/package/monads-io)
@@ -16,41 +16,23 @@ Package / [Exports](modules.md)
 [![license MIT](https://img.shields.io/npm/l/monads-io.svg)](https://github.com/AlexXanderGrib/monads-io/blob/main/LICENSE.txt)
 [![Size](https://img.shields.io/bundlephobia/minzip/monads-io)](https://bundlephobia.com/package/monads-io)
 
-## Why use this template
+## Why use this lib
 
-1. I used this approach personally to publish following packages
-   1. [`qiwi-sdk`](https://npmjs.com/package/qiwi-sdk)
-   2. [`yoomoney-sdk`](https://npmjs.com/package/yoomoney-sdk)
-   3. [`unpc`](https://npmjs.com/package/unpc)
-   4. [`tie-logger`](https://npmjs.com/package/tie-logger)
-2. They all got `99`+% quality rating on NPM
-3. Most of them are located on 1st page of [npm search by keyword `backend`](https://www.npmjs.com/search?q=keywords:backend)
+1. **Small** and **Tree-Shakable**. Either - 3kb minified, Maybe - 3kb minified, can be imported separately
+2. **No dependencies**.
+3. **Memory-Efficient**. 6-10 bytes overhead / instance
+4. **Tested**. 100% coverage
+5. **Practical**. Just 2 wrappers: Either and Maybe - easy for non-fp people
 
-## What to do
+## Credits
 
-1. Replace package name and package description here and in [package.json](./package.json)
-2. Replace `AlexXanderGrib/monads-io` to your repository
-3. Replace `monads-io` to your package name
-4. Write some code and cover it with tests
+Huge credit to @JSMonk. This library is based on [`JSMonk/sweet-monads`](https://github.com/JSMonk/sweet-monads)
 
-### How to max `quality`
+Docs available in his repository
 
-1. Write tests and increase coverage. To exclude files with destructive side-effects, you can use following comment
-   ```javascript
-   /* istanbul ignore file */
-   ```
-2. Everything else is already in this template
-   1. TypeScript support
-   2. Auto build to both ES-Modules and CommonJS
-   3. TS-Jest
-   4. Exports mapping
-   5. Git Hooks
-3. Remember to run `npm test` before publishing to include coverage files in package and increase quality of your package
-4. **PUBLISH USING ONLY NPM**. Not doing this will decrease score by 15-25%
-
-### How to max `maintenance`?
-
-Upload 3 versions of your package in 24 hours. You can not get more than 33% maintenance on `npm`
+- [Either](https://github.com/JSMonk/sweet-monads/tree/master/either)
+- [Maybe](https://github.com/JSMonk/sweet-monads/tree/master/maybe)
+- [Reference](./docs/api/modules.md)
 
 ## 📦 Installation
 
@@ -69,11 +51,50 @@ Upload 3 versions of your package in 24 hours. You can not get more than 33% mai
 
 ## ⚙️ Usage
 
-```javascript
-import { Example } from "monads-io";
+```typescript
+// Real world example
+// This maybe is not tree-shakable. Used in NodeJS code
+import { Maybe } from "monads-io";
 
-const container = new Example(10);
+export async function getTargets(
+  api: TelegramAPI,
+  tokens: formattedText,
+  { mentionLimit = 1, message = undefined as message | undefined } = {}
+): Promise<Map<number, chat | undefined>> {
+  const mentions = getMentions(tokens).slice(0, mentionLimit);
 
-console.log(container);
-// Example { value: 10 }
+  const targets = new Map<number, chat | undefined>();
+  let replyTarget: [number, chat | undefined] | undefined;
+  const { messagesService, chatsService } = getServices(api);
+
+  ...
+
+  // 1. Get message
+  // 2. Get message reply id (0 = no reply)
+  // 3. Get reply message by message id
+  // 4. Get reply message sender
+  // 5. Get his/her profile
+  // 6. Set local variable to profile
+
+  const reply = await Maybe.fromNullable(message)
+    .filter((message) => message.reply_to_message_id !== 0)
+    .asyncChain((message) =>
+      messagesService.getReply(message.chat_id, message.id)
+    );
+
+  const sender = await reply
+    .map(MemberId.fromMessage)
+    .tap(({ memberId }) => {
+      replyTarget = [memberId, undefined];
+    })
+    .asyncChain(({ memberId }) => chatsService.getById(memberId));
+
+  sender.tap((sender) => {
+    replyTarget = [sender.id, sender];
+  });
+
+  ...
+
+  return replyTarget ? new Map([replyTarget, ...targets]) : targets;
+}
 ```

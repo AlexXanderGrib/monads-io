@@ -1,6 +1,6 @@
-# Quality Package Template
+# Monads IO
 
-> Package template that can get you `99%` quality and `33%` maintenance on `npm`
+> 🚀 Efficient Monads for JS: Maybe (Option) and Either (Result)
 
 [![Test Status](https://github.com/AlexXanderGrib/monads-io/actions/workflows/test.yml/badge.svg)](https://github.com/AlexXanderGrib/monads-io)
 [![Downloads](https://img.shields.io/npm/dt/monads-io.svg)](https://npmjs.com/package/monads-io)
@@ -17,13 +17,20 @@
 ## Why use this lib
 
 1. **Small** and **Tree-Shakable**. Either - 3kb minified, Maybe - 3kb minified, can be imported separately
-2. **Memory-Efficient**. 6-10 bytes overhead / instance
-3. **Tested**. 100% coverage
-4. **Practical**. Just 2 wrappers: Either and Maybe - easy for non-fp people
+2. **No dependencies**.
+3. **Memory-Efficient**. 6-10 bytes overhead / instance
+4. **Tested**. 100% coverage
+5. **Practical**. Just 2 wrappers: Either and Maybe - easy for non-fp people
 
 ## Credits
 
 Huge credit to @JSMonk. This library is based on [`JSMonk/sweet-monads`](https://github.com/JSMonk/sweet-monads)
+
+Docs available in his repository
+
+- [Either](https://github.com/JSMonk/sweet-monads/tree/master/either)
+- [Maybe](https://github.com/JSMonk/sweet-monads/tree/master/maybe)
+- [Reference](./docs/api/modules.md)
 
 ## 📦 Installation
 

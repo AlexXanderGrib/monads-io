@@ -7,25 +7,25 @@ I made 4 optimizations, based on `Maybe` type:
 
 1. [`Plain object`](./1-object.js)
    ```javascript
-   const some = (value) => ({ type: "some", value });
+   const just = (value) => ({ type: "just", value });
    const none = { type: "none" };
    ```
 2. [`Frozen object`](./2-frozen.js)
    Frozen object, can't be modified, that provides a VM ability to make optimizations
    ```javascript
-   const some = (value) => Object.freeze({ type: "some", value });
+   const just = (value) => Object.freeze({ type: "just", value });
    const none = Object.freeze({ type: "none" });
    ```
 3. [`Classes`](./3-class.js) - 34 KB average  
    Classes, thou not in "functional style", shown a significant decrease in memory usage (2x)
 
    ```javascript
-   class Some {
+   class Just {
      static create(value) {
-       return new Some(value);
+       return new Just(value);
      }
 
-     type = "some";
+     type = "just";
      constructor(value) {
        this.value = value;
        Object.freeze(this);
@@ -50,13 +50,13 @@ I made 4 optimizations, based on `Maybe` type:
 
    ```javascript
    const MaybeState = Object.freeze({
-    Some: 1,
+    Just: 1,
     None: 0
    });
 
-   class Some {
+   class Just {
     ...
-    type = MaybeState.Some
+    type = MaybeState.Just
     ...
    }
 
