@@ -34,7 +34,7 @@ export type SerializedMaybe<T> = maybe.SerializedMaybe<T>;
  * @deprecated This is created only for compatibility with old nodejs. This is not tree-shakable. Prefer importing from `monads-io/maybe`
  */
 export const Maybe = Object.freeze({
-  some: maybe.some,
+  just: maybe.just,
   none: maybe.none,
   chain: maybe.chain,
   merge: maybe.merge,

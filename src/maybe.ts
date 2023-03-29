@@ -12,19 +12,19 @@ import type {
 } from "./types";
 
 export const enum MaybeState {
-  Some = 1,
+  Just = 1,
   None = 0
 }
 
 const name = "Maybe";
 
-class Some<T> {
-  static create<T>(value: T): Some<T> {
-    return new Some(value);
+class Just<T> {
+  static create<T>(value: T): Just<T> {
+    return new Just(value);
   }
 
   public readonly name = name;
-  public readonly type = MaybeState.Some;
+  public readonly type = MaybeState.Just;
 
   private constructor(public readonly value: T) {
     Object.freeze(this);
@@ -45,7 +45,7 @@ class None {
   }
 }
 
-type States<T> = Pair<Some<T>, None>;
+type States<T> = Pair<Just<T>, None>;
 
 export type SerializedMaybe<T> = States<T>[number];
 
@@ -57,16 +57,16 @@ class MaybeConstructor<T, S extends MaybeState = MaybeState>
     return new MaybeConstructor<T, MaybeState.None>(None.create());
   }
 
-  static some<T>(value: T): Maybe<T> {
-    return new MaybeConstructor<T, MaybeState.Some>(Some.create(value));
+  static just<T>(value: T): Maybe<T> {
+    return new MaybeConstructor<T, MaybeState.Just>(Just.create(value));
   }
 
   unwrapOr<X>(value: X): T | X {
     return this.biMatch(identity, () => value);
   }
 
-  isSome(): this is MaybeConstructor<T, MaybeState.Some> {
-    return this.is(MaybeState.Some);
+  isJust(): this is MaybeConstructor<T, MaybeState.Just> {
+    return this.is(MaybeState.Just);
   }
 
   isNone(): this is MaybeConstructor<T, MaybeState.None> {
@@ -81,7 +81,7 @@ class MaybeConstructor<T, S extends MaybeState = MaybeState>
     map: Pm<T, V, A>,
     ...parameters: A
   ): Maybe<V> {
-    return this.chain(combine(bind(map, parameters), some));
+    return this.chain(combine(bind(map, parameters), just));
   }
 
   apply<A, B, P extends AnyParameters>(
@@ -119,7 +119,7 @@ class MaybeConstructor<T, S extends MaybeState = MaybeState>
   filter<X extends T>(filter: (input: T) => input is X): Maybe<X>;
   filter(filter: (input: T) => boolean): Maybe<T>;
   filter(filter: (input: T) => boolean): Maybe<T> {
-    return this.chain((value) => (filter(value) ? some(value) : none()));
+    return this.chain((value) => (filter(value) ? just(value) : none()));
   }
 
   chain<V, A extends AnyParameters>(
@@ -130,7 +130,7 @@ class MaybeConstructor<T, S extends MaybeState = MaybeState>
   }
 
   default(value: T): Maybe<T> {
-    return this.or(some(value));
+    return this.or(just(value));
   }
 
   or(x: Maybe<T>): Maybe<T> {
@@ -166,9 +166,9 @@ class MaybeConstructor<T, S extends MaybeState = MaybeState>
     });
   }
 
-  biMatch<A, B = A>(mapSome: Pm<T, A, []>, mapNone: Pm<void, B, []>): A | B {
+  biMatch<A, B = A>(mapJust: Pm<T, A, []>, mapNone: Pm<void, B, []>): A | B {
     return this.match<A | B>({
-      [MaybeState.Some]: ({ value }) => mapSome(value),
+      [MaybeState.Just]: ({ value }) => mapJust(value),
       [MaybeState.None]: () => mapNone()
     });
   }
@@ -185,7 +185,7 @@ class MaybeConstructor<T, S extends MaybeState = MaybeState>
     this: MaybeConstructor<MaybePromiseLike<X>>
   ): Promise<Maybe<X>> {
     return await this.biMatch<MaybePromiseLike<Maybe<X>>>(
-      async (value) => some(await value),
+      async (value) => just(await value),
       none
     );
   }
@@ -195,13 +195,13 @@ Object.freeze(MaybeConstructor);
 Object.freeze(MaybeConstructor.prototype);
 
 export type Maybe<T> =
-  | MaybeConstructor<T, MaybeState.Some>
+  | MaybeConstructor<T, MaybeState.Just>
   | MaybeConstructor<T, MaybeState.None>;
 
 export const isMaybe = <T>(value: unknown | Maybe<T>): value is Maybe<T> =>
   value instanceof MaybeConstructor;
 
-export const { some, none } = MaybeConstructor;
+export const { just, none } = MaybeConstructor;
 
 export function chain<A, B, P extends AnyParameters>(
   map: (v: A, ...parameters: P) => MaybePromiseLike<Maybe<B>>,
@@ -215,8 +215,8 @@ export function fromJSON<T>(serialized: SerializedMaybe<T>): Maybe<T> {
     throw new Error("Expected serialized to be of type Maybe");
   }
 
-  if (serialized.type === MaybeState.Some) {
-    return some(serialized.value);
+  if (serialized.type === MaybeState.Just) {
+    return just(serialized.value);
   }
 
   return none();
@@ -241,7 +241,7 @@ export function merge(values: Array<Maybe<unknown>>): Maybe<unknown> {
   const array: unknown[] = [];
 
   for (const value of values) {
-    if (value.isSome()) {
+    if (value.isJust()) {
       value.tap((value) => array.push(value));
 
       continue;
@@ -250,11 +250,11 @@ export function merge(values: Array<Maybe<unknown>>): Maybe<unknown> {
     return none();
   }
 
-  return some(array);
+  return just(array);
 }
 
 export function fromNullable<T>(value: Nullable<T>): Maybe<T> {
-  return value !== null && value !== undefined ? some(value) : none();
+  return value !== null && value !== undefined ? just(value) : none();
 }
 
 export function* iterator<T>(
@@ -262,7 +262,7 @@ export function* iterator<T>(
 ): Generator<T, void, void> {
   let result: Maybe<T>;
 
-  while ((result = callback()).isSome()) {
+  while ((result = callback()).isJust()) {
     yield result.unwrap();
   }
 }
@@ -272,7 +272,7 @@ export async function* asyncIterator<T>(
 ): AsyncGenerator<T, void, void> {
   let result: Maybe<MaybePromiseLike<T>>;
 
-  while ((result = await callback()).isSome()) {
+  while ((result = await callback()).isJust()) {
     yield await result.unwrap();
   }
 }

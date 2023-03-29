@@ -28,7 +28,7 @@ type MapFlat<V extends readonly { readonly type: Primitive }[]> = {
  *
  * @export
  * @class FlatUnion
- * @template {object[]} V - All valid variants of type. Example: [Some<T>, None]
+ * @template {object[]} V - All valid variants of type. Example: [Just<T>, None]
  */
 export class Union<
   V extends readonly { readonly type: Primitive }[],
