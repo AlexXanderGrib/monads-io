@@ -79,7 +79,8 @@ describe("Maybe", () => {
   });
 
   test("meta", () => {
-    expect($just[Symbol.toStringTag]).toBe("Maybe");
+    expect($just[Symbol.toStringTag]).toBe("Just");
+    expect($none[Symbol.toStringTag]).toBe("None");
     expect(isMaybe($none)).toBe(true);
     expect(isMaybe($just)).toBe(true);
     expect(isMaybe({ ...$just })).toBe(false);

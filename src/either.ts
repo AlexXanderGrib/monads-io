@@ -1,5 +1,4 @@
 /* eslint-disable no-invalid-this */
-import { Union } from "./union";
 import {
   bind,
   combine,
@@ -25,44 +24,15 @@ const enum EitherType {
 
 const name = "Either";
 
-class Left<L> {
-  static create<L>(left: L): Left<L> {
-    return new Left(left);
-  }
-
-  public readonly name = name;
-  public readonly type = EitherType.Left;
-  private constructor(public readonly left: L) {
-    Object.freeze(this);
-  }
-}
-
-class Right<R> {
-  static create<R>(right: R): Right<R> {
-    return new Right(right);
-  }
-
-  public readonly name = name;
-  public readonly type = EitherType.Right;
-
-  private constructor(public readonly right: R) {
-    Object.freeze(this);
-  }
-}
-
-type State<L, R> = Pair<Left<L>, Right<R>>;
-export type SerializedEither<L, R> = State<L, R>[number];
-
-class EitherConstructor<L, R, T extends EitherType = EitherType>
-  extends Union<State<L, R>, T>
+class EitherConstructor<L, R>
   implements AsyncMonad<R>, Alternative<R>, Container<R>
 {
   static right<L = never, T = never>(right: T): Either<L, T> {
-    return new EitherConstructor<L, T, EitherType.Right>(Right.create(right));
+    return Right.create(right);
   }
 
   static left<T = never, R = never>(value: T): Either<T, R> {
-    return new EitherConstructor<T, R, EitherType.Left>(Left.create(value));
+    return Left.create(value);
   }
 
   getRight(): R | undefined {
@@ -79,19 +49,19 @@ class EitherConstructor<L, R, T extends EitherType = EitherType>
   ): Either<L, R> {
     this.map(callback, ...parameters);
 
-    return this as Either<L, R>;
+    return this as unknown as Either<L, R>;
   }
 
   get [Symbol.toStringTag]() {
     return "Either";
   }
 
-  isLeft(): this is EitherConstructor<L, R, EitherType.Left> {
-    return this.is(EitherType.Left);
+  isLeft(): this is Left<L, R> {
+    return this instanceof Left;
   }
 
-  isRight(): this is EitherConstructor<L, R, EitherType.Right> {
-    return this.is(EitherType.Right);
+  isRight(): this is Right<L, R> {
+    return this instanceof Right;
   }
 
   unwrapOr<X>(value: X): X | R {
@@ -177,10 +147,15 @@ class EitherConstructor<L, R, T extends EitherType = EitherType>
   }
 
   biMatch<A, B = A>(mapLeft: Pm<L, A>, mapRight: Pm<R, B>): A | B {
-    return this.match<A | B>({
-      [EitherType.Left]: ({ left }) => mapLeft(left),
-      [EitherType.Right]: ({ right }) => mapRight(right)
-    });
+    if (this.isLeft()) {
+      return mapLeft(this.left);
+    }
+
+    if (this.isRight()) {
+      return mapRight(this.right);
+    }
+
+    throw new Error("Invalid state");
   }
 
   default(value: R): Either<L, R> {
@@ -190,7 +165,7 @@ class EitherConstructor<L, R, T extends EitherType = EitherType>
   or(x: Either<L, R>): Either<L, R> {
     return this.biMatch(
       () => x,
-      () => this as Either<L, R>
+      () => this as unknown as Either<L, R>
     );
   }
 
@@ -216,9 +191,83 @@ class EitherConstructor<L, R, T extends EitherType = EitherType>
 Object.freeze(EitherConstructor);
 Object.freeze(EitherConstructor.prototype);
 
-export type Either<L, R> =
-  | EitherConstructor<L, R, EitherType.Right>
-  | EitherConstructor<L, R, EitherType.Left>;
+type SerializedLeft<L> = Readonly<{
+  name: typeof name;
+  type: EitherType.Left;
+  left: L;
+}>;
+
+class Left<L, R> extends EitherConstructor<L, R> implements SerializedLeft<L> {
+  static create<L, R = unknown>(left: L): Left<L, R> {
+    return new Left(left);
+  }
+
+  get [Symbol.toStringTag]() {
+    return "Left";
+  }
+
+  get name(): typeof name {
+    return name;
+  }
+
+  get type(): EitherType.Left {
+    return EitherType.Left;
+  }
+
+  private constructor(public readonly left: L) {
+    super();
+    Object.freeze(this);
+  }
+
+  toJSON(): SerializedLeft<L> {
+    return { name: this.name, type: this.type, left: this.left };
+  }
+}
+
+Object.freeze(Left);
+Object.freeze(Left.prototype);
+
+type SerializedRight<R> = Readonly<{
+  name: typeof name;
+  type: EitherType.Right;
+  right: R;
+}>;
+
+class Right<L, R>
+  extends EitherConstructor<L, R>
+  implements SerializedRight<R>
+{
+  static create<R, L = unknown>(right: R): Right<L, R> {
+    return new Right(right);
+  }
+
+  get [Symbol.toStringTag]() {
+    return "Right";
+  }
+
+  get name(): typeof name {
+    return name;
+  }
+
+  get type(): EitherType.Right {
+    return EitherType.Right;
+  }
+
+  private constructor(public readonly right: R) {
+    super();
+    Object.freeze(this);
+  }
+
+  toJSON(): SerializedRight<R> {
+    return { name: this.name, type: this.type, right: this.right };
+  }
+}
+
+Object.freeze(Right);
+Object.freeze(Right.prototype);
+
+export type Either<L, R> = Right<L, R> | Left<L, R>;
+export type SerializedEither<L, R> = SerializedRight<R> | SerializedLeft<L>;
 
 export const isEither = <L, R>(
   value: unknown | Either<L, R>
@@ -336,7 +385,7 @@ export function mergeInMany<L, R>(
 ): Either<L[], R[]>;
 export function mergeInMany(
   values: Array<Either<unknown, unknown>>
-): EitherConstructor<unknown[], unknown[], EitherType> {
+): EitherConstructor<unknown[], unknown[]> {
   const hasLefts = values.some((value) => value.isLeft());
   const results: unknown[] = [];
 
@@ -424,4 +473,14 @@ export async function fromTryAsync<L, T>(
   } catch (error) {
     return left(error as L);
   }
+}
+
+export function fromPromiseSettledResult<L, T>(
+  result: PromiseSettledResult<T>
+): Either<L, T> {
+  if (result.status === "fulfilled") {
+    return right(result.value);
+  }
+
+  return left(result.reason);
 }

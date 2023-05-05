@@ -1,4 +1,3 @@
-import { Union } from "./union";
 import { bind, combine, identity, isWrappedFunction, noop } from "./runtime";
 import type {
   MaybePromiseLike,
@@ -18,59 +17,25 @@ export const enum MaybeState {
 
 const name = "Maybe";
 
-class Just<T> {
-  static create<T>(value: T): Just<T> {
-    return new Just(value);
-  }
-
-  public readonly name = name;
-  public readonly type = MaybeState.Just;
-
-  private constructor(public readonly value: T) {
-    Object.freeze(this);
-  }
-}
-
-class None {
-  static readonly instance = new None();
-  static create(): None {
-    return None.instance;
-  }
-
-  public readonly name = name;
-  public readonly type = MaybeState.None;
-
-  private constructor() {
-    Object.freeze(this);
-  }
-}
-
-type States<T> = Pair<Just<T>, None>;
-
-export type SerializedMaybe<T> = States<T>[number];
-
-class MaybeConstructor<T, S extends MaybeState = MaybeState>
-  extends Union<States<T>, S>
-  implements Monad<T>, Alternative<T>, Container<T>
-{
+class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
   static none<T = never>(): Maybe<T> {
-    return new MaybeConstructor<T, MaybeState.None>(None.create());
+    return None.create();
   }
 
   static just<T>(value: T): Maybe<T> {
-    return new MaybeConstructor<T, MaybeState.Just>(Just.create(value));
+    return Just.create(value);
   }
 
   unwrapOr<X>(value: X): T | X {
     return this.biMatch(identity, () => value);
   }
 
-  isJust(): this is MaybeConstructor<T, MaybeState.Just> {
-    return this.is(MaybeState.Just);
+  isJust(): this is Just<T> {
+    return this instanceof Just;
   }
 
-  isNone(): this is MaybeConstructor<T, MaybeState.None> {
-    return this.is(MaybeState.None);
+  isNone(): this is None<T> {
+    return this instanceof None;
   }
 
   join<V>(this: Maybe<Maybe<V>>): Maybe<V> {
@@ -135,7 +100,7 @@ class MaybeConstructor<T, S extends MaybeState = MaybeState>
 
   or(x: Maybe<T>): Maybe<T> {
     return this.biMatch(
-      () => this as Maybe<T>,
+      () => this as unknown as Maybe<T>,
       () => x
     );
   }
@@ -150,7 +115,7 @@ class MaybeConstructor<T, S extends MaybeState = MaybeState>
   ): Maybe<T> {
     this.map(callback, ...parameters);
 
-    return this as Maybe<T>;
+    return this as unknown as Maybe<T>;
   }
 
   flatMap<V, P extends AnyParameters>(
@@ -167,10 +132,15 @@ class MaybeConstructor<T, S extends MaybeState = MaybeState>
   }
 
   biMatch<A, B = A>(mapJust: Pm<T, A, []>, mapNone: Pm<void, B, []>): A | B {
-    return this.match<A | B>({
-      [MaybeState.Just]: ({ value }) => mapJust(value),
-      [MaybeState.None]: () => mapNone()
-    });
+    if (this.isJust()) {
+      return mapJust(this.value);
+    }
+
+    if (this.isNone()) {
+      return mapNone();
+    }
+
+    throw new Error("Invalid state");
   }
 
   async asyncChain<V, P extends AnyParameters>(
@@ -194,10 +164,75 @@ class MaybeConstructor<T, S extends MaybeState = MaybeState>
 Object.freeze(MaybeConstructor);
 Object.freeze(MaybeConstructor.prototype);
 
-export type Maybe<T> =
-  | MaybeConstructor<T, MaybeState.Just>
-  | MaybeConstructor<T, MaybeState.None>;
+type SerializedJust<T> = Readonly<{
+  name: typeof name;
+  type: MaybeState.Just;
+  value: T;
+}>;
 
+class Just<T> extends MaybeConstructor<T> implements SerializedJust<T> {
+  static create<T>(value: T): Just<T> {
+    return new Just(value);
+  }
+  get [Symbol.toStringTag]() {
+    return "Just";
+  }
+  get name(): typeof name {
+    return name;
+  }
+
+  get type(): MaybeState.Just {
+    return MaybeState.Just;
+  }
+
+  private constructor(public readonly value: T) {
+    super();
+    Object.freeze(this);
+  }
+
+  toJSON(): SerializedJust<T> {
+    return { name: this.name, type: this.type, value: this.value };
+  }
+}
+
+Object.freeze(Just);
+Object.freeze(Just.prototype);
+
+type SerializedNone = { name: typeof name; type: MaybeState.None };
+
+class None<T = unknown> extends MaybeConstructor<T> implements SerializedNone {
+  static readonly instance = new None<any>();
+  static create<T>(): None<T> {
+    return None.instance;
+  }
+
+  get [Symbol.toStringTag]() {
+    return "None";
+  }
+
+  get name(): typeof name {
+    return name;
+  }
+
+  get type(): MaybeState.None {
+    return MaybeState.None;
+  }
+
+  private constructor() {
+    super();
+    Object.freeze(this);
+  }
+
+  toJSON(): SerializedNone {
+    return { name: this.name, type: this.type };
+  }
+}
+
+Object.freeze(None);
+Object.freeze(None.prototype);
+
+export type Maybe<T> = Just<T> | None<T>;
+export type SerializedMaybe<T> = SerializedJust<T> | SerializedNone;
 export const isMaybe = <T>(value: unknown | Maybe<T>): value is Maybe<T> =>
   value instanceof MaybeConstructor;
 

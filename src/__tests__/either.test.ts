@@ -131,7 +131,8 @@ describe("Either", () => {
   });
 
   test("meta", () => {
-    expect($right[Symbol.toStringTag]).toBe("Either");
+    expect($right[Symbol.toStringTag]).toBe("Right");
+    expect($left[Symbol.toStringTag]).toBe("Left");
     expect(isEither($left)).toBe(true);
     expect(isEither($right)).toBe(true);
     expect(isEither({ ...$right })).toBe(false);

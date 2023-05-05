@@ -1,25 +1,22 @@
 [Package](../README.md) / [Exports](../modules.md) / [<internal\>](../modules/internal_.md) / MaybeConstructor
 
-# Class: MaybeConstructor<T, S\>
+# Class: MaybeConstructor<T\>
 
 [<internal>](../modules/internal_.md).MaybeConstructor
 
-Represents a union of values with `type` field to differentiate between them.
-
-**`Export`**
-
 ## Type parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `T` | `T` | All valid variants of type. Example: [Just<T>, None] |
-| `S` | extends [`MaybeState`](../enums/internal_.MaybeState.md) = [`MaybeState`](../enums/internal_.MaybeState.md) | - |
+| Name |
+| :------ |
+| `T` |
 
 ## Hierarchy
 
-- [`Union`](Union.md)<[`States`](../modules/internal_.md#states)<`T`\>, `S`\>
+- **`MaybeConstructor`**
 
-  ↳ **`MaybeConstructor`**
+  ↳ [`Just`](internal_.Just.md)
+
+  ↳ [`None`](internal_.None.md)
 
 ## Implements
 
@@ -47,15 +44,12 @@ Represents a union of values with `type` field to differentiate between them.
 - [default](internal_.MaybeConstructor.md#default)
 - [filter](internal_.MaybeConstructor.md#filter)
 - [flatMap](internal_.MaybeConstructor.md#flatmap)
-- [is](internal_.MaybeConstructor.md#is)
 - [isJust](internal_.MaybeConstructor.md#isjust)
 - [isNone](internal_.MaybeConstructor.md#isnone)
 - [join](internal_.MaybeConstructor.md#join)
 - [map](internal_.MaybeConstructor.md#map)
-- [match](internal_.MaybeConstructor.md#match)
 - [or](internal_.MaybeConstructor.md#or)
 - [tap](internal_.MaybeConstructor.md#tap)
-- [toJSON](internal_.MaybeConstructor.md#tojson)
 - [unwrap](internal_.MaybeConstructor.md#unwrap)
 - [unwrapOr](internal_.MaybeConstructor.md#unwrapor)
 - [zip](internal_.MaybeConstructor.md#zip)
@@ -66,28 +60,13 @@ Represents a union of values with `type` field to differentiate between them.
 
 ### constructor
 
-• **new MaybeConstructor**<`T`, `S`\>(`value`)
+• **new MaybeConstructor**<`T`\>()
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | `T` |
-| `S` | extends [`MaybeState`](../enums/internal_.MaybeState.md) = [`MaybeState`](../enums/internal_.MaybeState.md) |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | [`MapFlat`](../modules/internal_.md#mapflat)<[`States`](../modules/internal_.md#states)<`T`\>\>[`S`] | Any valid variant of type |
-
-#### Inherited from
-
-[Union](Union.md).[constructor](Union.md#constructor)
-
-#### Defined in
-
-dist/union.d.ts:38
+| Name |
+| :------ |
+| `T` |
 
 ## Accessors
 
@@ -101,7 +80,7 @@ dist/union.d.ts:38
 
 #### Defined in
 
-dist/maybe.d.ts:33
+dist/maybe.d.ts:17
 
 ## Methods
 
@@ -135,7 +114,7 @@ dist/maybe.d.ts:33
 
 #### Defined in
 
-dist/maybe.d.ts:31
+dist/maybe.d.ts:15
 
 ▸ **apply**<`A`, `B`, `P`\>(`this`, `argument`, `...parameters`): [`Maybe`](../modules/internal_.md#maybe)<`B`\>
 
@@ -165,7 +144,7 @@ dist/maybe.d.ts:31
 
 #### Defined in
 
-dist/maybe.d.ts:32
+dist/maybe.d.ts:16
 
 ___
 
@@ -193,7 +172,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:44
+dist/maybe.d.ts:28
 
 ___
 
@@ -211,7 +190,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `this` | [`MaybeConstructor`](internal_.MaybeConstructor.md)<[`MaybePromiseLike`](../modules.md#maybepromiselike)<`X`\>, [`MaybeState`](../enums/internal_.MaybeState.md)\> |
+| `this` | [`MaybeConstructor`](internal_.MaybeConstructor.md)<[`MaybePromiseLike`](../modules.md#maybepromiselike)<`X`\>\> |
 
 #### Returns
 
@@ -219,7 +198,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:45
+dist/maybe.d.ts:29
 
 ___
 
@@ -247,7 +226,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:43
+dist/maybe.d.ts:27
 
 ___
 
@@ -279,7 +258,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:36
+dist/maybe.d.ts:20
 
 ___
 
@@ -303,7 +282,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:37
+dist/maybe.d.ts:21
 
 ___
 
@@ -329,7 +308,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:34
+dist/maybe.d.ts:18
 
 ▸ **filter**(`filter`): [`Maybe`](../modules/internal_.md#maybe)<`T`\>
 
@@ -345,7 +324,7 @@ dist/maybe.d.ts:34
 
 #### Defined in
 
-dist/maybe.d.ts:35
+dist/maybe.d.ts:19
 
 ___
 
@@ -373,67 +352,35 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:41
-
-___
-
-### is
-
-▸ **is**<`K`\>(`type`): this is Union<States<T\>, K\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `K` | extends `MaybeState` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `type` | `K` |
-
-#### Returns
-
-this is Union<States<T\>, K\>
-
-{this is FlatUnion<V, K>} - Type of this object matches provided
-
-#### Inherited from
-
-[Union](Union.md).[is](Union.md#is)
-
-#### Defined in
-
-dist/union.d.ts:44
+dist/maybe.d.ts:25
 
 ___
 
 ### isJust
 
-▸ **isJust**(): this is MaybeConstructor<T, Just\>
+▸ **isJust**(): this is Just<T\>
 
 #### Returns
 
-this is MaybeConstructor<T, Just\>
+this is Just<T\>
 
 #### Defined in
 
-dist/maybe.d.ts:27
+dist/maybe.d.ts:11
 
 ___
 
 ### isNone
 
-▸ **isNone**(): this is MaybeConstructor<T, None\>
+▸ **isNone**(): this is None<T\>
 
 #### Returns
 
-this is MaybeConstructor<T, None\>
+this is None<T\>
 
 #### Defined in
 
-dist/maybe.d.ts:28
+dist/maybe.d.ts:12
 
 ___
 
@@ -463,7 +410,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:29
+dist/maybe.d.ts:13
 
 ___
 
@@ -495,41 +442,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:30
-
-___
-
-### match
-
-▸ **match**<`R`\>(`matchers`): `R`
-
-**`Throws`**
-
-Undefined is not a function. If matcher is not found
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `R` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `matchers` | [`AnyMatchers`](../modules/internal_.md#anymatchers)<[`MapFlat`](../modules/internal_.md#mapflat)<[`States`](../modules/internal_.md#states)<`T`\>\>, `R`\> |
-
-#### Returns
-
-`R`
-
-#### Inherited from
-
-[Union](Union.md).[match](Union.md#match)
-
-#### Defined in
-
-dist/union.d.ts:51
+dist/maybe.d.ts:14
 
 ___
 
@@ -553,7 +466,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:38
+dist/maybe.d.ts:22
 
 ___
 
@@ -580,25 +493,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:40
-
-___
-
-### toJSON
-
-▸ **toJSON**(): [`None`](internal_.None.md) \| [`Just`](internal_.Just.md)<`T`\>
-
-#### Returns
-
-[`None`](internal_.None.md) \| [`Just`](internal_.Just.md)<`T`\>
-
-#### Inherited from
-
-[Union](Union.md).[toJSON](Union.md#tojson)
-
-#### Defined in
-
-dist/union.d.ts:52
+dist/maybe.d.ts:24
 
 ___
 
@@ -622,7 +517,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:42
+dist/maybe.d.ts:26
 
 ___
 
@@ -652,7 +547,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:26
+dist/maybe.d.ts:10
 
 ___
 
@@ -678,7 +573,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:39
+dist/maybe.d.ts:23
 
 ___
 
@@ -704,7 +599,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:25
+dist/maybe.d.ts:9
 
 ___
 
@@ -724,4 +619,4 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:24
+dist/maybe.d.ts:8

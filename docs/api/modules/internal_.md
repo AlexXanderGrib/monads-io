@@ -4,11 +4,6 @@
 
 ## Table of contents
 
-### Enumerations
-
-- [EitherType](../enums/internal_.EitherType.md)
-- [MaybeState](../enums/internal_.MaybeState.md)
-
 ### Enumeration Members
 
 - [Just](internal_.md#just)
@@ -36,18 +31,20 @@
 
 ### Type Aliases
 
-- [AnyMatchers](internal_.md#anymatchers)
 - [Either](internal_.md#either)
-- [MapFlat](internal_.md#mapflat)
-- [Matchers](internal_.md#matchers)
-- [MatchersDefault](internal_.md#matchersdefault)
 - [Maybe](internal_.md#maybe)
 - [Pm](internal_.md#pm)
-- [Primitive](internal_.md#primitive)
 - [SerializedEither](internal_.md#serializedeither)
+- [SerializedJust](internal_.md#serializedjust)
+- [SerializedLeft](internal_.md#serializedleft)
 - [SerializedMaybe](internal_.md#serializedmaybe)
-- [State](internal_.md#state)
-- [States](internal_.md#states)
+- [SerializedNone](internal_.md#serializednone)
+- [SerializedRight](internal_.md#serializedright)
+
+### Variables
+
+- [name](internal_.md#name)
+- [name](internal_.md#name-1)
 
 ## Enumeration Members
 
@@ -57,7 +54,7 @@
 
 #### Defined in
 
-dist/maybe.d.ts:4
+dist/maybe.d.ts:3
 
 ___
 
@@ -67,7 +64,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:4
+dist/either.d.ts:3
 
 ___
 
@@ -77,7 +74,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:5
+dist/maybe.d.ts:4
 
 ___
 
@@ -87,30 +84,13 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:5
+dist/either.d.ts:4
 
 ## Type Aliases
 
-### AnyMatchers
-
-Ƭ **AnyMatchers**<`V`, `R`\>: [`Matchers`](internal_.md#matchers)<`V`, `R`\> \| [`MatchersDefault`](internal_.md#matchersdefault)<`V`, `R`\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `V` | extends `Record`<`string`, `unknown`\> |
-| `R` | `R` |
-
-#### Defined in
-
-dist/union.d.ts:13
-
-___
-
 ### Either
 
-Ƭ **Either**<`L`, `R`\>: [`EitherConstructor`](../classes/internal_.EitherConstructor.md)<`L`, `R`, [`Right`](internal_.md#right)\> \| [`EitherConstructor`](../classes/internal_.EitherConstructor.md)<`L`, `R`, [`Left`](internal_.md#left)\>
+Ƭ **Either**<`L`, `R`\>: [`Right`](../classes/internal_.Right.md)<`L`, `R`\> \| [`Left`](../classes/internal_.Left.md)<`L`, `R`\>
 
 #### Type parameters
 
@@ -121,63 +101,13 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:51
-
-___
-
-### MapFlat
-
-Ƭ **MapFlat**<`V`\>: { [key in V[number]["type"]]: Extract<V[number], Object\> }
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `V` | extends readonly { `type`: [`Primitive`](internal_.md#primitive)  }[] |
-
-#### Defined in
-
-dist/union.d.ts:15
-
-___
-
-### Matchers
-
-Ƭ **Matchers**<`V`, `R`\>: { readonly [key in keyof V]: Function }
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `V` | extends `Record`<`string`, `unknown`\> |
-| `R` | `R` |
-
-#### Defined in
-
-dist/union.d.ts:5
-
-___
-
-### MatchersDefault
-
-Ƭ **MatchersDefault**<`V`, `R`\>: { readonly [key in keyof V]?: Function } & { `[_]`: <K\>(`value`: `V`[`K`], `type`: `K`) => `R`  }
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `V` | extends `Record`<`string`, `unknown`\> |
-| `R` | `R` |
-
-#### Defined in
-
-dist/union.d.ts:8
+dist/either.d.ts:63
 
 ___
 
 ### Maybe
 
-Ƭ **Maybe**<`T`\>: [`MaybeConstructor`](../classes/internal_.MaybeConstructor.md)<`T`, [`Just`](internal_.md#just)\> \| [`MaybeConstructor`](../classes/internal_.MaybeConstructor.md)<`T`, [`None`](internal_.md#none)\>
+Ƭ **Maybe**<`T`\>: [`Just`](../classes/internal_.Just.md)<`T`\> \| [`None`](../classes/internal_.None.md)<`T`\>
 
 #### Type parameters
 
@@ -187,7 +117,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:47
+dist/maybe.d.ts:58
 
 ___
 
@@ -227,19 +157,9 @@ dist/types.d.ts:10
 
 ___
 
-### Primitive
-
-Ƭ **Primitive**: `string` \| `number`
-
-#### Defined in
-
-dist/union.d.ts:14
-
-___
-
 ### SerializedEither
 
-Ƭ **SerializedEither**<`L`, `R`\>: [`State`](internal_.md#state)<`L`, `R`\>[`number`]
+Ƭ **SerializedEither**<`L`, `R`\>: [`SerializedRight`](internal_.md#serializedright)<`R`\> \| [`SerializedLeft`](internal_.md#serializedleft)<`L`\>
 
 #### Type parameters
 
@@ -250,13 +170,45 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:22
+dist/either.d.ts:64
+
+___
+
+### SerializedJust
+
+Ƭ **SerializedJust**<`T`\>: `Readonly`<{ `name`: typeof [`name`](internal_.md#name-1) ; `type`: [`Just`](internal_.md#just) ; `value`: `T`  }\>
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Defined in
+
+dist/maybe.d.ts:31
+
+___
+
+### SerializedLeft
+
+Ƭ **SerializedLeft**<`L`\>: `Readonly`<{ `left`: `L` ; `name`: typeof [`name`](internal_.md#name) ; `type`: [`Left`](internal_.md#left)  }\>
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `L` |
+
+#### Defined in
+
+dist/either.d.ts:35
 
 ___
 
 ### SerializedMaybe
 
-Ƭ **SerializedMaybe**<`T`\>: [`States`](internal_.md#states)<`T`\>[`number`]
+Ƭ **SerializedMaybe**<`T`\>: [`SerializedJust`](internal_.md#serializedjust)<`T`\> \| [`SerializedNone`](internal_.md#serializednone)
 
 #### Type parameters
 
@@ -266,37 +218,57 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:22
+dist/maybe.d.ts:59
 
 ___
 
-### State
+### SerializedNone
 
-Ƭ **State**<`L`, `R`\>: [`Pair`](../modules.md#pair)<[`Left`](../classes/internal_.Left.md)<`L`\>, [`Right`](../classes/internal_.Right.md)<`R`\>\>
+Ƭ **SerializedNone**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `name` | typeof [`name`](internal_.md#name-1) |
+| `type` | [`None`](internal_.md#none) |
+
+#### Defined in
+
+dist/maybe.d.ts:45
+
+___
+
+### SerializedRight
+
+Ƭ **SerializedRight**<`R`\>: `Readonly`<{ `name`: typeof [`name`](internal_.md#name) ; `right`: `R` ; `type`: [`Right`](internal_.md#right)  }\>
 
 #### Type parameters
 
 | Name |
 | :------ |
-| `L` |
 | `R` |
 
 #### Defined in
 
-dist/either.d.ts:21
+dist/either.d.ts:49
 
-___
+## Variables
 
-### States
+### name
 
-Ƭ **States**<`T`\>: [`Pair`](../modules.md#pair)<[`Just`](../classes/internal_.Just.md)<`T`\>, [`None`](../classes/internal_.None.md)\>
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
+• `Const` **name**: ``"Either"``
 
 #### Defined in
 
-dist/maybe.d.ts:21
+dist/either.d.ts:6
+
+___
+
+### name
+
+• `Const` **name**: ``"Maybe"``
+
+#### Defined in
+
+dist/maybe.d.ts:6

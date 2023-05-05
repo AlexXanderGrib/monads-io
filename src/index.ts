@@ -23,7 +23,8 @@ export const Either = Object.freeze({
   catchAsync: either.catchAsync,
   wrap: either.wrap,
   wrapAsync: either.wrapAsync,
-  fromMaybe: either.fromMaybe
+  fromMaybe: either.fromMaybe,
+  fromPromiseSettledResult: either.fromPromiseSettledResult
 });
 
 import * as maybe from "./maybe.exports";
@@ -55,4 +56,3 @@ export type {
   Pair
 } from "./types.js";
 export { identity, noop, throwValue, bind, combine } from "./runtime.js";
-export { Union, _ } from "./union.js";

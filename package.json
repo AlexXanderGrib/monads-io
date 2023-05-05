@@ -1,6 +1,6 @@
 {
   "name": "monads-io",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "🚀 Efficient Monads for JS: Maybe (Option) and Either (Result)",
   "scripts": {
     "test": "jest",
@@ -80,11 +80,11 @@
   },
   "homepage": "https://github.com/AlexXanderGrib/monads-io#readme",
   "devDependencies": {
-    "@types/jest": "^29.2.3",
+    "@types/jest": "^29.5.1",
     "@types/node": "^18.11.9",
-    "@typescript-eslint/eslint-plugin": "^5.44.0",
-    "@typescript-eslint/parser": "^5.44.0",
-    "eslint": "^8.36.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.2",
+    "@typescript-eslint/parser": "^5.59.2",
+    "eslint": "^8.39.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
@@ -92,20 +92,20 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-security": "^1.7.1",
     "eslint-plugin-unicorn": "^46.0.0",
-    "glob": "^9.3.2",
+    "glob": "^10.2.2",
     "jest": "^29.5.0",
-    "prettier": "^2.8.7",
-    "rimraf": "^4.4.1",
-    "rollup": "^3.20.2",
+    "prettier": "^2.8.8",
+    "rimraf": "^5.0.0",
+    "rollup": "^3.21.5",
     "rollup-plugin-cleanup": "^3.2.1",
     "rollup-plugin-prettier": "^3.0.0",
     "rollup-plugin-typescript2": "^0.34.1",
-    "ts-jest": "^29.0.5",
+    "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
-    "typedoc": "^0.23.28",
-    "typedoc-plugin-markdown": "^3.14.0",
-    "typedoc-plugin-missing-exports": "^1.0.0",
-    "typescript": "^5.0.2"
+    "typedoc": "^0.24.6",
+    "typedoc-plugin-markdown": "^3.15.3",
+    "typedoc-plugin-missing-exports": "^2.0.0",
+    "typescript": "^5.0.4"
   },
   "engines": {
     "node": ">=14"

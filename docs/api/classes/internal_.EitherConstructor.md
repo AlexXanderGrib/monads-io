@@ -1,26 +1,23 @@
 [Package](../README.md) / [Exports](../modules.md) / [<internal\>](../modules/internal_.md) / EitherConstructor
 
-# Class: EitherConstructor<L, R, T\>
+# Class: EitherConstructor<L, R\>
 
 [<internal>](../modules/internal_.md).EitherConstructor
 
-Represents a union of values with `type` field to differentiate between them.
-
-**`Export`**
-
 ## Type parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `L` | `L` | All valid variants of type. Example: [Just<T>, None] |
-| `R` | `R` | - |
-| `T` | extends [`EitherType`](../enums/internal_.EitherType.md) = [`EitherType`](../enums/internal_.EitherType.md) | - |
+| Name |
+| :------ |
+| `L` |
+| `R` |
 
 ## Hierarchy
 
-- [`Union`](Union.md)<[`State`](../modules/internal_.md#state)<`L`, `R`\>, `T`\>
+- **`EitherConstructor`**
 
-  ↳ **`EitherConstructor`**
+  ↳ [`Right`](internal_.Right.md)
+
+  ↳ [`Left`](internal_.Left.md)
 
 ## Implements
 
@@ -49,19 +46,16 @@ Represents a union of values with `type` field to differentiate between them.
 - [default](internal_.EitherConstructor.md#default)
 - [getLeft](internal_.EitherConstructor.md#getleft)
 - [getRight](internal_.EitherConstructor.md#getright)
-- [is](internal_.EitherConstructor.md#is)
 - [isLeft](internal_.EitherConstructor.md#isleft)
 - [isRight](internal_.EitherConstructor.md#isright)
 - [join](internal_.EitherConstructor.md#join)
 - [map](internal_.EitherConstructor.md#map)
 - [mapLeft](internal_.EitherConstructor.md#mapleft)
-- [match](internal_.EitherConstructor.md#match)
 - [or](internal_.EitherConstructor.md#or)
 - [promise](internal_.EitherConstructor.md#promise)
 - [swap](internal_.EitherConstructor.md#swap)
 - [tap](internal_.EitherConstructor.md#tap)
 - [throw](internal_.EitherConstructor.md#throw)
-- [toJSON](internal_.EitherConstructor.md#tojson)
 - [unwrap](internal_.EitherConstructor.md#unwrap)
 - [unwrapOr](internal_.EitherConstructor.md#unwrapor)
 - [zip](internal_.EitherConstructor.md#zip)
@@ -72,29 +66,14 @@ Represents a union of values with `type` field to differentiate between them.
 
 ### constructor
 
-• **new EitherConstructor**<`L`, `R`, `T`\>(`value`)
+• **new EitherConstructor**<`L`, `R`\>()
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `L` | `L` |
-| `R` | `R` |
-| `T` | extends [`EitherType`](../enums/internal_.EitherType.md) = [`EitherType`](../enums/internal_.EitherType.md) |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | [`MapFlat`](../modules/internal_.md#mapflat)<[`State`](../modules/internal_.md#state)<`L`, `R`\>\>[`T`] | Any valid variant of type |
-
-#### Inherited from
-
-[Union](Union.md).[constructor](Union.md#constructor)
-
-#### Defined in
-
-dist/union.d.ts:38
+| Name |
+| :------ |
+| `L` |
+| `R` |
 
 ## Accessors
 
@@ -108,7 +87,7 @@ dist/union.d.ts:38
 
 #### Defined in
 
-dist/either.d.ts:29
+dist/either.d.ts:13
 
 ## Methods
 
@@ -142,7 +121,7 @@ dist/either.d.ts:29
 
 #### Defined in
 
-dist/either.d.ts:36
+dist/either.d.ts:20
 
 ▸ **apply**<`A`, `B`, `P`\>(`this`, `map`, `...parameters`): [`Either`](../modules/internal_.md#either)<`L`, `B`\>
 
@@ -172,7 +151,7 @@ dist/either.d.ts:36
 
 #### Defined in
 
-dist/either.d.ts:37
+dist/either.d.ts:21
 
 ___
 
@@ -205,7 +184,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:41
+dist/either.d.ts:25
 
 ___
 
@@ -223,7 +202,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `this` | [`EitherConstructor`](internal_.EitherConstructor.md)<`L`, [`MaybePromiseLike`](../modules.md#maybepromiselike)<`T`\>, [`EitherType`](../enums/internal_.EitherType.md)\> |
+| `this` | [`EitherConstructor`](internal_.EitherConstructor.md)<`L`, [`MaybePromiseLike`](../modules.md#maybepromiselike)<`T`\>\> |
 
 #### Returns
 
@@ -235,7 +214,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:42
+dist/either.d.ts:26
 
 ___
 
@@ -263,7 +242,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:40
+dist/either.d.ts:24
 
 ___
 
@@ -291,7 +270,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:43
+dist/either.d.ts:27
 
 ___
 
@@ -324,7 +303,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:39
+dist/either.d.ts:23
 
 ___
 
@@ -348,7 +327,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:44
+dist/either.d.ts:28
 
 ___
 
@@ -362,7 +341,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:27
+dist/either.d.ts:11
 
 ___
 
@@ -376,67 +355,35 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:26
-
-___
-
-### is
-
-▸ **is**<`K`\>(`type`): this is Union<State<L, R\>, K\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `K` | extends `EitherType` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `type` | `K` |
-
-#### Returns
-
-this is Union<State<L, R\>, K\>
-
-{this is FlatUnion<V, K>} - Type of this object matches provided
-
-#### Inherited from
-
-[Union](Union.md).[is](Union.md#is)
-
-#### Defined in
-
-dist/union.d.ts:44
+dist/either.d.ts:10
 
 ___
 
 ### isLeft
 
-▸ **isLeft**(): this is EitherConstructor<L, R, Left\>
+▸ **isLeft**(): this is Left<L, R\>
 
 #### Returns
 
-this is EitherConstructor<L, R, Left\>
+this is Left<L, R\>
 
 #### Defined in
 
-dist/either.d.ts:30
+dist/either.d.ts:14
 
 ___
 
 ### isRight
 
-▸ **isRight**(): this is EitherConstructor<L, R, Right\>
+▸ **isRight**(): this is Right<L, R\>
 
 #### Returns
 
-this is EitherConstructor<L, R, Right\>
+this is Right<L, R\>
 
 #### Defined in
 
-dist/either.d.ts:31
+dist/either.d.ts:15
 
 ___
 
@@ -468,7 +415,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:33
+dist/either.d.ts:17
 
 ___
 
@@ -500,7 +447,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:35
+dist/either.d.ts:19
 
 ___
 
@@ -528,41 +475,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:34
-
-___
-
-### match
-
-▸ **match**<`R`\>(`matchers`): `R`
-
-**`Throws`**
-
-Undefined is not a function. If matcher is not found
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `R` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `matchers` | [`AnyMatchers`](../modules/internal_.md#anymatchers)<[`MapFlat`](../modules/internal_.md#mapflat)<[`State`](../modules/internal_.md#state)<`L`, `R`\>\>, `R`\> |
-
-#### Returns
-
-`R`
-
-#### Inherited from
-
-[Union](Union.md).[match](Union.md#match)
-
-#### Defined in
-
-dist/union.d.ts:51
+dist/either.d.ts:18
 
 ___
 
@@ -586,7 +499,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:45
+dist/either.d.ts:29
 
 ___
 
@@ -600,7 +513,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:48
+dist/either.d.ts:32
 
 ___
 
@@ -614,7 +527,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:38
+dist/either.d.ts:22
 
 ___
 
@@ -641,7 +554,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:28
+dist/either.d.ts:12
 
 ___
 
@@ -655,25 +568,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:49
-
-___
-
-### toJSON
-
-▸ **toJSON**(): [`Left`](internal_.Left.md)<`L`\> \| [`Right`](internal_.Right.md)<`R`\>
-
-#### Returns
-
-[`Left`](internal_.Left.md)<`L`\> \| [`Right`](internal_.Right.md)<`R`\>
-
-#### Inherited from
-
-[Union](Union.md).[toJSON](Union.md#tojson)
-
-#### Defined in
-
-dist/union.d.ts:52
+dist/either.d.ts:33
 
 ___
 
@@ -697,7 +592,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:47
+dist/either.d.ts:31
 
 ___
 
@@ -727,7 +622,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:32
+dist/either.d.ts:16
 
 ___
 
@@ -754,7 +649,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:46
+dist/either.d.ts:30
 
 ___
 
@@ -781,7 +676,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:25
+dist/either.d.ts:9
 
 ___
 
@@ -808,4 +703,4 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:24
+dist/either.d.ts:8
