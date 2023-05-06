@@ -7,7 +7,8 @@ import {
   iterator,
   merge,
   none,
-  just
+  just,
+  filterMap
 } from "../maybe";
 
 describe("Maybe", () => {
@@ -147,5 +148,15 @@ describe("Maybe", () => {
     }
 
     expect(values).toEqual([7, 8, 9, 10]);
+  });
+
+  test("filterMap", () => {
+    const array = [1, 2, 3, 4, 5, 6];
+
+    const result = filterMap(array, (value) =>
+      value % 2 === 0 ? just(value * 2) : none()
+    );
+
+    expect([...result]).toEqual([4, 8, 12]);
   });
 });

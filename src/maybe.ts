@@ -11,21 +11,23 @@ import type {
 } from "./types";
 
 export const enum MaybeState {
-  Just = 1,
-  None = 0
+  None = 0,
+  Just = 1
 }
 
 const name = "Maybe";
 
+export function none<T = never>(): Maybe<T> {
+  return None.create();
+}
+
+export function just<T>(value: T): Maybe<T> {
+  return Just.create(value);
+}
+
+export { just as from };
+
 class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
-  static none<T = never>(): Maybe<T> {
-    return None.create();
-  }
-
-  static just<T>(value: T): Maybe<T> {
-    return Just.create(value);
-  }
-
   unwrapOr<X>(value: X): T | X {
     return this.biMatch(identity, () => value);
   }
@@ -77,10 +79,6 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
     });
   }
 
-  get [Symbol.toStringTag]() {
-    return name;
-  }
-
   filter<X extends T>(filter: (input: T) => input is X): Maybe<X>;
   filter(filter: (input: T) => boolean): Maybe<T>;
   filter(filter: (input: T) => boolean): Maybe<T> {
@@ -91,7 +89,7 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
     map: Pm<T, Maybe<V>, A>,
     ...parameters: A
   ): Maybe<V> {
-    return this.biMatch(bind(map, parameters), none);
+    return this.biMatch<Maybe<V>>(bind(map, parameters), none);
   }
 
   default(value: T): Maybe<T> {
@@ -140,6 +138,7 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
       return mapNone();
     }
 
+    /* istanbul ignore next */
     throw new Error("Invalid state");
   }
 
@@ -151,9 +150,7 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
     return result.join();
   }
 
-  async await<X>(
-    this: MaybeConstructor<MaybePromiseLike<X>>
-  ): Promise<Maybe<X>> {
+  async await<X>(this: Maybe<MaybePromiseLike<X>>): Promise<Maybe<X>> {
     return await this.biMatch<MaybePromiseLike<Maybe<X>>>(
       async (value) => just(await value),
       none
@@ -174,9 +171,11 @@ class Just<T> extends MaybeConstructor<T> implements SerializedJust<T> {
   static create<T>(value: T): Just<T> {
     return new Just(value);
   }
+
   get [Symbol.toStringTag]() {
     return "Just";
   }
+
   get name(): typeof name {
     return name;
   }
@@ -201,7 +200,7 @@ Object.freeze(Just.prototype);
 type SerializedNone = { name: typeof name; type: MaybeState.None };
 
 class None<T = unknown> extends MaybeConstructor<T> implements SerializedNone {
-  static readonly instance = new None<any>();
+  static readonly instance = new None<never>();
   static create<T>(): None<T> {
     return None.instance;
   }
@@ -234,9 +233,7 @@ Object.freeze(None.prototype);
 export type Maybe<T> = Just<T> | None<T>;
 export type SerializedMaybe<T> = SerializedJust<T> | SerializedNone;
 export const isMaybe = <T>(value: unknown | Maybe<T>): value is Maybe<T> =>
-  value instanceof MaybeConstructor;
-
-export const { just, none } = MaybeConstructor;
+  value instanceof Just || value instanceof None;
 
 export function chain<A, B, P extends AnyParameters>(
   map: (v: A, ...parameters: P) => MaybePromiseLike<Maybe<B>>,
@@ -309,5 +306,19 @@ export async function* asyncIterator<T>(
 
   while ((result = await callback()).isJust()) {
     yield await result.unwrap();
+  }
+}
+
+export function* filterMap<T, X>(
+  iterable: Iterable<T>,
+  filterMap: (value: T, index: number) => Maybe<X>
+): Generator<X, void, void> {
+  let index = 0;
+  for (const value of iterable) {
+    const processed = filterMap(value, index++);
+
+    if (processed.isJust()) {
+      yield processed.unwrap();
+    }
   }
 }
