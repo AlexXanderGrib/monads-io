@@ -54,7 +54,7 @@
 
 #### Defined in
 
-dist/maybe.d.ts:3
+dist/maybe.d.ts:4
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:4
+dist/maybe.d.ts:3
 
 ___
 
@@ -94,14 +94,14 @@ dist/either.d.ts:4
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `L` |
-| `R` |
+| Name | Type |
+| :------ | :------ |
+| `L` | `unknown` |
+| `R` | `unknown` |
 
 #### Defined in
 
-dist/either.d.ts:63
+dist/either.d.ts:66
 
 ___
 
@@ -170,7 +170,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:64
+dist/either.d.ts:67
 
 ___
 
@@ -202,7 +202,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:35
+dist/either.d.ts:34
 
 ___
 
@@ -251,7 +251,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:49
+dist/either.d.ts:50
 
 ## Variables
 

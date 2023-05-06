@@ -85,7 +85,7 @@
 
 #### Defined in
 
-dist/either.d.ts:60
+dist/either.d.ts:63
 
 ## Properties
 
@@ -99,7 +99,7 @@ SerializedRight.right
 
 #### Defined in
 
-dist/either.d.ts:55
+dist/either.d.ts:56
 
 ## Accessors
 
@@ -111,13 +111,9 @@ dist/either.d.ts:55
 
 `string`
 
-#### Overrides
-
-EitherConstructor.\_\_@toStringTag@216
-
 #### Defined in
 
-dist/either.d.ts:57
+dist/either.d.ts:58
 
 ___
 
@@ -135,7 +131,7 @@ SerializedRight.name
 
 #### Defined in
 
-dist/either.d.ts:58
+dist/either.d.ts:59
 
 ___
 
@@ -153,7 +149,7 @@ SerializedRight.type
 
 #### Defined in
 
-dist/either.d.ts:59
+dist/either.d.ts:60
 
 ## Methods
 
@@ -187,7 +183,7 @@ dist/either.d.ts:59
 
 #### Defined in
 
-dist/either.d.ts:20
+dist/either.d.ts:19
 
 ▸ **apply**<`A`, `B`, `P`\>(`this`, `map`, `...parameters`): [`Either`](../modules/internal_.md#either)<`L`, `B`\>
 
@@ -217,7 +213,7 @@ dist/either.d.ts:20
 
 #### Defined in
 
-dist/either.d.ts:21
+dist/either.d.ts:20
 
 ___
 
@@ -250,7 +246,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:25
+dist/either.d.ts:24
 
 ___
 
@@ -268,7 +264,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `this` | [`EitherConstructor`](internal_.EitherConstructor.md)<`L`, [`MaybePromiseLike`](../modules.md#maybepromiselike)<`T`\>\> |
+| `this` | [`Either`](../modules/internal_.md#either)<`L`, [`MaybePromiseLike`](../modules.md#maybepromiselike)<`T`\>\> |
 
 #### Returns
 
@@ -280,7 +276,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:26
+dist/either.d.ts:25
 
 ___
 
@@ -312,7 +308,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:24
+dist/either.d.ts:23
 
 ___
 
@@ -344,7 +340,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:27
+dist/either.d.ts:26
 
 ___
 
@@ -377,7 +373,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:23
+dist/either.d.ts:22
 
 ___
 
@@ -401,43 +397,43 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:28
+dist/either.d.ts:27
 
 ___
 
 ### getLeft
 
-▸ **getLeft**(): `undefined` \| `L`
+▸ **getLeft**(): `undefined`
 
 #### Returns
 
-`undefined` \| `L`
+`undefined`
 
-#### Inherited from
+#### Overrides
 
 [EitherConstructor](internal_.EitherConstructor.md).[getLeft](internal_.EitherConstructor.md#getleft)
 
 #### Defined in
 
-dist/either.d.ts:11
+dist/either.d.ts:62
 
 ___
 
 ### getRight
 
-▸ **getRight**(): `undefined` \| `R`
+▸ **getRight**(): `R`
 
 #### Returns
 
-`undefined` \| `R`
+`R`
 
-#### Inherited from
+#### Overrides
 
 [EitherConstructor](internal_.EitherConstructor.md).[getRight](internal_.EitherConstructor.md#getright)
 
 #### Defined in
 
-dist/either.d.ts:10
+dist/either.d.ts:61
 
 ___
 
@@ -455,7 +451,7 @@ this is Left<L, R\>
 
 #### Defined in
 
-dist/either.d.ts:14
+dist/either.d.ts:13
 
 ___
 
@@ -473,7 +469,7 @@ this is Right<L, R\>
 
 #### Defined in
 
-dist/either.d.ts:15
+dist/either.d.ts:14
 
 ___
 
@@ -505,7 +501,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:17
+dist/either.d.ts:16
 
 ___
 
@@ -537,7 +533,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:19
+dist/either.d.ts:18
 
 ___
 
@@ -569,7 +565,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:18
+dist/either.d.ts:17
 
 ___
 
@@ -593,7 +589,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:29
+dist/either.d.ts:28
 
 ___
 
@@ -611,7 +607,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:32
+dist/either.d.ts:31
 
 ___
 
@@ -629,7 +625,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:22
+dist/either.d.ts:21
 
 ___
 
@@ -678,7 +674,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:33
+dist/either.d.ts:32
 
 ___
 
@@ -692,7 +688,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:61
+dist/either.d.ts:64
 
 ___
 
@@ -716,7 +712,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:31
+dist/either.d.ts:30
 
 ___
 
@@ -746,7 +742,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:16
+dist/either.d.ts:15
 
 ___
 
@@ -777,7 +773,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:30
+dist/either.d.ts:29
 
 ___
 
@@ -804,7 +800,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:56
+dist/either.d.ts:57
 
 ___
 

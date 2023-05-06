@@ -30,10 +30,6 @@
 
 - [constructor](internal_.MaybeConstructor.md#constructor)
 
-### Accessors
-
-- [[toStringTag]](internal_.MaybeConstructor.md#[tostringtag])
-
 ### Methods
 
 - [apply](internal_.MaybeConstructor.md#apply)
@@ -53,8 +49,6 @@
 - [unwrap](internal_.MaybeConstructor.md#unwrap)
 - [unwrapOr](internal_.MaybeConstructor.md#unwrapor)
 - [zip](internal_.MaybeConstructor.md#zip)
-- [just](internal_.MaybeConstructor.md#just)
-- [none](internal_.MaybeConstructor.md#none)
 
 ## Constructors
 
@@ -67,20 +61,6 @@
 | Name |
 | :------ |
 | `T` |
-
-## Accessors
-
-### [toStringTag]
-
-• `get` **[toStringTag]**(): `string`
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-dist/maybe.d.ts:17
 
 ## Methods
 
@@ -114,7 +94,7 @@ dist/maybe.d.ts:17
 
 #### Defined in
 
-dist/maybe.d.ts:15
+dist/maybe.d.ts:16
 
 ▸ **apply**<`A`, `B`, `P`\>(`this`, `argument`, `...parameters`): [`Maybe`](../modules/internal_.md#maybe)<`B`\>
 
@@ -144,7 +124,7 @@ dist/maybe.d.ts:15
 
 #### Defined in
 
-dist/maybe.d.ts:16
+dist/maybe.d.ts:17
 
 ___
 
@@ -190,7 +170,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `this` | [`MaybeConstructor`](internal_.MaybeConstructor.md)<[`MaybePromiseLike`](../modules.md#maybepromiselike)<`X`\>\> |
+| `this` | [`Maybe`](../modules/internal_.md#maybe)<[`MaybePromiseLike`](../modules.md#maybepromiselike)<`X`\>\> |
 
 #### Returns
 
@@ -366,7 +346,7 @@ this is Just<T\>
 
 #### Defined in
 
-dist/maybe.d.ts:11
+dist/maybe.d.ts:12
 
 ___
 
@@ -380,7 +360,7 @@ this is None<T\>
 
 #### Defined in
 
-dist/maybe.d.ts:12
+dist/maybe.d.ts:13
 
 ___
 
@@ -410,7 +390,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:13
+dist/maybe.d.ts:14
 
 ___
 
@@ -442,7 +422,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:14
+dist/maybe.d.ts:15
 
 ___
 
@@ -547,7 +527,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:10
+dist/maybe.d.ts:11
 
 ___
 
@@ -574,49 +554,3 @@ ___
 #### Defined in
 
 dist/maybe.d.ts:23
-
-___
-
-### just
-
-▸ `Static` **just**<`T`\>(`value`): [`Maybe`](../modules/internal_.md#maybe)<`T`\>
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `value` | `T` |
-
-#### Returns
-
-[`Maybe`](../modules/internal_.md#maybe)<`T`\>
-
-#### Defined in
-
-dist/maybe.d.ts:9
-
-___
-
-### none
-
-▸ `Static` **none**<`T`\>(): [`Maybe`](../modules/internal_.md#maybe)<`T`\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | `never` |
-
-#### Returns
-
-[`Maybe`](../modules/internal_.md#maybe)<`T`\>
-
-#### Defined in
-
-dist/maybe.d.ts:8

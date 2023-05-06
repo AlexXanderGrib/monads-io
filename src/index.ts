@@ -45,7 +45,8 @@ export const Maybe = Object.freeze({
   fromEitherRight: maybe.fromEitherRight,
   fromEitherLeft: maybe.fromEitherLeft,
   iterator: maybe.iterator,
-  asyncIterator: maybe.asyncIterator
+  asyncIterator: maybe.asyncIterator,
+  filterMap: maybe.filterMap
 });
 
 export type {
