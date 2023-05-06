@@ -10,8 +10,32 @@ import {
   isEither,
   chain,
   wrap,
-  wrapAsync
+  wrapAsync,
+  Either,
+  fromPromiseSettledResult
 } from "../either.exports";
+
+// class Test {
+//   @Decorate()
+//   right(): Either<Error, number> {
+//     return right(11);
+//   }
+
+//   @Decorate()
+//   left(): Either<Error, number> {
+//     throw new Error("Test");
+//   }
+
+//   @DecorateAsync()
+//   rightAsync(): Promise<Either<Error, number>> {
+//     return Promise.resolve(right(11));
+//   }
+
+//   @DecorateAsync()
+//   leftAsync(): Promise<Either<Error, number>> {
+//     throw new Error("Test");
+//   }
+// }
 
 describe("Either", () => {
   const $right = right<Error, number>(10);
@@ -180,5 +204,29 @@ describe("Either", () => {
 
     expect(await wrappedAsync(10)).toEqual(right(11));
     expect(await wrappedAsync(11)).toEqual(left(new Error("How dare you")));
+  });
+
+  // test("decorators", async () => {
+  //   const instance = new Test();
+
+  //   expect(instance.right()).toEqual(right(11));
+  //   expect(instance.left()).toEqual(left(new Error("Test")));
+
+  //   expect(await instance.rightAsync()).toEqual(right(11));
+  //   expect(await instance.leftAsync()).toEqual(left(new Error("Test")));
+  // });
+
+  test("fromPromiseSettledResult", async () => {
+    const results = await Promise.allSettled([
+      Promise.reject(new Error("Test")),
+      Promise.resolve(11)
+    ]);
+
+    const [$left, $right] = results.map(
+      (result): Either<Error, number> => fromPromiseSettledResult(result)
+    );
+
+    expect($left).toEqual(left(new Error("Test")));
+    expect($right).toEqual(right(11));
   });
 });

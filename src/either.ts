@@ -24,21 +24,23 @@ const enum EitherType {
 
 const name = "Either";
 
+export function right<L = never, T = never>(right: T): Either<L, T> {
+  return Right.create(right);
+}
+
+export function left<T = never, R = never>(value: T): Either<T, R> {
+  return Left.create(value);
+}
+
 class EitherConstructor<L, R>
   implements AsyncMonad<R>, Alternative<R>, Container<R>
 {
-  static right<L = never, T = never>(right: T): Either<L, T> {
-    return Right.create(right);
-  }
-
-  static left<T = never, R = never>(value: T): Either<T, R> {
-    return Left.create(value);
-  }
-
+  /* istanbul ignore next */
   getRight(): R | undefined {
     return this.biMatch(noop, identity);
   }
 
+  /* istanbul ignore next */
   getLeft(): L | undefined {
     return this.biMatch(identity, noop);
   }
@@ -50,10 +52,6 @@ class EitherConstructor<L, R>
     this.map(callback, ...parameters);
 
     return this as unknown as Either<L, R>;
-  }
-
-  get [Symbol.toStringTag]() {
-    return "Either";
   }
 
   isLeft(): this is Left<L, R> {
@@ -83,6 +81,13 @@ class EitherConstructor<L, R>
     map: Pm<R, T, P>,
     ...parameters: P
   ): Either<L, T> {
+    return this.mapRight(map, ...parameters);
+  }
+
+  mapRight<T, P extends AnyParameters>(
+    map: Pm<R, T, P>,
+    ...parameters: P
+  ): Either<L, T> {
     return this.biMap(identity, bind(map, parameters));
   }
 
@@ -100,7 +105,7 @@ class EitherConstructor<L, R>
     this: Either<L, A | Pm<A, B, P>>,
     argument: Either<L, A | Pm<A, B, P>>,
     ...parameters: P
-  ): EitherConstructor<L, B> {
+  ): Either<L, B> {
     return this.zip(argument).map(([current, argument]): B => {
       if (isWrappedFunction<A, B, P>(current)) {
         return current(argument as A, ...parameters);
@@ -137,9 +142,7 @@ class EitherConstructor<L, R>
     return result.join();
   }
 
-  async await<T>(
-    this: EitherConstructor<L, MaybePromiseLike<T>>
-  ): Promise<Either<L, T>> {
+  async await<T>(this: Either<L, MaybePromiseLike<T>>): Promise<Either<L, T>> {
     return await this.biMatch<MaybePromiseLike<Either<L, T>>>(
       left,
       async (value) => right(await value)
@@ -155,6 +158,7 @@ class EitherConstructor<L, R>
       return mapRight(this.right);
     }
 
+    /* istanbul ignore next */
     throw new Error("Invalid state");
   }
 
@@ -210,6 +214,14 @@ class Left<L, R> extends EitherConstructor<L, R> implements SerializedLeft<L> {
     return name;
   }
 
+  override getRight(): undefined {
+    return;
+  }
+
+  override getLeft(): L {
+    return this.left;
+  }
+
   get type(): EitherType.Left {
     return EitherType.Left;
   }
@@ -253,6 +265,14 @@ class Right<L, R>
     return EitherType.Right;
   }
 
+  override getRight(): R {
+    return this.right;
+  }
+
+  override getLeft(): undefined {
+    return;
+  }
+
   private constructor(public readonly right: R) {
     super();
     Object.freeze(this);
@@ -266,14 +286,12 @@ class Right<L, R>
 Object.freeze(Right);
 Object.freeze(Right.prototype);
 
-export type Either<L, R> = Right<L, R> | Left<L, R>;
+export type Either<L = unknown, R = unknown> = Right<L, R> | Left<L, R>;
 export type SerializedEither<L, R> = SerializedRight<R> | SerializedLeft<L>;
 
 export const isEither = <L, R>(
   value: unknown | Either<L, R>
-): value is Either<L, R> => value instanceof EitherConstructor;
-
-export const { right, left } = EitherConstructor;
+): value is Either<L, R> => value instanceof Right || value instanceof Left;
 
 export function chain<L, R, NR, P extends AnyParameters>(
   map: (value: R, ...parameters: P) => MaybePromiseLike<Either<never, NR>>,
@@ -369,7 +387,7 @@ export function mergeInMany<L1, R1, L2, R2, L3, R3, L4, R4, L5, R5>(
     Either<L4, R4>,
     Either<L5, R5>
   ]
-): EitherConstructor<Array<L1 | L2 | L3 | L4 | L5>, [R1, R2, R3, R4, R5]>;
+): Either<Array<L1 | L2 | L3 | L4 | L5>, [R1, R2, R3, R4, R5]>;
 export function mergeInMany<L1, R1, L2, R2, L3, R3, L4, R4, L5, R5, L6, R6>(
   values: [
     Either<L1, R1>,
@@ -385,7 +403,7 @@ export function mergeInMany<L, R>(
 ): Either<L[], R[]>;
 export function mergeInMany(
   values: Array<Either<unknown, unknown>>
-): EitherConstructor<unknown[], unknown[]> {
+): Either<unknown[], unknown[]> {
   const hasLefts = values.some((value) => value.isLeft());
   const results: unknown[] = [];
 
@@ -419,6 +437,61 @@ export function aggregateError<T = unknown>(
       ),
     noop
   );
+}
+
+type LegacyMethodDecorator = (
+  target: CallableFunction,
+  property: any,
+  descriptor: PropertyDescriptor
+) => void;
+
+type ModernMethodDecorator<R = unknown> = <
+  T extends (...parameters: AnyParameters) => R
+>(
+  method: T,
+  context: any
+) => T;
+
+export function DecorateLegacy(): LegacyMethodDecorator {
+  /* istanbul ignore next */
+  return function decorate(_target, _property, descriptor) {
+    descriptor.value = wrap(descriptor.value);
+  };
+}
+
+export function DecorateAsyncLegacy(): LegacyMethodDecorator {
+  /* istanbul ignore next */
+  return function decorateAsync(_target, _property, descriptor) {
+    descriptor.value = wrapAsync(descriptor.value);
+  };
+}
+
+export function Decorate(): ModernMethodDecorator<Either> {
+  return function decorate(
+    method: any,
+    context: ClassMethodDecoratorContext
+  ): any {
+    /* istanbul ignore next */
+    if (context.kind !== "method") {
+      throw new Error("Expected decorating method");
+    }
+
+    return wrap(method);
+  };
+}
+
+export function DecorateAsync(): ModernMethodDecorator<Promise<Either>> {
+  return function decorate(
+    method: any,
+    context: ClassMethodDecoratorContext
+  ): any {
+    /* istanbul ignore next */
+    if (context.kind !== "method") {
+      throw new Error("Expected decorating method");
+    }
+
+    return wrapAsync(method);
+  };
 }
 
 export function wrap<L, R, P extends AnyParameters>(
