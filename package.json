@@ -1,6 +1,6 @@
 {
   "name": "monads-io",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "🚀 Efficient Monads for JS: Maybe (Option) and Either (Result)",
   "scripts": {
     "test": "jest",
@@ -28,12 +28,12 @@
     "./either": {
       "require": "./dist/either.exports.js",
       "import": "./dist/either.exports.mjs",
-      "types": "./dist/either.d.ts"
+      "types": "./dist/either.exports.d.ts"
     },
     "./maybe": {
       "require": "./dist/maybe.exports.js",
       "import": "./dist/maybe.exports.mjs",
-      "types": "./dist/maybe.d.ts"
+      "types": "./dist/maybe.exports.d.ts"
     },
     "./types": {
       "types": "./dist/types.d.ts"
