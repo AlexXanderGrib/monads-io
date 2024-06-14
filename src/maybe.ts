@@ -1,3 +1,8 @@
+import {
+  DeserializationError,
+  InvalidStateError,
+  UnwrapCustomError
+} from "./errors";
 import { bind, combine, identity, isWrappedFunction, noop } from "./runtime";
 import type {
   MaybePromiseLike,
@@ -29,7 +34,11 @@ export { just as from };
 
 class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
   unwrapOr<X>(value: X): T | X {
-    return this.biMatch(identity, () => value);
+    return this.unwrapOrElse(() => value);
+  }
+
+  unwrapOrElse<X>(value: () => X): T | X {
+    return this.fold(identity, value);
   }
 
   isJust(): this is Just<T> {
@@ -49,6 +58,13 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
     ...parameters: A
   ): Maybe<V> {
     return this.chain(combine(bind(map, parameters), just));
+  }
+
+  mapNullable<V, A extends AnyParameters>(
+    map: Pm<T, V | null | undefined, A>,
+    ...parameters: A
+  ): Maybe<V> {
+    return this.chain(combine(bind(map, parameters), fromNullable));
   }
 
   apply<A, B, P extends AnyParameters>(
@@ -75,7 +91,9 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
         return argument(current as A, ...parameters);
       }
 
-      throw new Error("Some of the arguments should be a function");
+      throw new InvalidStateError(
+        InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION
+      );
     });
   }
 
@@ -89,7 +107,7 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
     map: Pm<T, Maybe<V>, A>,
     ...parameters: A
   ): Maybe<V> {
-    return this.biMatch<Maybe<V>>(bind(map, parameters), none);
+    return this.fold<Maybe<V>>(bind(map, parameters), none);
   }
 
   default(value: T): Maybe<T> {
@@ -97,10 +115,15 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
   }
 
   or(x: Maybe<T>): Maybe<T> {
-    return this.biMatch(
-      () => this as unknown as Maybe<T>,
-      () => x
-    );
+    return this.orLazy(() => x);
+  }
+
+  orLazy(factory: () => Maybe<T>): Maybe<T> {
+    return this.fold(() => this as unknown as Maybe<T>, factory);
+  }
+
+  async orAsync(factory: () => MaybePromiseLike<Maybe<T>>): Promise<Maybe<T>> {
+    return await this.fold(() => this as unknown as Maybe<T>, factory);
   }
 
   zip<A>(maybe: Maybe<A>): Maybe<Pair<T, A>> {
@@ -120,16 +143,14 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
     map: Pm<T, V, P>,
     ...parameters: P
   ): V | undefined {
-    return this.biMatch(bind(map, parameters), noop);
+    return this.fold(bind(map, parameters), noop);
   }
 
-  unwrap(message = "Maybe state is None"): T {
-    return this.biMatch(identity, () => {
-      throw new Error(message);
-    });
+  unwrap(message: string = UnwrapCustomError.Messages.MAYBE_IS_NONE): T {
+    return this.fold(identity, () => UnwrapCustomError.inlineThrow(message));
   }
 
-  biMatch<A, B = A>(mapJust: Pm<T, A, []>, mapNone: Pm<void, B, []>): A | B {
+  fold<A, B = A>(mapJust: Pm<T, A>, mapNone: Pm<void, B>): A | B {
     if (this.isJust()) {
       return mapJust(this.value);
     }
@@ -139,7 +160,7 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
     }
 
     /* istanbul ignore next */
-    throw new Error("Invalid state");
+    throw new InvalidStateError();
   }
 
   async asyncChain<V, P extends AnyParameters>(
@@ -150,11 +171,50 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
     return result.join();
   }
 
+  async asyncMap<A, P extends AnyParameters>(
+    map: Pm<T, MaybePromiseLike<A>, P>,
+    ...parameters: P
+  ): Promise<Maybe<A>> {
+    return await this.map(map, ...parameters).await();
+  }
+
   async await<X>(this: Maybe<MaybePromiseLike<X>>): Promise<Maybe<X>> {
-    return await this.biMatch<MaybePromiseLike<Maybe<X>>>(
+    return await this.fold<MaybePromiseLike<Maybe<X>>>(
       async (value) => just(await value),
       none
     );
+  }
+
+  asyncApply<A, B, P extends AnyParameters>(
+    this: Maybe<Pm<A, MaybePromiseLike<B>, P>>,
+    argument: Maybe<A>,
+    ...parameters: P
+  ): Promise<Maybe<B>>;
+  asyncApply<A, B, P extends AnyParameters>(
+    this: Maybe<A>,
+    map: Maybe<Pm<A, MaybePromiseLike<B>, P>>,
+    ...parameters: P
+  ): Promise<Maybe<B>>;
+  async asyncApply<A, B, P extends AnyParameters>(
+    this: Maybe<A | Pm<A, MaybePromiseLike<B>, P>>,
+    argument: Maybe<A | Pm<A, MaybePromiseLike<B>, P>>,
+    ...parameters: P
+  ): Promise<Maybe<B>> {
+    return await this.zip(argument)
+      .map(([current, argument]): B => {
+        if (isWrappedFunction<A, B, P>(current)) {
+          return current(argument as A, ...parameters);
+        }
+
+        if (isWrappedFunction<A, B, P>(argument)) {
+          return argument(current as A, ...parameters);
+        }
+
+        throw new InvalidStateError(
+          InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION
+        );
+      })
+      .await();
   }
 }
 
@@ -172,7 +232,7 @@ class Just<T> extends MaybeConstructor<T> implements SerializedJust<T> {
     return new Just(value);
   }
 
-  get [Symbol.toStringTag]() {
+  get [Symbol.toStringTag](): "Just" {
     return "Just";
   }
 
@@ -205,7 +265,11 @@ class None<T = unknown> extends MaybeConstructor<T> implements SerializedNone {
     return None.instance;
   }
 
-  get [Symbol.toStringTag]() {
+  get value(): undefined {
+    return undefined;
+  }
+
+  get [Symbol.toStringTag](): "None" {
     return "None";
   }
 
@@ -232,8 +296,16 @@ Object.freeze(None.prototype);
 
 export type Maybe<T> = Just<T> | None<T>;
 export type SerializedMaybe<T> = SerializedJust<T> | SerializedNone;
+
+export const isJust = <T>(value: unknown | Maybe<T>): value is Just<T> =>
+  value instanceof Just;
+
+export const isNone = <T>(value: unknown | Maybe<T>): value is None<T> =>
+  // Better: value === None.instance
+  value instanceof None;
+
 export const isMaybe = <T>(value: unknown | Maybe<T>): value is Maybe<T> =>
-  value instanceof Just || value instanceof None;
+  isJust(value) || isNone(value);
 
 export function chain<A, B, P extends AnyParameters>(
   map: (v: A, ...parameters: P) => MaybePromiseLike<Maybe<B>>,
@@ -244,7 +316,9 @@ export function chain<A, B, P extends AnyParameters>(
 
 export function fromJSON<T>(serialized: SerializedMaybe<T>): Maybe<T> {
   if (serialized.name !== name) {
-    throw new Error("Expected serialized to be of type Maybe");
+    throw new DeserializationError(
+      DeserializationError.Messages.EXPECTED_MAYBE
+    );
   }
 
   if (serialized.type === MaybeState.Just) {

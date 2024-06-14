@@ -14,6 +14,11 @@ import {
   Either,
   fromPromiseSettledResult
 } from "../either.exports";
+import {
+  DeserializationError,
+  InvalidStateError,
+  UnwrapCustomError
+} from "../errors";
 
 // class Test {
 //   @Decorate()
@@ -78,8 +83,14 @@ describe("Either", () => {
   test("json", async () => {
     expect(fromJSON($right.toJSON())).toEqual($right);
     expect(fromJSON($left.toJSON())).toEqual($left);
-    expect(() => fromJSON({} as any)).toThrowError();
-    expect(() => fromJSON({ name: "Either" } as any)).toThrowError();
+    expect(() => fromJSON({} as any)).toThrowError(
+      new DeserializationError(DeserializationError.Messages.EXPECTED_EITHER)
+    );
+    expect(() => fromJSON({ name: "Either" } as any)).toThrowError(
+      new DeserializationError(
+        DeserializationError.Messages.EITHER_INVALID_STATE
+      )
+    );
   });
 
   test("from Promise/Try/Catch", async () => {
@@ -129,7 +140,7 @@ describe("Either", () => {
   test("unwrap", () => {
     expect($right.unwrap()).toBe(10);
     expect($left.unwrapOr(11)).toBe(11);
-    expect(() => $left.unwrap()).toThrowError();
+    expect(() => $left.unwrap()).toThrowError(UnwrapCustomError);
   });
 
   test("apply", () => {
@@ -143,7 +154,9 @@ describe("Either", () => {
 
     expect(() =>
       $right.apply(right<Error, (a: number) => number>(undefined as any))
-    ).toThrowError();
+    ).toThrowError(
+      new InvalidStateError(InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION)
+    );
   });
 
   test("getLeft/getRight", () => {
@@ -228,5 +241,45 @@ describe("Either", () => {
 
     expect($left).toEqual(left(new Error("Test")));
     expect($right).toEqual(right(11));
+  });
+
+  test("orAsync", async () => {
+    const either = await $left.orAsync(() => $right);
+    expect(either).toEqual($right);
+  });
+
+  test("any", () => {
+    const either = $left.mapLeft(() => 10);
+    expect(either.any()).toBe(10);
+  });
+
+  test("asyncApply", async () => {
+    expect(await $right.asyncApply(right((a: number) => a + 1))).toEqual(
+      right(11)
+    );
+    expect(await right((a: number) => a + 1).asyncApply(right(10))).toEqual(
+      right(11)
+    );
+
+    expect(await $left.asyncApply(right((a: number) => a + 1))).toEqual($left);
+    expect(
+      await $right.asyncApply(
+        left<Error, (a: number) => number>(new Error("Test"))
+      )
+    ).toEqual(left(new Error("Test")));
+
+    try {
+      await $right.asyncApply(
+        right<Error, (a: number) => number>(undefined as any)
+      );
+
+      fail("Didn't throw");
+    } catch (error) {
+      expect(error).toEqual(
+        new InvalidStateError(
+          InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION
+        )
+      );
+    }
   });
 });

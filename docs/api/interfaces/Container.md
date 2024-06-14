@@ -1,8 +1,6 @@
-[Package](../README.md) / [Exports](../modules.md) / [<internal\>](../modules/internal_.md) / Container
+[Package](../README.md) / [Exports](../modules.md) / Container
 
-# Interface: Container<T\>
-
-[<internal>](../modules/internal_.md).Container
+# Interface: Container\<T\>
 
 ## Type parameters
 
@@ -19,8 +17,8 @@
 
 ### Methods
 
-- [unwrap](internal_.Container.md#unwrap)
-- [unwrapOr](internal_.Container.md#unwrapor)
+- [unwrap](Container.md#unwrap)
+- [unwrapOr](Container.md#unwrapor)
 
 ## Methods
 
@@ -40,7 +38,7 @@ ___
 
 ### unwrapOr
 
-▸ **unwrapOr**<`X`\>(`value`): `T` \| `X`
+▸ **unwrapOr**\<`X`\>(`value`): `T` \| `X`
 
 #### Type parameters
 

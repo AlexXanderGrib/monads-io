@@ -54,6 +54,27 @@ export type {
   MaybePromiseLike,
   Nullable,
   AnyParameters,
-  Pair
+  Pair,
+  Alternative,
+  Applicative,
+  AsyncMonad,
+  Container,
+  Functor,
+  Monad
 } from "./types.js";
-export { identity, noop, throwValue, bind, combine } from "./runtime.js";
+
+export {
+  identity,
+  noop,
+  throwValue,
+  bind,
+  combine,
+  unwrap
+} from "./runtime.js";
+
+export {
+  DecorationError,
+  DeserializationError,
+  InvalidStateError,
+  UnwrapCustomError
+} from "./errors.js";

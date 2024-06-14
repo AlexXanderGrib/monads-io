@@ -1,11 +1,19 @@
-[Package](../README.md) / [Exports](../modules.md) / <internal\>
+[Package](../README.md) / [Exports](../modules.md) / \<internal\>
 
-# Module: <internal\>
+# Module: \<internal\>
 
 ## Table of contents
 
+### Enumerations
+
+- [DecorationErrorMessages](../enums/internal_.DecorationErrorMessages.md)
+- [DeserializationErrorMessages](../enums/internal_.DeserializationErrorMessages.md)
+- [InvalidStateMessages](../enums/internal_.InvalidStateMessages.md)
+- [UnwrapCustomErrorMessages](../enums/internal_.UnwrapCustomErrorMessages.md)
+
 ### Enumeration Members
 
+- [EXPECTED\_DECORATING\_METHOD](internal_.md#expected_decorating_method)
 - [Just](internal_.md#just)
 - [Left](internal_.md#left)
 - [None](internal_.md#none)
@@ -19,15 +27,6 @@
 - [MaybeConstructor](../classes/internal_.MaybeConstructor.md)
 - [None](../classes/internal_.None.md)
 - [Right](../classes/internal_.Right.md)
-
-### Interfaces
-
-- [Alternative](../interfaces/internal_.Alternative.md)
-- [Applicative](../interfaces/internal_.Applicative.md)
-- [AsyncMonad](../interfaces/internal_.AsyncMonad.md)
-- [Container](../interfaces/internal_.Container.md)
-- [Functor](../interfaces/internal_.Functor.md)
-- [Monad](../interfaces/internal_.Monad.md)
 
 ### Type Aliases
 
@@ -47,6 +46,16 @@
 - [name](internal_.md#name-1)
 
 ## Enumeration Members
+
+### EXPECTED\_DECORATING\_METHOD
+
+• **EXPECTED\_DECORATING\_METHOD**: ``"Expected decorating method"``
+
+#### Defined in
+
+dist/errors.d.ts:12
+
+___
 
 ### Just
 
@@ -90,7 +99,7 @@ dist/either.d.ts:4
 
 ### Either
 
-Ƭ **Either**<`L`, `R`\>: [`Right`](../classes/internal_.Right.md)<`L`, `R`\> \| [`Left`](../classes/internal_.Left.md)<`L`, `R`\>
+Ƭ **Either**\<`L`, `R`\>: [`Right`](../classes/internal_.Right.md)\<`L`, `R`\> \| [`Left`](../classes/internal_.Left.md)\<`L`, `R`\>
 
 #### Type parameters
 
@@ -101,13 +110,13 @@ dist/either.d.ts:4
 
 #### Defined in
 
-dist/either.d.ts:66
+dist/either.d.ts:75
 
 ___
 
 ### Maybe
 
-Ƭ **Maybe**<`T`\>: [`Just`](../classes/internal_.Just.md)<`T`\> \| [`None`](../classes/internal_.None.md)<`T`\>
+Ƭ **Maybe**\<`T`\>: [`Just`](../classes/internal_.Just.md)\<`T`\> \| [`None`](../classes/internal_.None.md)\<`T`\>
 
 #### Type parameters
 
@@ -117,13 +126,13 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:58
+dist/maybe.d.ts:66
 
 ___
 
 ### Pm
 
-Ƭ **Pm**<`A`, `B`, `P`\>: (`value`: `A`, ...`parameters`: `P`) => `B`
+Ƭ **Pm**\<`A`, `B`, `P`\>: (`value`: `A`, ...`parameters`: `P`) => `B`
 
 #### Type parameters
 
@@ -159,7 +168,7 @@ ___
 
 ### SerializedEither
 
-Ƭ **SerializedEither**<`L`, `R`\>: [`SerializedRight`](internal_.md#serializedright)<`R`\> \| [`SerializedLeft`](internal_.md#serializedleft)<`L`\>
+Ƭ **SerializedEither**\<`L`, `R`\>: [`SerializedRight`](internal_.md#serializedright)\<`R`\> \| [`SerializedLeft`](internal_.md#serializedleft)\<`L`\>
 
 #### Type parameters
 
@@ -170,13 +179,13 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:67
+dist/either.d.ts:76
 
 ___
 
 ### SerializedJust
 
-Ƭ **SerializedJust**<`T`\>: `Readonly`<{ `name`: typeof [`name`](internal_.md#name-1) ; `type`: [`Just`](internal_.md#just) ; `value`: `T`  }\>
+Ƭ **SerializedJust**\<`T`\>: `Readonly`\<\{ `name`: typeof [`name`](internal_.md#name-1) ; `type`: [`Just`](internal_.md#just) ; `value`: `T`  }\>
 
 #### Type parameters
 
@@ -186,13 +195,13 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:31
+dist/maybe.d.ts:38
 
 ___
 
 ### SerializedLeft
 
-Ƭ **SerializedLeft**<`L`\>: `Readonly`<{ `left`: `L` ; `name`: typeof [`name`](internal_.md#name) ; `type`: [`Left`](internal_.md#left)  }\>
+Ƭ **SerializedLeft**\<`L`\>: `Readonly`\<\{ `left`: `L` ; `name`: typeof [`name`](internal_.md#name) ; `type`: [`Left`](internal_.md#left)  }\>
 
 #### Type parameters
 
@@ -202,13 +211,13 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:34
+dist/either.d.ts:43
 
 ___
 
 ### SerializedMaybe
 
-Ƭ **SerializedMaybe**<`T`\>: [`SerializedJust`](internal_.md#serializedjust)<`T`\> \| [`SerializedNone`](internal_.md#serializednone)
+Ƭ **SerializedMaybe**\<`T`\>: [`SerializedJust`](internal_.md#serializedjust)\<`T`\> \| [`SerializedNone`](internal_.md#serializednone)
 
 #### Type parameters
 
@@ -218,7 +227,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:59
+dist/maybe.d.ts:67
 
 ___
 
@@ -235,13 +244,13 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:45
+dist/maybe.d.ts:52
 
 ___
 
 ### SerializedRight
 
-Ƭ **SerializedRight**<`R`\>: `Readonly`<{ `name`: typeof [`name`](internal_.md#name) ; `right`: `R` ; `type`: [`Right`](internal_.md#right)  }\>
+Ƭ **SerializedRight**\<`R`\>: `Readonly`\<\{ `name`: typeof [`name`](internal_.md#name) ; `right`: `R` ; `type`: [`Right`](internal_.md#right)  }\>
 
 #### Type parameters
 
@@ -251,7 +260,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:50
+dist/either.d.ts:59
 
 ## Variables
 

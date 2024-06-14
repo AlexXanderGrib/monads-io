@@ -1,4 +1,9 @@
 import {
+  DeserializationError,
+  InvalidStateError,
+  UnwrapCustomError
+} from "../errors";
+import {
   asyncIterator,
   chain,
   fromJSON,
@@ -51,7 +56,9 @@ describe("Maybe", () => {
   test("json", async () => {
     expect(fromJSON($just.toJSON())).toEqual($just);
     expect(fromJSON($none.toJSON())).toEqual($none);
-    expect(() => fromJSON({} as any)).toThrowError();
+    expect(() => fromJSON({} as any)).toThrowError(
+      new DeserializationError(DeserializationError.Messages.EXPECTED_MAYBE)
+    );
   });
 
   test("or/default", () => {
@@ -64,7 +71,7 @@ describe("Maybe", () => {
   test("unwrap", () => {
     expect($just.unwrap()).toBe(10);
     expect($none.unwrapOr(11)).toBe(11);
-    expect(() => $none.unwrap()).toThrowError();
+    expect(() => $none.unwrap()).toThrowError(UnwrapCustomError);
   });
 
   test("apply", () => {
@@ -76,7 +83,9 @@ describe("Maybe", () => {
 
     expect(() =>
       $just.apply(just<(a: number) => number>(undefined as any))
-    ).toThrowError();
+    ).toThrowError(
+      new InvalidStateError(InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION)
+    );
   });
 
   test("meta", () => {
@@ -158,5 +167,53 @@ describe("Maybe", () => {
     );
 
     expect([...result]).toEqual([4, 8, 12]);
+  });
+
+  test("mapNullable", () => {
+    const value = $just.mapNullable(() => {
+      /** undefined */
+    });
+
+    expect(value).toEqual($none);
+  });
+
+  test("orAsync", async () => {
+    const maybe = await $none.orAsync(() => $just);
+    expect(maybe).toEqual($just);
+  });
+
+  test("asyncMap", async () => {
+    const maybe = await $just.asyncMap((v) => v + 1);
+    expect(maybe.unwrap()).toBe(11);
+  });
+
+  test("asyncApply", async () => {
+    expect(await $just.asyncApply(just((a: number) => a + 1))).toEqual(
+      just(11)
+    );
+    expect(await just((a: number) => a + 1).asyncApply(just(10))).toEqual(
+      just(11)
+    );
+
+    expect(await $none.asyncApply(just((a: number) => a + 1))).toEqual($none);
+    expect(await $just.asyncApply(none<(a: number) => number>())).toEqual(
+      none()
+    );
+
+    try {
+      await $just.asyncApply(just<(a: number) => number>(undefined as any));
+      fail("Dint throw error");
+    } catch (error) {
+      expect(error).toEqual(
+        new InvalidStateError(
+          InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION
+        )
+      );
+    }
+  });
+
+  test("value", () => {
+    expect($just.value).toBe(10);
+    expect($none.value).toBe(undefined);
   });
 });

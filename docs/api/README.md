@@ -20,7 +20,7 @@ Package / [Exports](modules.md)
 
 1. **Small** and **Tree-Shakable**. Either - 3kb minified, Maybe - 3kb minified, can be imported separately
 2. **No dependencies**.
-3. **Memory-Efficient**. 4 bytes overhead per instance (only class pointer)
+3. **Memory-Efficient**. 8 bytes overhead per instance (only class pointer)
 4. **Tested**. 100% coverage
 5. **Practical**. Just 2 wrappers: Either and Maybe - easy for non-fp people
 

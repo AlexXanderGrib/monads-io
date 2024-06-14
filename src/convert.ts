@@ -5,7 +5,7 @@ export function maybeToEither<L, R>(
   maybe: Maybe<R>,
   leftValue: L
 ): Either<L, R> {
-  return maybe.biMatch(right, () => left(leftValue));
+  return maybe.fold(right, () => left(leftValue));
 }
 
 export function eitherRight<R>(either: Either<unknown, R>): Maybe<R> {

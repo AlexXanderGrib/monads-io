@@ -1,5 +1,11 @@
 /* eslint-disable no-invalid-this */
 import {
+  DecorationError,
+  DeserializationError,
+  InvalidStateError,
+  UnwrapCustomError
+} from "./errors";
+import {
   bind,
   combine,
   identity,
@@ -37,12 +43,12 @@ class EitherConstructor<L, R>
 {
   /* istanbul ignore next */
   getRight(): R | undefined {
-    return this.biMatch(noop, identity);
+    return this.fold(noop, identity);
   }
 
   /* istanbul ignore next */
   getLeft(): L | undefined {
-    return this.biMatch(identity, noop);
+    return this.fold(identity, noop);
   }
 
   tap<P extends AnyParameters>(
@@ -62,8 +68,12 @@ class EitherConstructor<L, R>
     return this instanceof Right;
   }
 
+  unwrapOrElse<X>(fallback: (value: L) => X): X | R {
+    return this.fold(fallback, identity);
+  }
+
   unwrapOr<X>(value: X): X | R {
-    return this.biMatch(() => value, identity);
+    return this.unwrapOrElse(() => value);
   }
 
   join<L1, L2, R>(this: Either<L1, Either<L2, R>>): Either<L1 | L2, R> {
@@ -115,41 +125,81 @@ class EitherConstructor<L, R>
         return argument(current as A, ...parameters);
       }
 
-      throw new Error("Some of the arguments should be a function");
+      throw new InvalidStateError(
+        InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION
+      );
     });
   }
 
+  asyncApply<A, B, P extends AnyParameters>(
+    this: Either<L, Pm<A, MaybePromiseLike<B>, P>>,
+    argument: Either<L, A>,
+    ...parameters: P
+  ): Promise<Either<L, B>>;
+  asyncApply<A, B, P extends AnyParameters>(
+    this: Either<L, A>,
+    map: Either<L, Pm<A, MaybePromiseLike<B>, P>>,
+    ...parameters: P
+  ): Promise<Either<L, B>>;
+  async asyncApply<A, B, P extends AnyParameters>(
+    this: Either<L, A | Pm<A, MaybePromiseLike<B>, P>>,
+    argument: Either<L, A | Pm<A, MaybePromiseLike<B>, P>>,
+    ...parameters: P
+  ): Promise<Either<L, B>> {
+    return await this.zip(argument)
+      .map(([current, argument]): B => {
+        if (isWrappedFunction<A, B, P>(current)) {
+          return current(argument as A, ...parameters);
+        }
+
+        if (isWrappedFunction<A, B, P>(argument)) {
+          return argument(current as A, ...parameters);
+        }
+
+        throw new InvalidStateError(
+          InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION
+        );
+      })
+      .await();
+  }
+
   swap(): Either<R, L> {
-    return this.biMatch(right, left);
+    return this.fold(right, left);
   }
 
   chain<A, B, P extends AnyParameters>(
     map: Pm<R, Either<A, B>, P>,
     ...parameters: P
   ): Either<A | L, B> {
-    return this.biMatch(left, bind(map, parameters));
+    return this.fold(left, bind(map, parameters));
   }
 
   biMap<A, B>(mapLeft: Pm<L, A>, mapRight: Pm<R, B>): Either<A, B> {
-    return this.biMatch(combine(mapLeft, left), combine(mapRight, right));
+    return this.fold(combine(mapLeft, left), combine(mapRight, right));
   }
 
   async asyncChain<A, B, P extends AnyParameters>(
     map: Pm<R, MaybePromiseLike<Either<A, B>>, P>,
     ...parameters: P
   ): Promise<Either<A | L, B>> {
-    const result = await this.map(map, ...parameters).await();
+    const result = await this.asyncMap<L, Either<A, B>, P>(map, ...parameters);
     return result.join();
   }
 
+  async asyncMap<A, B, P extends AnyParameters>(
+    map: Pm<R, MaybePromiseLike<B>, P>,
+    ...parameters: P
+  ): Promise<Either<A | L, B>> {
+    return await this.map(map, ...parameters).await();
+  }
   async await<T>(this: Either<L, MaybePromiseLike<T>>): Promise<Either<L, T>> {
-    return await this.biMatch<MaybePromiseLike<Either<L, T>>>(
+    return await this.fold<MaybePromiseLike<Either<L, T>>>(
       left,
       async (value) => right(await value)
     );
   }
 
-  biMatch<A, B = A>(mapLeft: Pm<L, A>, mapRight: Pm<R, B>): A | B {
+  fold<A, B = A>(mapLeft: Pm<L, A>, mapRight: Pm<R, B>): A | B {
     if (this.isLeft()) {
       return mapLeft(this.left);
     }
@@ -159,7 +209,7 @@ class EitherConstructor<L, R>
     }
 
     /* istanbul ignore next */
-    throw new Error("Invalid state");
+    throw new InvalidStateError();
   }
 
   default(value: R): Either<L, R> {
@@ -167,20 +217,25 @@ class EitherConstructor<L, R>
   }
 
   or(x: Either<L, R>): Either<L, R> {
-    return this.biMatch(
-      () => x,
-      () => this as unknown as Either<L, R>
-    );
+    return this.orLazy(() => x);
+  }
+
+  orLazy(factory: () => Either<L, R>): Either<L, R> {
+    return this.fold(factory, () => this as unknown as Either<L, R>);
+  }
+
+  async orAsync(
+    factory: () => MaybePromiseLike<Either<L, R>>
+  ): Promise<Either<L, R>> {
+    return await this.fold(factory, () => this as unknown as Either<L, R>);
   }
 
   zip<A, B>(either: Either<A, B>): Either<L | A, Pair<R, B>> {
     return this.chain((value) => either.map((right) => [value, right]));
   }
 
-  unwrap(message = "Either state is Left"): R {
-    return this.biMatch(() => {
-      throw new Error(message);
-    }, identity);
+  unwrap(message: string = UnwrapCustomError.Messages.EITHER_IS_LEFT): R {
+    return this.fold(() => UnwrapCustomError.inlineThrow(message), identity);
   }
 
   async promise(): Promise<R> {
@@ -188,7 +243,15 @@ class EitherConstructor<L, R>
   }
 
   throw(): R {
-    return this.biMatch(throwValue, identity);
+    return this.fold(throwValue, identity);
+  }
+
+  value(): L | R {
+    return this.fold(identity, identity);
+  }
+
+  any<T>(this: Either<T, T>): T {
+    return this.value();
   }
 }
 
@@ -206,7 +269,7 @@ class Left<L, R> extends EitherConstructor<L, R> implements SerializedLeft<L> {
     return new Left(left);
   }
 
-  get [Symbol.toStringTag]() {
+  get [Symbol.toStringTag](): "Left" {
     return "Left";
   }
 
@@ -253,7 +316,7 @@ class Right<L, R>
     return new Right(right);
   }
 
-  get [Symbol.toStringTag]() {
+  get [Symbol.toStringTag](): "Right" {
     return "Right";
   }
 
@@ -289,9 +352,17 @@ Object.freeze(Right.prototype);
 export type Either<L = unknown, R = unknown> = Right<L, R> | Left<L, R>;
 export type SerializedEither<L, R> = SerializedRight<R> | SerializedLeft<L>;
 
+export const isLeft = <L, R>(
+  value: unknown | Either<L, R>
+): value is Left<L, R> => value instanceof Left;
+
+export const isRight = <L, R>(
+  value: unknown | Either<L, R>
+): value is Right<L, R> => value instanceof Right;
+
 export const isEither = <L, R>(
   value: unknown | Either<L, R>
-): value is Either<L, R> => value instanceof Right || value instanceof Left;
+): value is Either<L, R> => isLeft(value) || isRight(value);
 
 export function chain<L, R, NR, P extends AnyParameters>(
   map: (value: R, ...parameters: P) => MaybePromiseLike<Either<never, NR>>,
@@ -316,7 +387,9 @@ export function fromJSON<L, R>(
   serialized: SerializedEither<L, R>
 ): Either<L, R> {
   if (serialized.name !== "Either") {
-    throw new Error("Expected serialized to be of type Either");
+    throw new DeserializationError(
+      DeserializationError.Messages.EXPECTED_EITHER
+    );
   }
 
   if (serialized.type === EitherType.Left) {
@@ -327,7 +400,9 @@ export function fromJSON<L, R>(
     return right(serialized.right);
   }
 
-  throw new Error("Unable to deserialize Either: Invalid state");
+  throw new DeserializationError(
+    DeserializationError.Messages.EITHER_INVALID_STATE
+  );
 }
 
 export function mergeInOne<L1, R1>(values: [Either<L1, R1>]): Either<L1, [R1]>;
@@ -412,7 +487,7 @@ export function mergeInMany(
       continue;
     }
 
-    results.push(either.biMatch(identity, identity));
+    results.push(either.value());
   }
 
   const factory = hasLefts ? left : right;
@@ -422,14 +497,14 @@ export function mergeInMany(
 export function aggregateError<T = unknown>(
   values: Array<Either<T, unknown>>,
   message: string | undefined | ((lefts: T[]) => string | undefined)
-) {
+): AggregateError | undefined {
   const joined = mergeInMany(values);
 
   if (joined.isRight()) {
     return;
   }
 
-  return joined.biMatch(
+  return joined.fold(
     (errors) =>
       new AggregateError(
         errors,
@@ -467,13 +542,14 @@ export function DecorateAsyncLegacy(): LegacyMethodDecorator {
 }
 
 export function Decorate(): ModernMethodDecorator<Either> {
+  /* istanbul ignore next */
   return function decorate(
     method: any,
     context: ClassMethodDecoratorContext
   ): any {
     /* istanbul ignore next */
     if (context.kind !== "method") {
-      throw new Error("Expected decorating method");
+      throw new DecorationError();
     }
 
     return wrap(method);
@@ -481,13 +557,14 @@ export function Decorate(): ModernMethodDecorator<Either> {
 }
 
 export function DecorateAsync(): ModernMethodDecorator<Promise<Either>> {
+  /* istanbul ignore next */
   return function decorate(
     method: any,
     context: ClassMethodDecoratorContext
   ): any {
     /* istanbul ignore next */
     if (context.kind !== "method") {
-      throw new Error("Expected decorating method");
+      throw new DecorationError();
     }
 
     return wrapAsync(method);
