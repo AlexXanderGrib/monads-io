@@ -8,7 +8,7 @@ export type AnyParameters = readonly unknown[];
  * Parameterized mapper
  * `(A, ...P) => B`
  */
-export type Pm<A, B, P extends AnyParameters = []> = (
+export type Mapper<A, B, P extends AnyParameters = []> = (
   value: A,
   ...parameters: P
 ) => B;
@@ -22,7 +22,7 @@ export interface Functor<A> {
   // Functor<A>.map = (A => B) => Functor<B>
 
   map<B, P extends AnyParameters>(
-    map: Pm<A, B, P>,
+    map: Mapper<A, B, P>,
     ...parameters: P
   ): Functor<B>;
 }
@@ -32,13 +32,13 @@ export interface Applicative<A> extends Functor<A> {
   // Applicative<A => B>.apply = (A) => Applicative<B>
 
   apply<A, B, P extends AnyParameters>(
-    this: Applicative<Pm<A, B, P>>,
+    this: Applicative<Mapper<A, B, P>>,
     argument: Applicative<A>,
     ...parameters: P
   ): Applicative<B>;
   apply<A, B, P extends AnyParameters>(
     this: Applicative<A>,
-    argument: Applicative<Pm<A, B, P>>,
+    argument: Applicative<Mapper<A, B, P>>,
     ...parameters: P
   ): Applicative<B>;
 }
@@ -48,7 +48,7 @@ export interface Monad<A> extends Applicative<A> {
   // Monad<Monad<A>>.join = () => Monad<A>
 
   chain<B, P extends AnyParameters>(
-    map: Pm<A, Monad<B>, P>,
+    map: Mapper<A, Monad<B>, P>,
     ...parameters: P
   ): Monad<B>;
 
@@ -57,7 +57,7 @@ export interface Monad<A> extends Applicative<A> {
 
 export interface AsyncMonad<A> extends Monad<A> {
   asyncChain<B, P extends AnyParameters>(
-    map: Pm<A, MaybePromiseLike<AsyncMonad<B>>, P>,
+    map: Mapper<A, MaybePromiseLike<AsyncMonad<B>>, P>,
     ...parameters: P
   ): Promise<AsyncMonad<B>>;
 

@@ -1,6 +1,6 @@
 {
   "name": "monads-io",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "🚀 Efficient Monads for JS: Maybe (Option) and Either (Result)",
   "scripts": {
     "test": "jest",

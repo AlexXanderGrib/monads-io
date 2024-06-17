@@ -16,7 +16,7 @@ import {
 import type {
   MaybePromiseLike,
   Pair,
-  Pm,
+  Mapper,
   AnyParameters,
   AsyncMonad,
   Alternative,
@@ -29,6 +29,8 @@ const enum EitherType {
 }
 
 const name = "Either";
+const rightName = "Right";
+const leftName = "Left";
 
 export function right<L = never, T = never>(right: T): Either<L, T> {
   return Right.create(right);
@@ -52,7 +54,7 @@ class EitherConstructor<L, R>
   }
 
   tap<P extends AnyParameters>(
-    callback: Pm<R, void, P>,
+    callback: Mapper<R, void, P>,
     ...parameters: P
   ): Either<L, R> {
     this.map(callback, ...parameters);
@@ -81,39 +83,39 @@ class EitherConstructor<L, R>
   }
 
   mapLeft<T, P extends AnyParameters>(
-    map: Pm<L, T, P>,
+    map: Mapper<L, T, P>,
     ...parameters: P
   ): Either<T, R> {
     return this.biMap(bind(map, parameters), identity);
   }
 
   map<T, P extends AnyParameters>(
-    map: Pm<R, T, P>,
+    map: Mapper<R, T, P>,
     ...parameters: P
   ): Either<L, T> {
     return this.mapRight(map, ...parameters);
   }
 
   mapRight<T, P extends AnyParameters>(
-    map: Pm<R, T, P>,
+    map: Mapper<R, T, P>,
     ...parameters: P
   ): Either<L, T> {
     return this.biMap(identity, bind(map, parameters));
   }
 
   apply<A, B, P extends AnyParameters>(
-    this: Either<L, Pm<A, B, P>>,
+    this: Either<L, Mapper<A, B, P>>,
     argument: Either<L, A>,
     ...parameters: P
   ): Either<L, B>;
   apply<A, B, P extends AnyParameters>(
     this: Either<L, A>,
-    map: Either<L, Pm<A, B, P>>,
+    map: Either<L, Mapper<A, B, P>>,
     ...parameters: P
   ): Either<L, B>;
   apply<A, B, P extends AnyParameters>(
-    this: Either<L, A | Pm<A, B, P>>,
-    argument: Either<L, A | Pm<A, B, P>>,
+    this: Either<L, A | Mapper<A, B, P>>,
+    argument: Either<L, A | Mapper<A, B, P>>,
     ...parameters: P
   ): Either<L, B> {
     return this.zip(argument).map(([current, argument]): B => {
@@ -132,18 +134,18 @@ class EitherConstructor<L, R>
   }
 
   asyncApply<A, B, P extends AnyParameters>(
-    this: Either<L, Pm<A, MaybePromiseLike<B>, P>>,
+    this: Either<L, Mapper<A, MaybePromiseLike<B>, P>>,
     argument: Either<L, A>,
     ...parameters: P
   ): Promise<Either<L, B>>;
   asyncApply<A, B, P extends AnyParameters>(
     this: Either<L, A>,
-    map: Either<L, Pm<A, MaybePromiseLike<B>, P>>,
+    map: Either<L, Mapper<A, MaybePromiseLike<B>, P>>,
     ...parameters: P
   ): Promise<Either<L, B>>;
   async asyncApply<A, B, P extends AnyParameters>(
-    this: Either<L, A | Pm<A, MaybePromiseLike<B>, P>>,
-    argument: Either<L, A | Pm<A, MaybePromiseLike<B>, P>>,
+    this: Either<L, A | Mapper<A, MaybePromiseLike<B>, P>>,
+    argument: Either<L, A | Mapper<A, MaybePromiseLike<B>, P>>,
     ...parameters: P
   ): Promise<Either<L, B>> {
     return await this.zip(argument)
@@ -168,18 +170,18 @@ class EitherConstructor<L, R>
   }
 
   chain<A, B, P extends AnyParameters>(
-    map: Pm<R, Either<A, B>, P>,
+    map: Mapper<R, Either<A, B>, P>,
     ...parameters: P
   ): Either<A | L, B> {
     return this.fold(left, bind(map, parameters));
   }
 
-  biMap<A, B>(mapLeft: Pm<L, A>, mapRight: Pm<R, B>): Either<A, B> {
+  biMap<A, B>(mapLeft: Mapper<L, A>, mapRight: Mapper<R, B>): Either<A, B> {
     return this.fold(combine(mapLeft, left), combine(mapRight, right));
   }
 
   async asyncChain<A, B, P extends AnyParameters>(
-    map: Pm<R, MaybePromiseLike<Either<A, B>>, P>,
+    map: Mapper<R, MaybePromiseLike<Either<A, B>>, P>,
     ...parameters: P
   ): Promise<Either<A | L, B>> {
     const result = await this.asyncMap<L, Either<A, B>, P>(map, ...parameters);
@@ -187,7 +189,7 @@ class EitherConstructor<L, R>
   }
 
   async asyncMap<A, B, P extends AnyParameters>(
-    map: Pm<R, MaybePromiseLike<B>, P>,
+    map: Mapper<R, MaybePromiseLike<B>, P>,
     ...parameters: P
   ): Promise<Either<A | L, B>> {
     return await this.map(map, ...parameters).await();
@@ -199,7 +201,7 @@ class EitherConstructor<L, R>
     );
   }
 
-  fold<A, B = A>(mapLeft: Pm<L, A>, mapRight: Pm<R, B>): A | B {
+  fold<A, B = A>(mapLeft: Mapper<L, A>, mapRight: Mapper<R, B>): A | B {
     if (this.isLeft()) {
       return mapLeft(this.left);
     }
@@ -269,8 +271,8 @@ class Left<L, R> extends EitherConstructor<L, R> implements SerializedLeft<L> {
     return new Left(left);
   }
 
-  get [Symbol.toStringTag](): "Left" {
-    return "Left";
+  get [Symbol.toStringTag](): typeof leftName {
+    return leftName;
   }
 
   get name(): typeof name {
@@ -316,8 +318,8 @@ class Right<L, R>
     return new Right(right);
   }
 
-  get [Symbol.toStringTag](): "Right" {
-    return "Right";
+  get [Symbol.toStringTag](): typeof rightName {
+    return rightName;
   }
 
   get name(): typeof name {
@@ -386,7 +388,7 @@ export function chain<L, R, NL, NR, P extends AnyParameters>(
 export function fromJSON<L, R>(
   serialized: SerializedEither<L, R>
 ): Either<L, R> {
-  if (serialized.name !== "Either") {
+  if (serialized.name !== name) {
     throw new DeserializationError(
       DeserializationError.Messages.EXPECTED_EITHER
     );
@@ -541,17 +543,22 @@ export function DecorateAsyncLegacy(): LegacyMethodDecorator {
   };
 }
 
+function requireDecorationMethod(
+  context: ClassMemberDecoratorContext
+): asserts context is ClassMethodDecoratorContext {
+  if (context.kind !== "method") {
+    throw new DecorationError();
+  }
+}
+
 export function Decorate(): ModernMethodDecorator<Either> {
   /* istanbul ignore next */
   return function decorate(
     method: any,
-    context: ClassMethodDecoratorContext
+    context: ClassMemberDecoratorContext
   ): any {
     /* istanbul ignore next */
-    if (context.kind !== "method") {
-      throw new DecorationError();
-    }
-
+    requireDecorationMethod(context);
     return wrap(method);
   };
 }
@@ -560,13 +567,10 @@ export function DecorateAsync(): ModernMethodDecorator<Promise<Either>> {
   /* istanbul ignore next */
   return function decorate(
     method: any,
-    context: ClassMethodDecoratorContext
+    context: ClassMemberDecoratorContext
   ): any {
     /* istanbul ignore next */
-    if (context.kind !== "method") {
-      throw new DecorationError();
-    }
-
+    requireDecorationMethod(context);
     return wrapAsync(method);
   };
 }
@@ -628,9 +632,7 @@ export async function fromTryAsync<L, T>(
 export function fromPromiseSettledResult<L, T>(
   result: PromiseSettledResult<T>
 ): Either<L, T> {
-  if (result.status === "fulfilled") {
-    return right(result.value);
-  }
-
-  return left(result.reason);
+  return result.status === "fulfilled"
+    ? right(result.value)
+    : left(result.reason);
 }

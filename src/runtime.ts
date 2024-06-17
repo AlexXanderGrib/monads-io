@@ -1,4 +1,4 @@
-import { AnyParameters, Container, MaybePromiseLike, Pm } from "./types";
+import { AnyParameters, Container, MaybePromiseLike, Mapper } from "./types";
 
 /**
  * Do nothing, return `undefined`
@@ -73,13 +73,13 @@ export function combine<A, B, C>(
  * @template A
  * @template B
  * @template {AnyParameters} P
- * @param {(MaybePromiseLike<A> | Pm<A, MaybePromiseLike<B>, P>)} value
+ * @param {(MaybePromiseLike<A> | Mapper<A, MaybePromiseLike<B>, P>)} value
  * @return {*}  {value is Pm<A, B, P>}
  * @internal
  */
 export function isWrappedFunction<A, B, P extends AnyParameters>(
-  value: MaybePromiseLike<A> | Pm<A, MaybePromiseLike<B>, P>
-): value is Pm<A, B, P> {
+  value: MaybePromiseLike<A> | Mapper<A, MaybePromiseLike<B>, P>
+): value is Mapper<A, B, P> {
   return typeof value === "function";
 }
 

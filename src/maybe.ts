@@ -8,7 +8,7 @@ import type {
   MaybePromiseLike,
   Nullable,
   AnyParameters,
-  Pm,
+  Mapper,
   Pair,
   Alternative,
   Monad,
@@ -21,6 +21,8 @@ export const enum MaybeState {
 }
 
 const name = "Maybe";
+const justName = "Just";
+const noneName = "None";
 
 export function none<T = never>(): Maybe<T> {
   return None.create();
@@ -54,32 +56,32 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
   }
 
   map<V, A extends AnyParameters>(
-    map: Pm<T, V, A>,
+    map: Mapper<T, V, A>,
     ...parameters: A
   ): Maybe<V> {
     return this.chain(combine(bind(map, parameters), just));
   }
 
   mapNullable<V, A extends AnyParameters>(
-    map: Pm<T, V | null | undefined, A>,
+    map: Mapper<T, V | null | undefined, A>,
     ...parameters: A
   ): Maybe<V> {
     return this.chain(combine(bind(map, parameters), fromNullable));
   }
 
   apply<A, B, P extends AnyParameters>(
-    this: Maybe<Pm<A, B, P>>,
+    this: Maybe<Mapper<A, B, P>>,
     argument: Maybe<A>,
     ...parameters: P
   ): Maybe<B>;
   apply<A, B, P extends AnyParameters>(
     this: Maybe<A>,
-    argument: Maybe<Pm<A, B, P>>,
+    argument: Maybe<Mapper<A, B, P>>,
     ...parameters: P
   ): Maybe<B>;
   apply<A, B, P extends AnyParameters>(
-    this: Maybe<A | Pm<A, B, P>>,
-    argument: Maybe<A | Pm<A, B, P>>,
+    this: Maybe<A | Mapper<A, B, P>>,
+    argument: Maybe<A | Mapper<A, B, P>>,
     ...parameters: P
   ): Maybe<B> {
     return this.zip(argument).map(([current, argument]): B => {
@@ -104,7 +106,7 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
   }
 
   chain<V, A extends AnyParameters>(
-    map: Pm<T, Maybe<V>, A>,
+    map: Mapper<T, Maybe<V>, A>,
     ...parameters: A
   ): Maybe<V> {
     return this.fold<Maybe<V>>(bind(map, parameters), none);
@@ -131,7 +133,7 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
   }
 
   tap<P extends AnyParameters>(
-    callback: Pm<T, void, P>,
+    callback: Mapper<T, void, P>,
     ...parameters: P
   ): Maybe<T> {
     this.map(callback, ...parameters);
@@ -140,7 +142,7 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
   }
 
   flatMap<V, P extends AnyParameters>(
-    map: Pm<T, V, P>,
+    map: Mapper<T, V, P>,
     ...parameters: P
   ): V | undefined {
     return this.fold(bind(map, parameters), noop);
@@ -150,7 +152,7 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
     return this.fold(identity, () => UnwrapCustomError.inlineThrow(message));
   }
 
-  fold<A, B = A>(mapJust: Pm<T, A>, mapNone: Pm<void, B>): A | B {
+  fold<A, B = A>(mapJust: Mapper<T, A>, mapNone: Mapper<void, B>): A | B {
     if (this.isJust()) {
       return mapJust(this.value);
     }
@@ -164,7 +166,7 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
   }
 
   async asyncChain<V, P extends AnyParameters>(
-    map: Pm<T, MaybePromiseLike<Maybe<V>>, P>,
+    map: Mapper<T, MaybePromiseLike<Maybe<V>>, P>,
     ...parameters: P
   ): Promise<Maybe<V>> {
     const result = await this.map(map, ...parameters).await();
@@ -172,7 +174,7 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
   }
 
   async asyncMap<A, P extends AnyParameters>(
-    map: Pm<T, MaybePromiseLike<A>, P>,
+    map: Mapper<T, MaybePromiseLike<A>, P>,
     ...parameters: P
   ): Promise<Maybe<A>> {
     return await this.map(map, ...parameters).await();
@@ -186,18 +188,18 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
   }
 
   asyncApply<A, B, P extends AnyParameters>(
-    this: Maybe<Pm<A, MaybePromiseLike<B>, P>>,
+    this: Maybe<Mapper<A, MaybePromiseLike<B>, P>>,
     argument: Maybe<A>,
     ...parameters: P
   ): Promise<Maybe<B>>;
   asyncApply<A, B, P extends AnyParameters>(
     this: Maybe<A>,
-    map: Maybe<Pm<A, MaybePromiseLike<B>, P>>,
+    map: Maybe<Mapper<A, MaybePromiseLike<B>, P>>,
     ...parameters: P
   ): Promise<Maybe<B>>;
   async asyncApply<A, B, P extends AnyParameters>(
-    this: Maybe<A | Pm<A, MaybePromiseLike<B>, P>>,
-    argument: Maybe<A | Pm<A, MaybePromiseLike<B>, P>>,
+    this: Maybe<A | Mapper<A, MaybePromiseLike<B>, P>>,
+    argument: Maybe<A | Mapper<A, MaybePromiseLike<B>, P>>,
     ...parameters: P
   ): Promise<Maybe<B>> {
     return await this.zip(argument)
@@ -232,8 +234,8 @@ class Just<T> extends MaybeConstructor<T> implements SerializedJust<T> {
     return new Just(value);
   }
 
-  get [Symbol.toStringTag](): "Just" {
-    return "Just";
+  get [Symbol.toStringTag](): typeof justName {
+    return justName;
   }
 
   get name(): typeof name {
@@ -269,8 +271,8 @@ class None<T = unknown> extends MaybeConstructor<T> implements SerializedNone {
     return undefined;
   }
 
-  get [Symbol.toStringTag](): "None" {
-    return "None";
+  get [Symbol.toStringTag](): typeof noneName {
+    return noneName;
   }
 
   get name(): typeof name {
