@@ -1,6 +1,8 @@
-[Package](../README.md) / [Exports](../modules.md) / InvalidStateError
+[Package](../README.md) / [Modules](../modules.md) / [index](../modules/index.md) / InvalidStateError
 
 # Class: InvalidStateError
+
+[index](../modules/index.md).InvalidStateError
 
 ## Hierarchy
 
@@ -12,12 +14,12 @@
 
 ### Constructors
 
-- [constructor](InvalidStateError.md#constructor)
+- [constructor](index.InvalidStateError.md#constructor)
 
 ### Properties
 
-- [name](InvalidStateError.md#name)
-- [Messages](InvalidStateError.md#messages)
+- [name](index.InvalidStateError.md#name)
+- [Messages](index.InvalidStateError.md#messages)
 
 ## Constructors
 
@@ -29,7 +31,7 @@
 
 | Name | Type |
 | :------ | :------ |
-| `message?` | [`InvalidStateMessages`](../enums/internal_.InvalidStateMessages.md) |
+| `message?` | [`InvalidStateMessages`](../enums/index._internal_.InvalidStateMessages.md) |
 
 #### Overrides
 
@@ -57,7 +59,7 @@ ___
 
 ### Messages
 
-▪ `Static` `Readonly` **Messages**: typeof [`InvalidStateMessages`](../enums/internal_.InvalidStateMessages.md)
+▪ `Static` `Readonly` **Messages**: typeof [`InvalidStateMessages`](../enums/index._internal_.InvalidStateMessages.md)
 
 #### Defined in
 

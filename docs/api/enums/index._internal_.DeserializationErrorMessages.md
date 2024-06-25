@@ -1,16 +1,16 @@
-[Package](../README.md) / [Exports](../modules.md) / [\<internal\>](../modules/internal_.md) / DeserializationErrorMessages
+[Package](../README.md) / [Modules](../modules.md) / [index](../modules/index.md) / [\<internal\>](../modules/index._internal_.md) / DeserializationErrorMessages
 
 # Enumeration: DeserializationErrorMessages
 
-[\<internal\>](../modules/internal_.md).DeserializationErrorMessages
+[index](../modules/index.md).[\<internal\>](../modules/index._internal_.md).DeserializationErrorMessages
 
 ## Table of contents
 
 ### Enumeration Members
 
-- [EITHER\_INVALID\_STATE](internal_.DeserializationErrorMessages.md#either_invalid_state)
-- [EXPECTED\_EITHER](internal_.DeserializationErrorMessages.md#expected_either)
-- [EXPECTED\_MAYBE](internal_.DeserializationErrorMessages.md#expected_maybe)
+- [EITHER\_INVALID\_STATE](index._internal_.DeserializationErrorMessages.md#either_invalid_state)
+- [EXPECTED\_EITHER](index._internal_.DeserializationErrorMessages.md#expected_either)
+- [EXPECTED\_MAYBE](index._internal_.DeserializationErrorMessages.md#expected_maybe)
 
 ## Enumeration Members
 

@@ -26,13 +26,7 @@
 
 Huge credit to @JSMonk. This library is based on [`JSMonk/sweet-monads`](https://github.com/JSMonk/sweet-monads)
 
-Docs available in his repository
-
-- [Either](https://github.com/JSMonk/sweet-monads/tree/master/either)
-- [Maybe](https://github.com/JSMonk/sweet-monads/tree/master/maybe)
-- [Reference](./docs/api/modules.md)
-
-## 📦 Installation
+## Installation
 
 - **Using `npm`**
   ```shell
@@ -47,7 +41,123 @@ Docs available in his repository
   pnpm add monads-io
   ```
 
-## ⚙️ Usage
+## Usage
+
+### [Either](./docs/api/modules/either.md)
+
+> The Either type represents values with two possibilities: a value of type Either a b is either Left a or Right b.
+> ([source](https://hackage.haskell.org/package/category-extras-0.52.0/docs/Control-Monad-Either.html))
+
+1. Makes error path of function strongly typed
+2. Separates errors from exceptions
+3. Minimal memory overhead (see [benchmarks](./benchmarks/))
+
+<details>
+  <summary>Example (preparing data to render User page)</summary>
+
+```typescript
+import {
+  Either,
+  fromPromise,
+  fromTryAsync,
+  left,
+  mergeInOne,
+  right
+} from "monads-io/either";
+
+class NetworkError extends Error {}
+class HttpError extends Error {}
+class JsonParsingError extends Error {}
+class NotFoundError extends Error {}
+
+type FetchError = NetworkError | HttpError | JsonParsingError;
+
+type ID = string;
+type User = { id: ID; username: string; name: string /* ... */ };
+type Post = { id: ID; userId: User["id"]; body: string /* ... */ };
+
+async function getJson<T>(url: string): Promise<Either<FetchError, T>> {
+  const response = await fromPromise(
+    fetch(`https://jsonplaceholder.typicode.com/${url}`),
+    (cause) => new NetworkError("Unable to connect", { cause })
+  );
+
+  const okResponse = response.chain((response) => {
+    if (response.ok) return right(response);
+
+    return left(
+      new HttpError(
+        `Response status is ${response.status} ${response.statusText}`,
+        { cause: response }
+      )
+    );
+  });
+
+  const json = await okResponse.asyncChain((response) => {
+    return fromTryAsync(
+      async () => (await response.json()) as T,
+      (cause) => new JsonParsingError("Unable to parse JSON", { cause })
+    );
+  });
+
+  return json;
+}
+
+async function getUserByUsername(username: string) {
+  const users = await getJson<User[]>(`/users?username=${username}`);
+
+  return users.chain((users) => {
+    const user = users[0];
+
+    if (!user) {
+      return left(new NotFoundError(`User not found`, { cause: { username } }));
+    }
+
+    return right(user);
+  });
+}
+
+const getPosts = (userId: string) =>
+  getJson<Post[]>(`/posts?ownerId=${userId}`);
+
+class PageLoadError extends Error {
+  /* ... */
+
+  constructor(public returnStatus: number, message: string, cause?: unknown) {
+    super(message, { cause });
+  }
+}
+
+async function getUserPageData(username: string) {
+  const user = await getUserByUsername(username);
+  const posts = await user.asyncChain((user) => getPosts(user.id));
+
+  return mergeInOne([user, posts])
+    .map(([user, posts]) => ({ user, posts }))
+    .mapLeft((error) => {
+      if (error instanceof NotFoundError) {
+        return new PageLoadError(404, "User not found", error);
+      }
+
+      // error: FetchError
+      console.log("Error fetching data for User Page", error);
+      return new PageLoadError(500, "Internal server error", error);
+    });
+}
+```
+
+</details>
+
+### [Maybe](./docs/api/modules/maybe.md)
+
+> The Maybe monad represents computations which might "go wrong" by not returning a value.
+> ([source](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe))
+
+1. Allows to separate empty/present state from undefined
+2. Minimal memory overhead (see [benchmarks](./benchmarks/))
+
+<details>
+  <summary>Example (searching mention target)</summary>
 
 ```typescript
 // Real world example
@@ -55,44 +165,66 @@ Docs available in his repository
 import { Maybe } from "monads-io";
 
 export async function getTargets(
-  api: TelegramAPI,
-  tokens: formattedText,
-  { mentionLimit = 1, message = undefined as message | undefined } = {}
+api: TelegramAPI,
+tokens: formattedText,
+{ mentionLimit = 1, message = undefined as message | undefined } = {}
 ): Promise<Map<number, chat | undefined>> {
-  const mentions = getMentions(tokens).slice(0, mentionLimit);
+const mentions = getMentions(tokens).slice(0, mentionLimit);
 
-  const targets = new Map<number, chat | undefined>();
-  let replyTarget: [number, chat | undefined] | undefined;
-  const { messagesService, chatsService } = getServices(api);
+const targets = new Map<number, chat | undefined>();
+let replyTarget: [number, chat | undefined] | undefined;
+const { messagesService, chatsService } = getServices(api);
 
-  ...
+...
 
-  // 1. Get message
-  // 2. Get message reply id (0 = no reply)
-  // 3. Get reply message by message id
-  // 4. Get reply message sender
-  // 5. Get his/her profile
-  // 6. Set local variable to profile
+// 1. Get message
+// 2. Get message reply id (0 = no reply)
+// 3. Get reply message by message id
+// 4. Get reply message sender
+// 5. Get his/her profile
+// 6. Set local variable to profile
 
-  const reply = await Maybe.fromNullable(message)
-    .filter((message) => message.reply_to_message_id !== 0)
-    .asyncChain((message) =>
-      messagesService.getReply(message.chat_id, message.id)
-    );
+const reply = await Maybe.fromNullable(message)
+  .filter((message) => message.reply_to_message_id !== 0)
+  .asyncChain((message) =>
+    messagesService.getReply(message.chat_id, message.id)
+  );
 
-  const sender = await reply
-    .map(MemberId.fromMessage)
-    .tap(({ memberId }) => {
-      replyTarget = [memberId, undefined];
-    })
-    .asyncChain(({ memberId }) => chatsService.getById(memberId));
+const sender = await reply
+  .map(MemberId.fromMessage)
+  .tap(({ memberId }) => {
+    replyTarget = [memberId, undefined];
+  })
+  .asyncChain(({ memberId }) => chatsService.getById(memberId));
 
-  sender.tap((sender) => {
-    replyTarget = [sender.id, sender];
-  });
+sender.tap((sender) => {
+  replyTarget = [sender.id, sender];
+});
 
-  ...
+...
 
-  return replyTarget ? new Map([replyTarget, ...targets]) : targets;
+return replyTarget ? new Map([replyTarget, ...targets]) : targets;
 }
+
+```
+
+</details>
+
+### [Identity](./docs/api/modules/identity.md)
+
+> The Identity monad is a monad that does not embody any computational strategy. It simply applies the bound function to its input without any modification.
+> ([source](https://blog.ploeh.dk/2022/05/16/the-identity-monad/))
+
+Example
+
+```typescript
+// Before
+app.use(express.static(path.resolve(getDirname(import.meta.url), "../public")));
+
+// After
+Identity.from(import.meta.url)
+  .map(getDirname)
+  .map((dir) => path.resolve(dir, "../public"))
+  .map(express.static)
+  .map(app.use);
 ```

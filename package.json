@@ -26,22 +26,22 @@
       "types": "./index.d.ts"
     },
     "./either": {
-      "require": "./dist/either.exports.js",
-      "import": "./dist/either.exports.mjs",
-      "types": "./dist/either.exports.d.ts"
+      "require": "./either.js",
+      "import": "./either.mjs",
+      "types": "./either.d.ts"
     },
     "./maybe": {
-      "require": "./dist/maybe.exports.js",
-      "import": "./dist/maybe.exports.mjs",
-      "types": "./dist/maybe.exports.d.ts"
+      "require": "./maybe.js",
+      "import": "./maybe.mjs",
+      "types": "./maybe.d.ts"
     },
     "./identity": {
-      "require": "./dist/identity.exports.js",
-      "import": "./dist/identity.exports.mjs",
-      "types": "./dist/identity.exports.d.ts"
+      "require": "./identity.js",
+      "import": "./identity.mjs",
+      "types": "./identity.d.ts"
     },
     "./types": {
-      "types": "./dist/types.d.ts"
+      "types": "./types.d.ts"
     }
   },
   "publishConfig": {

@@ -1,6 +1,8 @@
-[Package](../README.md) / [Exports](../modules.md) / UnwrapCustomError
+[Package](../README.md) / [Modules](../modules.md) / [index](../modules/index.md) / UnwrapCustomError
 
 # Class: UnwrapCustomError
+
+[index](../modules/index.md).UnwrapCustomError
 
 ## Hierarchy
 
@@ -12,16 +14,16 @@
 
 ### Constructors
 
-- [constructor](UnwrapCustomError.md#constructor)
+- [constructor](index.UnwrapCustomError.md#constructor)
 
 ### Properties
 
-- [name](UnwrapCustomError.md#name)
-- [Messages](UnwrapCustomError.md#messages)
+- [name](index.UnwrapCustomError.md#name)
+- [Messages](index.UnwrapCustomError.md#messages)
 
 ### Methods
 
-- [inlineThrow](UnwrapCustomError.md#inlinethrow)
+- [inlineThrow](index.UnwrapCustomError.md#inlinethrow)
 
 ## Constructors
 
@@ -61,7 +63,7 @@ ___
 
 ### Messages
 
-▪ `Static` `Readonly` **Messages**: typeof [`UnwrapCustomErrorMessages`](../enums/internal_.UnwrapCustomErrorMessages.md)
+▪ `Static` `Readonly` **Messages**: typeof [`UnwrapCustomErrorMessages`](../enums/index._internal_.UnwrapCustomErrorMessages.md)
 
 #### Defined in
 

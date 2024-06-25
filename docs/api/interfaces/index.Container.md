@@ -1,6 +1,8 @@
-[Package](../README.md) / [Exports](../modules.md) / Container
+[Package](../README.md) / [Modules](../modules.md) / [index](../modules/index.md) / Container
 
 # Interface: Container\<A\>
+
+[index](../modules/index.md).Container
 
 ## Type parameters
 
@@ -10,16 +12,16 @@
 
 ## Implemented by
 
-- [`EitherConstructor`](../classes/internal_.EitherConstructor.md)
-- [`Identity`](../classes/internal_.Identity.md)
-- [`MaybeConstructor`](../classes/internal_.MaybeConstructor.md)
+- [`EitherConstructor`](../classes/either._internal_.EitherConstructor.md)
+- [`Identity`](../classes/identity.Identity.md)
+- [`MaybeConstructor`](../classes/maybe._internal_.MaybeConstructor.md)
 
 ## Table of contents
 
 ### Methods
 
-- [unwrap](Container.md#unwrap)
-- [unwrapOr](Container.md#unwrapor)
+- [unwrap](index.Container.md#unwrap)
+- [unwrapOr](index.Container.md#unwrapor)
 
 ## Methods
 

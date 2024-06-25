@@ -578,6 +578,12 @@ export function aggregateError<T = unknown>(
   );
 }
 
+function anify(value: unknown): any {
+  return value;
+}
+
+type MapCaught<L> = Mapper<unknown, L>;
+
 type LegacyMethodDecorator = (
   target: CallableFunction,
   property: any,
@@ -639,10 +645,11 @@ export function DecorateAsync(): ModernMethodDecorator<Promise<Either>> {
 }
 
 export function wrap<L, R, P extends AnyParameters>(
-  method: (...parameters: P) => Either<L, R>
+  method: (...parameters: P) => Either<L, R>,
+  mapCaught?: MapCaught<L>
 ): (this: any, ...parameters: P) => Either<L, R> {
   return function eitherWrap(this: any, ...parameters: P): Either<L, R> {
-    return catchSync(() => method.call(this, ...parameters));
+    return catchSync(() => method.call(this, ...parameters), mapCaught);
   };
 }
 
@@ -657,38 +664,47 @@ export function wrapAsync<L, R, P extends AnyParameters>(
   };
 }
 
-export function catchSync<L, R>(method: () => Either<L, R>): Either<L, R> {
-  return fromTry<L, Either<L, R>>(method).join();
+export function catchSync<L, R>(
+  method: () => Either<L, R>,
+  mapCaught?: MapCaught<L>
+): Either<L, R> {
+  return fromTry<L, Either<L, R>>(method, mapCaught).join();
 }
 
 export async function catchAsync<L, R>(
-  method: () => MaybePromiseLike<Either<L, R>>
+  method: () => MaybePromiseLike<Either<L, R>>,
+  mapCaught?: MapCaught<L>
 ): Promise<Either<L, R>> {
-  const caught = await fromTryAsync<L, Either<L, R>>(method);
+  const caught = await fromTryAsync<L, Either<L, R>>(method, mapCaught);
   return caught.join();
 }
 
 export async function fromPromise<L, T>(
-  promise: MaybePromiseLike<T>
+  promise: MaybePromiseLike<T>,
+  mapCaught?: MapCaught<L>
 ): Promise<Either<L, T>> {
-  return fromTryAsync(() => promise);
+  return fromTryAsync(() => promise, mapCaught);
 }
 
-export function fromTry<L, T>(callback: () => T): Either<L, T> {
+export function fromTry<L, T>(
+  callback: () => T,
+  mapCaught: MapCaught<L> = anify
+): Either<L, T> {
   try {
     return right(callback());
   } catch (error) {
-    return left(error as L);
+    return left(mapCaught(error));
   }
 }
 
-export async function fromTryAsync<L, T>(
-  callback: () => MaybePromiseLike<T>
-): Promise<Either<L, T>> {
+export async function fromTryAsync<L, R>(
+  callback: () => MaybePromiseLike<R>,
+  mapCaught: MapCaught<L> = anify
+): Promise<Either<L, R>> {
   try {
     return right(await callback());
   } catch (error) {
-    return left(error as L);
+    return left(mapCaught(error));
   }
 }
 
