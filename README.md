@@ -162,7 +162,7 @@ async function getUserPageData(username: string) {
 ```typescript
 // Real world example
 // This maybe is not tree-shakable. Used in NodeJS code
-import { Maybe } from "monads-io";
+import * as Maybe from "monads-io/maybe";
 
 export async function getTargets(
 api: TelegramAPI,
@@ -218,6 +218,8 @@ return replyTarget ? new Map([replyTarget, ...targets]) : targets;
 Example
 
 ```typescript
+import * as Identity from "monads-io/identity";
+
 // Before
 app.use(express.static(path.resolve(getDirname(import.meta.url), "../public")));
 
