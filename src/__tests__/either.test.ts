@@ -248,11 +248,6 @@ describe("Either", () => {
     expect(either).toEqual($right);
   });
 
-  test("any", () => {
-    const either = $left.mapLeft(() => 10);
-    expect(either.any()).toBe(10);
-  });
-
   test("asyncApply", async () => {
     expect(await $right.asyncApply(right((a: number) => a + 1))).toEqual(
       right(11)
@@ -281,5 +276,16 @@ describe("Either", () => {
         )
       );
     }
+  });
+
+  test("pipe", () => {
+    expect($left.pipe(() => 10)).toBe(10);
+  });
+
+  test("value/any", () => {
+    expect($left.value()).toBe($left.getLeft());
+    expect($right.value()).toBe($right.getRight());
+
+    expect(left<number, number>(10).any()).toBe(10);
   });
 });

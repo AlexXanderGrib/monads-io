@@ -1,7 +1,7 @@
 {
   "name": "monads-io",
-  "version": "3.0.1",
-  "description": "🚀 Efficient Monads for JS: Maybe (Option) and Either (Result)",
+  "version": "4.0.0",
+  "description": "🚀 Efficient Monads for JS: Maybe (Option) and Either (Result), Identity",
   "scripts": {
     "test": "jest",
     "build:dist": "rimraf dist && rollup -c",
@@ -34,6 +34,11 @@
       "require": "./dist/maybe.exports.js",
       "import": "./dist/maybe.exports.mjs",
       "types": "./dist/maybe.exports.d.ts"
+    },
+    "./identity": {
+      "require": "./dist/identity.exports.js",
+      "import": "./dist/identity.exports.mjs",
+      "types": "./dist/identity.exports.d.ts"
     },
     "./types": {
       "types": "./dist/types.d.ts"

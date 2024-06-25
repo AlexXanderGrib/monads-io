@@ -10,7 +10,9 @@ class Just {
     return new Just(value);
   }
 
-  type = Type.Just;
+  get type() {
+    return Type.Just;
+  }
 
   constructor(value) {
     this.value = value;
@@ -24,10 +26,13 @@ class None {
     return None.instance;
   }
 
-  type = Type.None;
+  get type() {
+    return Type.None;
+  }
+
   constructor() {
     Object.freeze(this);
   }
 }
 
-benchmark({ name: "enum", just: Just.create, none: None.instance });
+benchmark({ name: "enum + getter", just: Just.create, none: None.instance })

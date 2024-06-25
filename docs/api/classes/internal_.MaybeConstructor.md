@@ -1,6 +1,6 @@
 [Package](../README.md) / [Exports](../modules.md) / [\<internal\>](../modules/internal_.md) / MaybeConstructor
 
-# Class: MaybeConstructor\<T\>
+# Class: MaybeConstructor\<Va\>
 
 [\<internal\>](../modules/internal_.md).MaybeConstructor
 
@@ -8,7 +8,7 @@
 
 | Name |
 | :------ |
-| `T` |
+| `Va` |
 
 ## Hierarchy
 
@@ -20,9 +20,10 @@
 
 ## Implements
 
-- [`Monad`](../interfaces/Monad.md)\<`T`\>
-- [`Alternative`](../interfaces/Alternative.md)\<`T`\>
-- [`Container`](../interfaces/Container.md)\<`T`\>
+- [`Monad`](../interfaces/Monad.md)\<`Va`\>
+- [`Alternative`](../interfaces/Alternative.md)\<`Va`\>
+- [`Container`](../interfaces/Container.md)\<`Va`\>
+- [`Pipe`](../interfaces/internal_.Pipe.md)
 
 ## Table of contents
 
@@ -50,6 +51,7 @@
 - [or](internal_.MaybeConstructor.md#or)
 - [orAsync](internal_.MaybeConstructor.md#orasync)
 - [orLazy](internal_.MaybeConstructor.md#orlazy)
+- [pipe](internal_.MaybeConstructor.md#pipe)
 - [tap](internal_.MaybeConstructor.md#tap)
 - [unwrap](internal_.MaybeConstructor.md#unwrap)
 - [unwrapOr](internal_.MaybeConstructor.md#unwrapor)
@@ -60,13 +62,13 @@
 
 ### constructor
 
-• **new MaybeConstructor**\<`T`\>()
+• **new MaybeConstructor**\<`Va`\>()
 
 #### Type parameters
 
 | Name |
 | :------ |
-| `T` |
+| `Va` |
 
 ## Methods
 
@@ -86,7 +88,7 @@
 
 | Name | Type |
 | :------ | :------ |
-| `this` | [`Maybe`](../modules/internal_.md#maybe)\<[`Pm`](../modules/internal_.md#pm)\<`A`, `B`, `P`\>\> |
+| `this` | [`Maybe`](../modules/internal_.md#maybe)\<[`Mapper`](../modules/internal_.md#mapper)\<`A`, `B`, `P`\>\> |
 | `argument` | [`Maybe`](../modules/internal_.md#maybe)\<`A`\> |
 | `...parameters` | `P` |
 
@@ -100,7 +102,7 @@
 
 #### Defined in
 
-dist/maybe.d.ts:18
+dist/maybe.d.ts:22
 
 ▸ **apply**\<`A`, `B`, `P`\>(`this`, `argument`, `...parameters`): [`Maybe`](../modules/internal_.md#maybe)\<`B`\>
 
@@ -117,7 +119,7 @@ dist/maybe.d.ts:18
 | Name | Type |
 | :------ | :------ |
 | `this` | [`Maybe`](../modules/internal_.md#maybe)\<`A`\> |
-| `argument` | [`Maybe`](../modules/internal_.md#maybe)\<[`Pm`](../modules/internal_.md#pm)\<`A`, `B`, `P`\>\> |
+| `argument` | [`Maybe`](../modules/internal_.md#maybe)\<[`Mapper`](../modules/internal_.md#mapper)\<`A`, `B`, `P`\>\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -130,7 +132,7 @@ dist/maybe.d.ts:18
 
 #### Defined in
 
-dist/maybe.d.ts:19
+dist/maybe.d.ts:23
 
 ___
 
@@ -150,7 +152,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `this` | [`Maybe`](../modules/internal_.md#maybe)\<[`Pm`](../modules/internal_.md#pm)\<`A`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<`B`\>, `P`\>\> |
+| `this` | [`Maybe`](../modules/internal_.md#maybe)\<[`Mapper`](../modules/internal_.md#mapper)\<`A`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<`B`\>, `P`\>\> |
 | `argument` | [`Maybe`](../modules/internal_.md#maybe)\<`A`\> |
 | `...parameters` | `P` |
 
@@ -160,7 +162,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:35
+dist/maybe.d.ts:39
 
 ▸ **asyncApply**\<`A`, `B`, `P`\>(`this`, `map`, `...parameters`): `Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`B`\>\>
 
@@ -177,7 +179,7 @@ dist/maybe.d.ts:35
 | Name | Type |
 | :------ | :------ |
 | `this` | [`Maybe`](../modules/internal_.md#maybe)\<`A`\> |
-| `map` | [`Maybe`](../modules/internal_.md#maybe)\<[`Pm`](../modules/internal_.md#pm)\<`A`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<`B`\>, `P`\>\> |
+| `map` | [`Maybe`](../modules/internal_.md#maybe)\<[`Mapper`](../modules/internal_.md#mapper)\<`A`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<`B`\>, `P`\>\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -186,109 +188,109 @@ dist/maybe.d.ts:35
 
 #### Defined in
 
-dist/maybe.d.ts:36
+dist/maybe.d.ts:40
 
 ___
 
 ### asyncChain
 
-▸ **asyncChain**\<`V`, `P`\>(`map`, `...parameters`): `Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`V`\>\>
+▸ **asyncChain**\<`T`, `P`\>(`map`, `...parameters`): `Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`T`\>\>
 
 #### Type parameters
 
 | Name | Type |
 | :------ | :------ |
-| `V` | `V` |
+| `T` | `T` |
 | `P` | extends [`AnyParameters`](../modules.md#anyparameters) |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`T`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<[`Maybe`](../modules/internal_.md#maybe)\<`V`\>\>, `P`\> |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`Va`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<[`Maybe`](../modules/internal_.md#maybe)\<`T`\>\>, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns
 
-`Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`V`\>\>
+`Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`T`\>\>
 
 #### Defined in
 
-dist/maybe.d.ts:32
+dist/maybe.d.ts:36
 
 ___
 
 ### asyncMap
 
-▸ **asyncMap**\<`A`, `P`\>(`map`, `...parameters`): `Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`A`\>\>
+▸ **asyncMap**\<`T`, `P`\>(`map`, `...parameters`): `Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`T`\>\>
 
 #### Type parameters
 
 | Name | Type |
 | :------ | :------ |
-| `A` | `A` |
+| `T` | `T` |
 | `P` | extends [`AnyParameters`](../modules.md#anyparameters) |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`T`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<`A`\>, `P`\> |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`Va`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<`T`\>, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns
 
-`Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`A`\>\>
+`Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`T`\>\>
 
 #### Defined in
 
-dist/maybe.d.ts:33
+dist/maybe.d.ts:37
 
 ___
 
 ### await
 
-▸ **await**\<`X`\>(`this`): `Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`X`\>\>
+▸ **await**\<`T`\>(`this`): `Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`T`\>\>
 
 #### Type parameters
 
 | Name |
 | :------ |
-| `X` |
+| `T` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `this` | [`Maybe`](../modules/internal_.md#maybe)\<[`MaybePromiseLike`](../modules.md#maybepromiselike)\<`X`\>\> |
+| `this` | [`Maybe`](../modules/internal_.md#maybe)\<[`MaybePromiseLike`](../modules.md#maybepromiselike)\<`T`\>\> |
 
 #### Returns
 
-`Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`X`\>\>
+`Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`T`\>\>
 
 #### Defined in
 
-dist/maybe.d.ts:34
+dist/maybe.d.ts:38
 
 ___
 
 ### chain
 
-▸ **chain**\<`V`, `A`\>(`map`, `...parameters`): [`Maybe`](../modules/internal_.md#maybe)\<`V`\>
+▸ **chain**\<`V`, `P`\>(`map`, `...parameters`): [`Maybe`](../modules/internal_.md#maybe)\<`V`\>
 
 #### Type parameters
 
 | Name | Type |
 | :------ | :------ |
 | `V` | `V` |
-| `A` | extends [`AnyParameters`](../modules.md#anyparameters) |
+| `P` | extends [`AnyParameters`](../modules.md#anyparameters) |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`T`, [`Maybe`](../modules/internal_.md#maybe)\<`V`\>, `A`\> |
-| `...parameters` | `A` |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`Va`, [`Maybe`](../modules/internal_.md#maybe)\<`V`\>, `P`\> |
+| `...parameters` | `P` |
 
 #### Returns
 
@@ -300,23 +302,23 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:22
+dist/maybe.d.ts:26
 
 ___
 
 ### default
 
-▸ **default**(`value`): [`Maybe`](../modules/internal_.md#maybe)\<`T`\>
+▸ **default**(`value`): [`Maybe`](../modules/internal_.md#maybe)\<`Va`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `value` | `T` |
+| `value` | `Va` |
 
 #### Returns
 
-[`Maybe`](../modules/internal_.md#maybe)\<`T`\>
+[`Maybe`](../modules/internal_.md#maybe)\<`Va`\>
 
 #### Implementation of
 
@@ -324,41 +326,25 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:23
+dist/maybe.d.ts:27
 
 ___
 
 ### filter
 
-▸ **filter**\<`X`\>(`filter`): [`Maybe`](../modules/internal_.md#maybe)\<`X`\>
+▸ **filter**\<`T`\>(`filter`): [`Maybe`](../modules/internal_.md#maybe)\<`T`\>
 
 #### Type parameters
 
 | Name |
 | :------ |
-| `X` |
+| `T` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `filter` | (`input`: `T`) => input is X |
-
-#### Returns
-
-[`Maybe`](../modules/internal_.md#maybe)\<`X`\>
-
-#### Defined in
-
-dist/maybe.d.ts:20
-
-▸ **filter**(`filter`): [`Maybe`](../modules/internal_.md#maybe)\<`T`\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `filter` | (`input`: `T`) => `boolean` |
+| `filter` | (`input`: `Va`) => input is T |
 
 #### Returns
 
@@ -366,41 +352,57 @@ dist/maybe.d.ts:20
 
 #### Defined in
 
-dist/maybe.d.ts:21
+dist/maybe.d.ts:24
+
+▸ **filter**(`filter`): [`Maybe`](../modules/internal_.md#maybe)\<`Va`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `filter` | (`input`: `Va`) => `boolean` |
+
+#### Returns
+
+[`Maybe`](../modules/internal_.md#maybe)\<`Va`\>
+
+#### Defined in
+
+dist/maybe.d.ts:25
 
 ___
 
 ### flatMap
 
-▸ **flatMap**\<`V`, `P`\>(`map`, `...parameters`): `undefined` \| `V`
+▸ **flatMap**\<`T`, `P`\>(`map`, `...parameters`): `undefined` \| `T`
 
 #### Type parameters
 
 | Name | Type |
 | :------ | :------ |
-| `V` | `V` |
+| `T` | `T` |
 | `P` | extends [`AnyParameters`](../modules.md#anyparameters) |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`T`, `V`, `P`\> |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`Va`, `T`, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns
 
-`undefined` \| `V`
+`undefined` \| `T`
 
 #### Defined in
 
-dist/maybe.d.ts:29
+dist/maybe.d.ts:33
 
 ___
 
 ### fold
 
-▸ **fold**\<`A`, `B`\>(`mapJust`, `mapNone`): `A` \| `B`
+▸ **fold**\<`A`, `B`\>(`mapNone`, `mapJust`): `A` \| `B`
 
 #### Type parameters
 
@@ -413,8 +415,8 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `mapJust` | [`Pm`](../modules/internal_.md#pm)\<`T`, `A`\> |
-| `mapNone` | [`Pm`](../modules/internal_.md#pm)\<`void`, `B`\> |
+| `mapNone` | [`Mapper`](../modules/internal_.md#mapper)\<`void`, `B`\> |
+| `mapJust` | [`Mapper`](../modules/internal_.md#mapper)\<`Va`, `A`\> |
 
 #### Returns
 
@@ -422,35 +424,35 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:31
+dist/maybe.d.ts:35
 
 ___
 
 ### isJust
 
-▸ **isJust**(): this is Just\<T\>
+▸ **isJust**(): this is Just\<Va\>
 
 #### Returns
 
-this is Just\<T\>
+this is Just\<Va\>
 
 #### Defined in
 
-dist/maybe.d.ts:13
+dist/maybe.d.ts:16
 
 ___
 
 ### isNone
 
-▸ **isNone**(): this is None\<T\>
+▸ **isNone**(): this is None\<Va\>
 
 #### Returns
 
-this is None\<T\>
+this is None\<Va\>
 
 #### Defined in
 
-dist/maybe.d.ts:14
+dist/maybe.d.ts:17
 
 ___
 
@@ -480,27 +482,27 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:15
+dist/maybe.d.ts:18
 
 ___
 
 ### map
 
-▸ **map**\<`V`, `A`\>(`map`, `...parameters`): [`Maybe`](../modules/internal_.md#maybe)\<`V`\>
+▸ **map**\<`V`, `P`\>(`map`, `...parameters`): [`Maybe`](../modules/internal_.md#maybe)\<`V`\>
 
 #### Type parameters
 
 | Name | Type |
 | :------ | :------ |
 | `V` | `V` |
-| `A` | extends [`AnyParameters`](../modules.md#anyparameters) |
+| `P` | extends [`AnyParameters`](../modules.md#anyparameters) |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`T`, `V`, `A`\> |
-| `...parameters` | `A` |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`Va`, `V`, `P`\> |
+| `...parameters` | `P` |
 
 #### Returns
 
@@ -512,27 +514,27 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:16
+dist/maybe.d.ts:20
 
 ___
 
 ### mapNullable
 
-▸ **mapNullable**\<`V`, `A`\>(`map`, `...parameters`): [`Maybe`](../modules/internal_.md#maybe)\<`V`\>
+▸ **mapNullable**\<`V`, `P`\>(`map`, `...parameters`): [`Maybe`](../modules/internal_.md#maybe)\<`V`\>
 
 #### Type parameters
 
 | Name | Type |
 | :------ | :------ |
 | `V` | `V` |
-| `A` | extends [`AnyParameters`](../modules.md#anyparameters) |
+| `P` | extends [`AnyParameters`](../modules.md#anyparameters) |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`T`, `undefined` \| ``null`` \| `V`, `A`\> |
-| `...parameters` | `A` |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`Va`, `undefined` \| ``null`` \| `V`, `P`\> |
+| `...parameters` | `P` |
 
 #### Returns
 
@@ -540,23 +542,23 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:17
+dist/maybe.d.ts:21
 
 ___
 
 ### or
 
-▸ **or**(`x`): [`Maybe`](../modules/internal_.md#maybe)\<`T`\>
+▸ **or**(`x`): [`Maybe`](../modules/internal_.md#maybe)\<`Va`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `x` | [`Maybe`](../modules/internal_.md#maybe)\<`T`\> |
+| `x` | [`Maybe`](../modules/internal_.md#maybe)\<`Va`\> |
 
 #### Returns
 
-[`Maybe`](../modules/internal_.md#maybe)\<`T`\>
+[`Maybe`](../modules/internal_.md#maybe)\<`Va`\>
 
 #### Implementation of
 
@@ -564,53 +566,85 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:24
+dist/maybe.d.ts:28
 
 ___
 
 ### orAsync
 
-▸ **orAsync**(`factory`): `Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`T`\>\>
+▸ **orAsync**(`factory`): `Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`Va`\>\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `factory` | () => [`MaybePromiseLike`](../modules.md#maybepromiselike)\<[`Maybe`](../modules/internal_.md#maybe)\<`T`\>\> |
+| `factory` | () => [`MaybePromiseLike`](../modules.md#maybepromiselike)\<[`Maybe`](../modules/internal_.md#maybe)\<`Va`\>\> |
 
 #### Returns
 
-`Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`T`\>\>
+`Promise`\<[`Maybe`](../modules/internal_.md#maybe)\<`Va`\>\>
 
 #### Defined in
 
-dist/maybe.d.ts:26
+dist/maybe.d.ts:30
 
 ___
 
 ### orLazy
 
-▸ **orLazy**(`factory`): [`Maybe`](../modules/internal_.md#maybe)\<`T`\>
+▸ **orLazy**(`factory`): [`Maybe`](../modules/internal_.md#maybe)\<`Va`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `factory` | () => [`Maybe`](../modules/internal_.md#maybe)\<`T`\> |
+| `factory` | () => [`Maybe`](../modules/internal_.md#maybe)\<`Va`\> |
 
 #### Returns
 
-[`Maybe`](../modules/internal_.md#maybe)\<`T`\>
+[`Maybe`](../modules/internal_.md#maybe)\<`Va`\>
 
 #### Defined in
 
-dist/maybe.d.ts:25
+dist/maybe.d.ts:29
+
+___
+
+### pipe
+
+▸ **pipe**\<`V`, `P`\>(`pipe`, `...parameters`): `V`
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `V` | `V` |
+| `P` | extends [`AnyParameters`](../modules.md#anyparameters) |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `pipe` | [`Mapper`](../modules/internal_.md#mapper)\<[`Maybe`](../modules/internal_.md#maybe)\<`Va`\>, `V`, `P`\> |
+| `...parameters` | `P` |
+
+#### Returns
+
+`V`
+
+#### Implementation of
+
+[Pipe](../interfaces/internal_.Pipe.md).[pipe](../interfaces/internal_.Pipe.md#pipe)
+
+#### Defined in
+
+dist/maybe.d.ts:19
 
 ___
 
 ### tap
 
-▸ **tap**\<`P`\>(`callback`, `...parameters`): [`Maybe`](../modules/internal_.md#maybe)\<`T`\>
+▸ **tap**\<`P`\>(`callback`, `...parameters`): [`Maybe`](../modules/internal_.md#maybe)\<`Va`\>
 
 #### Type parameters
 
@@ -622,22 +656,22 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `callback` | [`Pm`](../modules/internal_.md#pm)\<`T`, `void`, `P`\> |
+| `callback` | [`Mapper`](../modules/internal_.md#mapper)\<`Va`, `void`, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns
 
-[`Maybe`](../modules/internal_.md#maybe)\<`T`\>
+[`Maybe`](../modules/internal_.md#maybe)\<`Va`\>
 
 #### Defined in
 
-dist/maybe.d.ts:28
+dist/maybe.d.ts:32
 
 ___
 
 ### unwrap
 
-▸ **unwrap**(`message?`): `T`
+▸ **unwrap**(`message?`): `Va`
 
 #### Parameters
 
@@ -647,7 +681,7 @@ ___
 
 #### Returns
 
-`T`
+`Va`
 
 #### Implementation of
 
@@ -655,29 +689,29 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:30
+dist/maybe.d.ts:34
 
 ___
 
 ### unwrapOr
 
-▸ **unwrapOr**\<`X`\>(`value`): `T` \| `X`
+▸ **unwrapOr**\<`T`\>(`value`): `Va` \| `T`
 
 #### Type parameters
 
 | Name |
 | :------ |
-| `X` |
+| `T` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `value` | `X` |
+| `value` | `T` |
 
 #### Returns
 
-`T` \| `X`
+`Va` \| `T`
 
 #### Implementation of
 
@@ -685,56 +719,56 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:11
+dist/maybe.d.ts:14
 
 ___
 
 ### unwrapOrElse
 
-▸ **unwrapOrElse**\<`X`\>(`value`): `T` \| `X`
+▸ **unwrapOrElse**\<`T`\>(`value`): `Va` \| `T`
 
 #### Type parameters
 
 | Name |
 | :------ |
-| `X` |
+| `T` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `value` | () => `X` |
+| `value` | () => `T` |
 
 #### Returns
 
-`T` \| `X`
+`Va` \| `T`
 
 #### Defined in
 
-dist/maybe.d.ts:12
+dist/maybe.d.ts:15
 
 ___
 
 ### zip
 
-▸ **zip**\<`A`\>(`maybe`): [`Maybe`](../modules/internal_.md#maybe)\<[`Pair`](../modules.md#pair)\<`T`, `A`\>\>
+▸ **zip**\<`T`\>(`maybe`): [`Maybe`](../modules/internal_.md#maybe)\<[`Pair`](../modules.md#pair)\<`Va`, `T`\>\>
 
 #### Type parameters
 
 | Name |
 | :------ |
-| `A` |
+| `T` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `maybe` | [`Maybe`](../modules/internal_.md#maybe)\<`A`\> |
+| `maybe` | [`Maybe`](../modules/internal_.md#maybe)\<`T`\> |
 
 #### Returns
 
-[`Maybe`](../modules/internal_.md#maybe)\<[`Pair`](../modules.md#pair)\<`T`, `A`\>\>
+[`Maybe`](../modules/internal_.md#maybe)\<[`Pair`](../modules.md#pair)\<`Va`, `T`\>\>
 
 #### Defined in
 
-dist/maybe.d.ts:27
+dist/maybe.d.ts:31

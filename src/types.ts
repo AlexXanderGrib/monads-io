@@ -64,7 +64,14 @@ export interface AsyncMonad<A> extends Monad<A> {
   await<A>(this: AsyncMonad<MaybePromiseLike<A>>): Promise<AsyncMonad<A>>;
 }
 
-export interface Container<T> {
-  unwrap(): T;
-  unwrapOr<X>(value: X): X | T;
+export interface Container<A> {
+  unwrap(): A;
+  unwrapOr<T>(value: T): T | A;
+}
+
+export interface Pipe {
+  pipe<T, P extends AnyParameters>(
+    callback: Mapper<Pipe, T, P>,
+    ...parameters: P
+  ): T;
 }

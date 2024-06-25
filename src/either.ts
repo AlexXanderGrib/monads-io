@@ -20,61 +20,65 @@ import type {
   AnyParameters,
   AsyncMonad,
   Alternative,
-  Container
+  Container,
+  Pipe
 } from "./types";
 
-const enum EitherType {
-  Left = 0,
-  Right = 1
+export const enum EitherType {
+  Left = "Left",
+  Right = "Right"
 }
 
 const name = "Either";
-const rightName = "Right";
-const leftName = "Left";
 
-export function right<L = never, T = never>(right: T): Either<L, T> {
+export function right<L = never, R = never>(right: R): Either<L, R> {
   return Right.create(right);
 }
 
-export function left<T = never, R = never>(value: T): Either<T, R> {
+export function left<L = never, R = never>(value: L): Either<L, R> {
   return Left.create(value);
 }
 
+function cast<L, R>(constructor: EitherConstructor<L, R>): Either<L, R> {
+  if (isEither<L, R>(constructor)) {
+    return constructor;
+  }
+
+  /* istanbul ignore next */
+  throw new InvalidStateError();
+}
+
 class EitherConstructor<L, R>
-  implements AsyncMonad<R>, Alternative<R>, Container<R>
+  implements AsyncMonad<R>, Alternative<R>, Container<R>, Pipe
 {
-  /* istanbul ignore next */
-  getRight(): R | undefined {
-    return this.fold(noop, identity);
-  }
-
-  /* istanbul ignore next */
-  getLeft(): L | undefined {
-    return this.fold(identity, noop);
-  }
-
   tap<P extends AnyParameters>(
     callback: Mapper<R, void, P>,
     ...parameters: P
   ): Either<L, R> {
     this.map(callback, ...parameters);
+    return cast(this);
+  }
 
-    return this as unknown as Either<L, R>;
+  pipe<T, P extends AnyParameters>(
+    pipe: Mapper<Either<L, R>, T, P>,
+    ...parameters: P
+  ): T {
+    return bind(pipe, parameters)(cast(this));
   }
 
   isLeft(): this is Left<L, R> {
-    return this instanceof Left;
+    return isLeft(this);
   }
 
   isRight(): this is Right<L, R> {
-    return this instanceof Right;
+    return isRight(this);
   }
 
-  unwrapOrElse<X>(fallback: (value: L) => X): X | R {
+  unwrapOrElse<T>(fallback: (value: L) => T): T | R {
     return this.fold(fallback, identity);
   }
 
-  unwrapOr<X>(value: X): X | R {
+  unwrapOr<T>(value: T): T | R {
     return this.unwrapOrElse(() => value);
   }
 
@@ -201,6 +205,13 @@ class EitherConstructor<L, R>
     );
   }
 
+  /**
+   *
+   * @param {Mapper<L, A>} mapLeft
+   * @param {Mapper<R, B>} mapRight
+   * @return {A|B}
+   * @throws {InvalidStateError} - {@link InvalidStateError} if Either state is neither Left neither Right, this probably should never happen
+   */
   fold<A, B = A>(mapLeft: Mapper<L, A>, mapRight: Mapper<R, B>): A | B {
     if (this.isLeft()) {
       return mapLeft(this.left);
@@ -223,19 +234,27 @@ class EitherConstructor<L, R>
   }
 
   orLazy(factory: () => Either<L, R>): Either<L, R> {
-    return this.fold(factory, () => this as unknown as Either<L, R>);
+    return this.fold(factory, () => cast(this));
   }
 
   async orAsync(
     factory: () => MaybePromiseLike<Either<L, R>>
   ): Promise<Either<L, R>> {
-    return await this.fold(factory, () => this as unknown as Either<L, R>);
+    return await this.fold(factory, () => cast(this));
   }
 
   zip<A, B>(either: Either<A, B>): Either<L | A, Pair<R, B>> {
     return this.chain((value) => either.map((right) => [value, right]));
   }
 
+  /**
+   * @deprecated - **If Left value is Error use {@link throw} instead**
+   *
+   *
+   * @param {string} [message] - Error message, if either is left. By default "Either state is Left"
+   * @return {R} - Right value of Either, if right
+   * @throws {UnwrapCustomError} - {@link UnwrapCustomError} is Left with provided {@link message}
+   */
   unwrap(message: string = UnwrapCustomError.Messages.EITHER_IS_LEFT): R {
     return this.fold(() => UnwrapCustomError.inlineThrow(message), identity);
   }
@@ -244,10 +263,22 @@ class EitherConstructor<L, R>
     return this.throw();
   }
 
+  /**
+   *
+   * @return {R} - Right value if current state is Right,
+   * @throws {L} - {@link L} if current state is Left
+   */
   throw(): R {
     return this.fold(throwValue, identity);
   }
 
+  /**
+   * Return value of Either independent if it is Right or Left
+   *
+   * @deprecated - probably should not be used, please refactor code or use {@link fold}
+   * @see {@link fold}
+   * @return {L|R}
+   */
   value(): L | R {
     return this.fold(identity, identity);
   }
@@ -271,19 +302,28 @@ class Left<L, R> extends EitherConstructor<L, R> implements SerializedLeft<L> {
     return new Left(left);
   }
 
-  get [Symbol.toStringTag](): typeof leftName {
-    return leftName;
+  /**
+   * @deprecated Should not be used directly, public only for serialization & type check use {@link getLeft}
+   * @see {@link getLeft}
+   *
+   * @type {L}
+   * @memberof Left
+   */
+  public readonly left: L;
+
+  get [Symbol.toStringTag](): EitherType.Left {
+    return EitherType.Left;
   }
 
   get name(): typeof name {
     return name;
   }
 
-  override getRight(): undefined {
+  getRight(): undefined {
     return;
   }
 
-  override getLeft(): L {
+  getLeft(): L {
     return this.left;
   }
 
@@ -291,8 +331,9 @@ class Left<L, R> extends EitherConstructor<L, R> implements SerializedLeft<L> {
     return EitherType.Left;
   }
 
-  private constructor(public readonly left: L) {
+  private constructor(left: L) {
     super();
+    this.left = left;
     Object.freeze(this);
   }
 
@@ -318,8 +359,17 @@ class Right<L, R>
     return new Right(right);
   }
 
-  get [Symbol.toStringTag](): typeof rightName {
-    return rightName;
+  /**
+   * @deprecated Should not be used directly, public only for serialization & type check use {@link getRight}
+   * @see {@link getRight}
+   *
+   * @type {R}
+   * @memberof Right
+   */
+  public readonly right: R;
+
+  get [Symbol.toStringTag](): EitherType.Right {
+    return EitherType.Right;
   }
 
   get name(): typeof name {
@@ -330,16 +380,17 @@ class Right<L, R>
     return EitherType.Right;
   }
 
-  override getRight(): R {
+  getRight(): R {
     return this.right;
   }
 
-  override getLeft(): undefined {
+  getLeft(): undefined {
     return;
   }
 
-  private constructor(public readonly right: R) {
+  private constructor(right: R) {
     super();
+    this.right = right;
     Object.freeze(this);
   }
 
@@ -378,7 +429,13 @@ export function chain<L, R, NL, NR, P extends AnyParameters>(
   map: (value: R, ...parameters: P) => MaybePromiseLike<Either<NL, NR>>,
   ...parameters: P
 ): (either: Either<L, R>, ...parameters: P) => Promise<Either<NL | L, NR>>;
-export function chain<L, R, NL, NR, P extends AnyParameters>(
+export function chain<
+  L = never,
+  R = never,
+  NL = never,
+  NR = never,
+  P extends AnyParameters = []
+>(
   map: (value: R, ...parameters: P) => MaybePromiseLike<Either<NL, NR>>,
   ...parameters: P
 ): (either: Either<L, R>) => Promise<Either<L | NL, NR>> {
@@ -437,12 +494,13 @@ export function mergeInOne<L1, R1, L2, R2, L3, R3, L4, R4, L5, R5, L6, R6>(
   ]
 ): Either<L1 | L2 | L3 | L4 | L5 | L6, [R1, R2, R3, R4, R5, R6]>;
 
-export function mergeInOne<L, R>(values: Array<Either<L, R>>): Either<L, R[]>;
-export function mergeInOne(values: Array<Either<unknown, unknown>>) {
+export function mergeInOne<L, R>(values: Either<L, R>[]): Either<L, R[]>;
+export function mergeInOne(values: Either<unknown, unknown>[]) {
   return mergeInMany(values).mapLeft((errors) => errors[0]);
 }
 
 export const merge = mergeInOne;
+export const from = right;
 
 export function mergeInMany<L1, R1>(
   values: [Either<L1, R1>]
@@ -481,19 +539,23 @@ export function mergeInMany<L, R>(
 export function mergeInMany(
   values: Array<Either<unknown, unknown>>
 ): Either<unknown[], unknown[]> {
-  const hasLefts = values.some((value) => value.isLeft());
-  const results: unknown[] = [];
-
-  for (const either of values) {
-    if (hasLefts && !either.isLeft()) {
-      continue;
-    }
-
-    results.push(either.value());
+  if (allRights(values)) {
+    return right(values.map((either) => either.getRight()));
   }
 
-  const factory = hasLefts ? left : right;
-  return factory(results);
+  const results: unknown[] = [];
+
+  for (const value of values) {
+    if (value.isLeft()) {
+      results.push(value.getLeft());
+    }
+  }
+
+  return left(results);
+}
+
+function allRights<A, B>(array: Either<A, B>[]): array is Right<A, B>[] {
+  return !array.some((value) => value.isLeft());
 }
 
 export function aggregateError<T = unknown>(
@@ -546,6 +608,7 @@ export function DecorateAsyncLegacy(): LegacyMethodDecorator {
 function requireDecorationMethod(
   context: ClassMemberDecoratorContext
 ): asserts context is ClassMethodDecoratorContext {
+  /* istanbul ignore next */
   if (context.kind !== "method") {
     throw new DecorationError();
   }

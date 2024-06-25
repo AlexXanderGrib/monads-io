@@ -22,17 +22,22 @@
 ### Classes
 
 - [EitherConstructor](../classes/internal_.EitherConstructor.md)
+- [Identity](../classes/internal_.Identity.md)
 - [Just](../classes/internal_.Just.md)
 - [Left](../classes/internal_.Left.md)
 - [MaybeConstructor](../classes/internal_.MaybeConstructor.md)
 - [None](../classes/internal_.None.md)
 - [Right](../classes/internal_.Right.md)
 
+### Interfaces
+
+- [Pipe](../interfaces/internal_.Pipe.md)
+
 ### Type Aliases
 
 - [Either](internal_.md#either)
+- [Mapper](internal_.md#mapper)
 - [Maybe](internal_.md#maybe)
-- [Pm](internal_.md#pm)
 - [SerializedEither](internal_.md#serializedeither)
 - [SerializedJust](internal_.md#serializedjust)
 - [SerializedLeft](internal_.md#serializedleft)
@@ -59,7 +64,7 @@ ___
 
 ### Just
 
-• **Just**: ``1``
+• **Just**: ``"Just"``
 
 #### Defined in
 
@@ -69,7 +74,7 @@ ___
 
 ### Left
 
-• **Left**: ``0``
+• **Left**: ``"Left"``
 
 #### Defined in
 
@@ -79,7 +84,7 @@ ___
 
 ### None
 
-• **None**: ``0``
+• **None**: ``"None"``
 
 #### Defined in
 
@@ -89,7 +94,7 @@ ___
 
 ### Right
 
-• **Right**: ``1``
+• **Right**: ``"Right"``
 
 #### Defined in
 
@@ -110,29 +115,13 @@ dist/either.d.ts:4
 
 #### Defined in
 
-dist/either.d.ts:75
+dist/either.d.ts:115
 
 ___
 
-### Maybe
+### Mapper
 
-Ƭ **Maybe**\<`T`\>: [`Just`](../classes/internal_.Just.md)\<`T`\> \| [`None`](../classes/internal_.None.md)\<`T`\>
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Defined in
-
-dist/maybe.d.ts:66
-
-___
-
-### Pm
-
-Ƭ **Pm**\<`A`, `B`, `P`\>: (`value`: `A`, ...`parameters`: `P`) => `B`
+Ƭ **Mapper**\<`A`, `B`, `P`\>: (`value`: `A`, ...`parameters`: `P`) => `B`
 
 #### Type parameters
 
@@ -166,6 +155,22 @@ dist/types.d.ts:10
 
 ___
 
+### Maybe
+
+Ƭ **Maybe**\<`T`\>: [`Just`](../classes/internal_.Just.md)\<`T`\> \| [`None`](../classes/internal_.None.md)\<`T`\>
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Defined in
+
+dist/maybe.d.ts:70
+
+___
+
 ### SerializedEither
 
 Ƭ **SerializedEither**\<`L`, `R`\>: [`SerializedRight`](internal_.md#serializedright)\<`R`\> \| [`SerializedLeft`](internal_.md#serializedleft)\<`L`\>
@@ -179,7 +184,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:76
+dist/either.d.ts:116
 
 ___
 
@@ -195,7 +200,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:38
+dist/maybe.d.ts:42
 
 ___
 
@@ -211,7 +216,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:43
+dist/either.d.ts:69
 
 ___
 
@@ -227,7 +232,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:67
+dist/maybe.d.ts:71
 
 ___
 
@@ -244,7 +249,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:52
+dist/maybe.d.ts:56
 
 ___
 
@@ -260,7 +265,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:59
+dist/either.d.ts:92
 
 ## Variables
 

@@ -1,17 +1,17 @@
 import { Either, left, right } from "./either";
-import { Maybe, fromNullable } from "./maybe";
+import { Maybe, just, none } from "./maybe";
 
 export function maybeToEither<L, R>(
   maybe: Maybe<R>,
   leftValue: L
 ): Either<L, R> {
-  return maybe.fold(right, () => left(leftValue));
+  return maybe.fold(() => left(leftValue), right);
 }
 
 export function eitherRight<R>(either: Either<unknown, R>): Maybe<R> {
-  return fromNullable(either.getRight());
+  return either.fold(none, just);
 }
 
 export function eitherLeft<L>(either: Either<L, unknown>): Maybe<L> {
-  return fromNullable(either.getLeft());
+  return either.fold(just, none);
 }

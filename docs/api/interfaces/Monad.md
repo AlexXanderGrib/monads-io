@@ -47,7 +47,7 @@
 
 | Name | Type |
 | :------ | :------ |
-| `this` | [`Applicative`](Applicative.md)\<[`Pm`](../modules/internal_.md#pm)\<`A`, `B`, `P`\>\> |
+| `this` | [`Applicative`](Applicative.md)\<[`Mapper`](../modules/internal_.md#mapper)\<`A`, `B`, `P`\>\> |
 | `argument` | [`Applicative`](Applicative.md)\<`A`\> |
 | `...parameters` | `P` |
 
@@ -78,7 +78,7 @@ dist/types.d.ts:19
 | Name | Type |
 | :------ | :------ |
 | `this` | [`Applicative`](Applicative.md)\<`A`\> |
-| `argument` | [`Applicative`](Applicative.md)\<[`Pm`](../modules/internal_.md#pm)\<`A`, `B`, `P`\>\> |
+| `argument` | [`Applicative`](Applicative.md)\<[`Mapper`](../modules/internal_.md#mapper)\<`A`, `B`, `P`\>\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -110,7 +110,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`A`, [`Monad`](Monad.md)\<`B`\>, `P`\> |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`A`, [`Monad`](Monad.md)\<`B`\>, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -164,7 +164,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`A`, `B`, `P`\> |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`A`, `B`, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns

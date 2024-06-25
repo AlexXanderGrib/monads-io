@@ -24,6 +24,7 @@
 - [`AsyncMonad`](../interfaces/AsyncMonad.md)\<`R`\>
 - [`Alternative`](../interfaces/Alternative.md)\<`R`\>
 - [`Container`](../interfaces/Container.md)\<`R`\>
+- [`Pipe`](../interfaces/internal_.Pipe.md)
 
 ## Table of contents
 
@@ -43,8 +44,6 @@
 - [chain](internal_.EitherConstructor.md#chain)
 - [default](internal_.EitherConstructor.md#default)
 - [fold](internal_.EitherConstructor.md#fold)
-- [getLeft](internal_.EitherConstructor.md#getleft)
-- [getRight](internal_.EitherConstructor.md#getright)
 - [isLeft](internal_.EitherConstructor.md#isleft)
 - [isRight](internal_.EitherConstructor.md#isright)
 - [join](internal_.EitherConstructor.md#join)
@@ -54,6 +53,7 @@
 - [or](internal_.EitherConstructor.md#or)
 - [orAsync](internal_.EitherConstructor.md#orasync)
 - [orLazy](internal_.EitherConstructor.md#orlazy)
+- [pipe](internal_.EitherConstructor.md#pipe)
 - [promise](internal_.EitherConstructor.md#promise)
 - [swap](internal_.EitherConstructor.md#swap)
 - [tap](internal_.EitherConstructor.md#tap)
@@ -101,7 +101,7 @@
 
 #### Defined in
 
-dist/either.d.ts:41
+dist/either.d.ts:67
 
 ___
 
@@ -121,7 +121,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `this` | [`Either`](../modules/internal_.md#either)\<`L`, [`Pm`](../modules/internal_.md#pm)\<`A`, `B`, `P`\>\> |
+| `this` | [`Either`](../modules/internal_.md#either)\<`L`, [`Mapper`](../modules/internal_.md#mapper)\<`A`, `B`, `P`\>\> |
 | `argument` | [`Either`](../modules/internal_.md#either)\<`L`, `A`\> |
 | `...parameters` | `P` |
 
@@ -135,7 +135,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:21
+dist/either.d.ts:20
 
 ▸ **apply**\<`A`, `B`, `P`\>(`this`, `map`, `...parameters`): [`Either`](../modules/internal_.md#either)\<`L`, `B`\>
 
@@ -152,7 +152,7 @@ dist/either.d.ts:21
 | Name | Type |
 | :------ | :------ |
 | `this` | [`Either`](../modules/internal_.md#either)\<`L`, `A`\> |
-| `map` | [`Either`](../modules/internal_.md#either)\<`L`, [`Pm`](../modules/internal_.md#pm)\<`A`, `B`, `P`\>\> |
+| `map` | [`Either`](../modules/internal_.md#either)\<`L`, [`Mapper`](../modules/internal_.md#mapper)\<`A`, `B`, `P`\>\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -165,7 +165,7 @@ dist/either.d.ts:21
 
 #### Defined in
 
-dist/either.d.ts:22
+dist/either.d.ts:21
 
 ___
 
@@ -185,7 +185,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `this` | [`Either`](../modules/internal_.md#either)\<`L`, [`Pm`](../modules/internal_.md#pm)\<`A`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<`B`\>, `P`\>\> |
+| `this` | [`Either`](../modules/internal_.md#either)\<`L`, [`Mapper`](../modules/internal_.md#mapper)\<`A`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<`B`\>, `P`\>\> |
 | `argument` | [`Either`](../modules/internal_.md#either)\<`L`, `A`\> |
 | `...parameters` | `P` |
 
@@ -195,7 +195,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:23
+dist/either.d.ts:22
 
 ▸ **asyncApply**\<`A`, `B`, `P`\>(`this`, `map`, `...parameters`): `Promise`\<[`Either`](../modules/internal_.md#either)\<`L`, `B`\>\>
 
@@ -212,7 +212,7 @@ dist/either.d.ts:23
 | Name | Type |
 | :------ | :------ |
 | `this` | [`Either`](../modules/internal_.md#either)\<`L`, `A`\> |
-| `map` | [`Either`](../modules/internal_.md#either)\<`L`, [`Pm`](../modules/internal_.md#pm)\<`A`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<`B`\>, `P`\>\> |
+| `map` | [`Either`](../modules/internal_.md#either)\<`L`, [`Mapper`](../modules/internal_.md#mapper)\<`A`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<`B`\>, `P`\>\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -221,7 +221,7 @@ dist/either.d.ts:23
 
 #### Defined in
 
-dist/either.d.ts:24
+dist/either.d.ts:23
 
 ___
 
@@ -241,7 +241,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`R`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<[`Either`](../modules/internal_.md#either)\<`A`, `B`\>\>, `P`\> |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`R`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<[`Either`](../modules/internal_.md#either)\<`A`, `B`\>\>, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -254,7 +254,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:28
+dist/either.d.ts:27
 
 ___
 
@@ -274,7 +274,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`R`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<`B`\>, `P`\> |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`R`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<`B`\>, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -283,7 +283,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:29
+dist/either.d.ts:28
 
 ___
 
@@ -313,7 +313,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:30
+dist/either.d.ts:29
 
 ___
 
@@ -332,8 +332,8 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `mapLeft` | [`Pm`](../modules/internal_.md#pm)\<`L`, `A`\> |
-| `mapRight` | [`Pm`](../modules/internal_.md#pm)\<`R`, `B`\> |
+| `mapLeft` | [`Mapper`](../modules/internal_.md#mapper)\<`L`, `A`\> |
+| `mapRight` | [`Mapper`](../modules/internal_.md#mapper)\<`R`, `B`\> |
 
 #### Returns
 
@@ -341,7 +341,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:27
+dist/either.d.ts:26
 
 ___
 
@@ -361,7 +361,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`R`, [`Either`](../modules/internal_.md#either)\<`A`, `B`\>, `P`\> |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`R`, [`Either`](../modules/internal_.md#either)\<`A`, `B`\>, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -374,7 +374,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:26
+dist/either.d.ts:25
 
 ___
 
@@ -398,7 +398,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:32
+dist/either.d.ts:38
 
 ___
 
@@ -417,44 +417,20 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `mapLeft` | [`Pm`](../modules/internal_.md#pm)\<`L`, `A`\> |
-| `mapRight` | [`Pm`](../modules/internal_.md#pm)\<`R`, `B`\> |
+| `mapLeft` | [`Mapper`](../modules/internal_.md#mapper)\<`L`, `A`\> |
+| `mapRight` | [`Mapper`](../modules/internal_.md#mapper)\<`R`, `B`\> |
 
 #### Returns
 
 `A` \| `B`
 
-#### Defined in
+**`Throws`**
 
-dist/either.d.ts:31
-
-___
-
-### getLeft
-
-▸ **getLeft**(): `undefined` \| `L`
-
-#### Returns
-
-`undefined` \| `L`
+- [InvalidStateError](InvalidStateError.md) if Either state is neither Left neither Right, this probably should never happen
 
 #### Defined in
 
-dist/either.d.ts:11
-
-___
-
-### getRight
-
-▸ **getRight**(): `undefined` \| `R`
-
-#### Returns
-
-`undefined` \| `R`
-
-#### Defined in
-
-dist/either.d.ts:10
+dist/either.d.ts:37
 
 ___
 
@@ -468,7 +444,7 @@ this is Left\<L, R\>
 
 #### Defined in
 
-dist/either.d.ts:13
+dist/either.d.ts:12
 
 ___
 
@@ -482,7 +458,7 @@ this is Right\<L, R\>
 
 #### Defined in
 
-dist/either.d.ts:14
+dist/either.d.ts:13
 
 ___
 
@@ -514,7 +490,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:17
+dist/either.d.ts:16
 
 ___
 
@@ -533,7 +509,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`R`, `T`, `P`\> |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`R`, `T`, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -546,7 +522,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:19
+dist/either.d.ts:18
 
 ___
 
@@ -565,7 +541,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`L`, `T`, `P`\> |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`L`, `T`, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -574,7 +550,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:18
+dist/either.d.ts:17
 
 ___
 
@@ -593,7 +569,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`R`, `T`, `P`\> |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`R`, `T`, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -602,7 +578,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:20
+dist/either.d.ts:19
 
 ___
 
@@ -626,7 +602,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:33
+dist/either.d.ts:39
 
 ___
 
@@ -646,7 +622,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:35
+dist/either.d.ts:41
 
 ___
 
@@ -666,7 +642,39 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:34
+dist/either.d.ts:40
+
+___
+
+### pipe
+
+▸ **pipe**\<`T`, `P`\>(`pipe`, `...parameters`): `T`
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `T` |
+| `P` | extends [`AnyParameters`](../modules.md#anyparameters) |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `pipe` | [`Mapper`](../modules/internal_.md#mapper)\<[`Either`](../modules/internal_.md#either)\<`L`, `R`\>, `T`, `P`\> |
+| `...parameters` | `P` |
+
+#### Returns
+
+`T`
+
+#### Implementation of
+
+[Pipe](../interfaces/internal_.Pipe.md).[pipe](../interfaces/internal_.Pipe.md#pipe)
+
+#### Defined in
+
+dist/either.d.ts:11
 
 ___
 
@@ -680,7 +688,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:38
+dist/either.d.ts:52
 
 ___
 
@@ -694,7 +702,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:25
+dist/either.d.ts:24
 
 ___
 
@@ -712,7 +720,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `callback` | [`Pm`](../modules/internal_.md#pm)\<`R`, `void`, `P`\> |
+| `callback` | [`Mapper`](../modules/internal_.md#mapper)\<`R`, `void`, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -721,7 +729,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:12
+dist/either.d.ts:10
 
 ___
 
@@ -733,9 +741,15 @@ ___
 
 `R`
 
+- Right value if current state is Right,
+
+**`Throws`**
+
+- L if current state is Left
+
 #### Defined in
 
-dist/either.d.ts:39
+dist/either.d.ts:58
 
 ___
 
@@ -745,13 +759,23 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `message?` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `message?` | `string` | Error message, if either is left. By default "Either state is Left" |
 
 #### Returns
 
 `R`
+
+- Right value of Either, if right
+
+**`Deprecated`**
+
+- **If Left value is Error use [throw](internal_.Right.md#throw) instead**
+
+**`Throws`**
+
+- [UnwrapCustomError](UnwrapCustomError.md) is Left with provided message
 
 #### Implementation of
 
@@ -759,29 +783,29 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:37
+dist/either.d.ts:51
 
 ___
 
 ### unwrapOr
 
-▸ **unwrapOr**\<`X`\>(`value`): `R` \| `X`
+▸ **unwrapOr**\<`T`\>(`value`): `R` \| `T`
 
 #### Type parameters
 
 | Name |
 | :------ |
-| `X` |
+| `T` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `value` | `X` |
+| `value` | `T` |
 
 #### Returns
 
-`R` \| `X`
+`R` \| `T`
 
 #### Implementation of
 
@@ -789,33 +813,33 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:16
+dist/either.d.ts:15
 
 ___
 
 ### unwrapOrElse
 
-▸ **unwrapOrElse**\<`X`\>(`fallback`): `R` \| `X`
+▸ **unwrapOrElse**\<`T`\>(`fallback`): `R` \| `T`
 
 #### Type parameters
 
 | Name |
 | :------ |
-| `X` |
+| `T` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `fallback` | (`value`: `L`) => `X` |
+| `fallback` | (`value`: `L`) => `T` |
 
 #### Returns
 
-`R` \| `X`
+`R` \| `T`
 
 #### Defined in
 
-dist/either.d.ts:15
+dist/either.d.ts:14
 
 ___
 
@@ -823,13 +847,23 @@ ___
 
 ▸ **value**(): `L` \| `R`
 
+Return value of Either independent if it is Right or Left
+
 #### Returns
 
 `L` \| `R`
 
+**`Deprecated`**
+
+- probably should not be used, please refactor code or use [fold](internal_.Right.md#fold)
+
+**`See`**
+
+[fold](internal_.Right.md#fold)
+
 #### Defined in
 
-dist/either.d.ts:40
+dist/either.d.ts:66
 
 ___
 
@@ -856,4 +890,4 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:36
+dist/either.d.ts:42

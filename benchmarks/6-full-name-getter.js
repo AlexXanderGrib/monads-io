@@ -1,8 +1,8 @@
 import { benchmark } from "./common.js";
 
 const Type = Object.freeze({
-  None: 0,
-  Just: 1
+  None: "None",
+  Just: "Just"
 });
 
 class Just {
@@ -10,7 +10,9 @@ class Just {
     return new Just(value);
   }
 
-  type = Type.Just;
+  get type() {
+    return Type.Just;
+  }
 
   constructor(value) {
     this.value = value;
@@ -24,10 +26,17 @@ class None {
     return None.instance;
   }
 
-  type = Type.None;
+  get type() {
+    return Type.None;
+  }
+
   constructor() {
     Object.freeze(this);
   }
 }
 
-benchmark({ name: "enum", just: Just.create, none: None.instance });
+benchmark({
+  name: "full type name + getter",
+  just: Just.create,
+  none: None.instance
+});

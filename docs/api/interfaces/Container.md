@@ -1,16 +1,17 @@
 [Package](../README.md) / [Exports](../modules.md) / Container
 
-# Interface: Container\<T\>
+# Interface: Container\<A\>
 
 ## Type parameters
 
 | Name |
 | :------ |
-| `T` |
+| `A` |
 
 ## Implemented by
 
 - [`EitherConstructor`](../classes/internal_.EitherConstructor.md)
+- [`Identity`](../classes/internal_.Identity.md)
 - [`MaybeConstructor`](../classes/internal_.MaybeConstructor.md)
 
 ## Table of contents
@@ -24,11 +25,11 @@
 
 ### unwrap
 
-▸ **unwrap**(): `T`
+▸ **unwrap**(): `A`
 
 #### Returns
 
-`T`
+`A`
 
 #### Defined in
 
@@ -38,23 +39,23 @@ ___
 
 ### unwrapOr
 
-▸ **unwrapOr**\<`X`\>(`value`): `T` \| `X`
+▸ **unwrapOr**\<`T`\>(`value`): `A` \| `T`
 
 #### Type parameters
 
 | Name |
 | :------ |
-| `X` |
+| `T` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `value` | `X` |
+| `value` | `T` |
 
 #### Returns
 
-`T` \| `X`
+`A` \| `T`
 
 #### Defined in
 

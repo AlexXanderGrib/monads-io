@@ -216,4 +216,8 @@ describe("Maybe", () => {
     expect($just.value).toBe(10);
     expect($none.value).toBe(undefined);
   });
+
+  test("pipe", () => {
+    expect($just.pipe(() => 10)).toBe(10);
+  });
 });

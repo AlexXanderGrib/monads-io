@@ -37,7 +37,7 @@
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`A`, `B`, `P`\> |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`A`, `B`, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns

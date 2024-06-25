@@ -12,17 +12,16 @@ import type {
   Pair,
   Alternative,
   Monad,
-  Container
+  Container,
+  Pipe
 } from "./types";
 
 export const enum MaybeState {
-  None = 0,
-  Just = 1
+  None = "None",
+  Just = "Just"
 }
 
 const name = "Maybe";
-const justName = "Just";
-const noneName = "None";
 
 export function none<T = never>(): Maybe<T> {
   return None.create();
@@ -34,37 +33,59 @@ export function just<T>(value: T): Maybe<T> {
 
 export { just as from };
 
-class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
-  unwrapOr<X>(value: X): T | X {
+export interface MaybeOperation<V, T> {
+  maybe(maybe: Maybe<V>): T;
+}
+
+function cast<T>(constructor: MaybeConstructor<T>): Maybe<T> {
+  if (isMaybe<T>(constructor)) {
+    return constructor;
+  }
+
+  /* istanbul ignore next */
+  throw new InvalidStateError();
+}
+
+class MaybeConstructor<Va>
+  implements Monad<Va>, Alternative<Va>, Container<Va>, Pipe
+{
+  unwrapOr<T>(value: T): Va | T {
     return this.unwrapOrElse(() => value);
   }
 
-  unwrapOrElse<X>(value: () => X): T | X {
-    return this.fold(identity, value);
+  unwrapOrElse<T>(value: () => T): Va | T {
+    return this.fold(value, identity);
   }
 
-  isJust(): this is Just<T> {
-    return this instanceof Just;
+  isJust(): this is Just<Va> {
+    return isJust(this);
   }
 
-  isNone(): this is None<T> {
-    return this instanceof None;
+  isNone(): this is None<Va> {
+    return isNone(this);
   }
 
   join<V>(this: Maybe<Maybe<V>>): Maybe<V> {
     return this.chain(identity);
   }
 
-  map<V, A extends AnyParameters>(
-    map: Mapper<T, V, A>,
-    ...parameters: A
+  pipe<V, P extends AnyParameters>(
+    pipe: Mapper<Maybe<Va>, V, P>,
+    ...parameters: P
+  ): V {
+    return bind(pipe, parameters)(cast(this));
+  }
+
+  map<V, P extends AnyParameters>(
+    map: Mapper<Va, V, P>,
+    ...parameters: P
   ): Maybe<V> {
     return this.chain(combine(bind(map, parameters), just));
   }
 
-  mapNullable<V, A extends AnyParameters>(
-    map: Mapper<T, V | null | undefined, A>,
-    ...parameters: A
+  mapNullable<V, P extends AnyParameters>(
+    map: Mapper<Va, V | null | undefined, P>,
+    ...parameters: P
   ): Maybe<V> {
     return this.chain(combine(bind(map, parameters), fromNullable));
   }
@@ -99,60 +120,61 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
     });
   }
 
-  filter<X extends T>(filter: (input: T) => input is X): Maybe<X>;
-  filter(filter: (input: T) => boolean): Maybe<T>;
-  filter(filter: (input: T) => boolean): Maybe<T> {
+  filter<T extends Va>(filter: (input: Va) => input is T): Maybe<T>;
+  filter(filter: (input: Va) => boolean): Maybe<Va>;
+  filter(filter: (input: Va) => boolean): Maybe<Va> {
     return this.chain((value) => (filter(value) ? just(value) : none()));
   }
 
-  chain<V, A extends AnyParameters>(
-    map: Mapper<T, Maybe<V>, A>,
-    ...parameters: A
+  chain<V, P extends AnyParameters>(
+    map: Mapper<Va, Maybe<V>, P>,
+    ...parameters: P
   ): Maybe<V> {
-    return this.fold<Maybe<V>>(bind(map, parameters), none);
+    return this.fold<Maybe<V>>(none, bind(map, parameters));
   }
 
-  default(value: T): Maybe<T> {
+  default(value: Va): Maybe<Va> {
     return this.or(just(value));
   }
 
-  or(x: Maybe<T>): Maybe<T> {
+  or(x: Maybe<Va>): Maybe<Va> {
     return this.orLazy(() => x);
   }
 
-  orLazy(factory: () => Maybe<T>): Maybe<T> {
-    return this.fold(() => this as unknown as Maybe<T>, factory);
+  orLazy(factory: () => Maybe<Va>): Maybe<Va> {
+    return this.fold(factory, () => cast(this));
   }
 
-  async orAsync(factory: () => MaybePromiseLike<Maybe<T>>): Promise<Maybe<T>> {
-    return await this.fold(() => this as unknown as Maybe<T>, factory);
+  async orAsync(
+    factory: () => MaybePromiseLike<Maybe<Va>>
+  ): Promise<Maybe<Va>> {
+    return await this.fold(factory, () => cast(this));
   }
 
-  zip<A>(maybe: Maybe<A>): Maybe<Pair<T, A>> {
+  zip<T>(maybe: Maybe<T>): Maybe<Pair<Va, T>> {
     return this.chain((value) => maybe.map((right) => [value, right]));
   }
 
   tap<P extends AnyParameters>(
-    callback: Mapper<T, void, P>,
+    callback: Mapper<Va, void, P>,
     ...parameters: P
-  ): Maybe<T> {
+  ): Maybe<Va> {
     this.map(callback, ...parameters);
-
-    return this as unknown as Maybe<T>;
+    return cast(this);
   }
 
-  flatMap<V, P extends AnyParameters>(
-    map: Mapper<T, V, P>,
+  flatMap<T, P extends AnyParameters>(
+    map: Mapper<Va, T, P>,
     ...parameters: P
-  ): V | undefined {
-    return this.fold(bind(map, parameters), noop);
+  ): T | undefined {
+    return this.fold(noop, bind(map, parameters));
   }
 
-  unwrap(message: string = UnwrapCustomError.Messages.MAYBE_IS_NONE): T {
-    return this.fold(identity, () => UnwrapCustomError.inlineThrow(message));
+  unwrap(message: string = UnwrapCustomError.Messages.MAYBE_IS_NONE): Va {
+    return this.fold(() => UnwrapCustomError.inlineThrow(message), identity);
   }
 
-  fold<A, B = A>(mapJust: Mapper<T, A>, mapNone: Mapper<void, B>): A | B {
+  fold<A, B = A>(mapNone: Mapper<void, B>, mapJust: Mapper<Va, A>): A | B {
     if (this.isJust()) {
       return mapJust(this.value);
     }
@@ -165,25 +187,24 @@ class MaybeConstructor<T> implements Monad<T>, Alternative<T>, Container<T> {
     throw new InvalidStateError();
   }
 
-  async asyncChain<V, P extends AnyParameters>(
-    map: Mapper<T, MaybePromiseLike<Maybe<V>>, P>,
+  async asyncChain<T, P extends AnyParameters>(
+    map: Mapper<Va, MaybePromiseLike<Maybe<T>>, P>,
     ...parameters: P
-  ): Promise<Maybe<V>> {
+  ): Promise<Maybe<T>> {
     const result = await this.map(map, ...parameters).await();
     return result.join();
   }
 
-  async asyncMap<A, P extends AnyParameters>(
-    map: Mapper<T, MaybePromiseLike<A>, P>,
+  async asyncMap<T, P extends AnyParameters>(
+    map: Mapper<Va, MaybePromiseLike<T>, P>,
     ...parameters: P
-  ): Promise<Maybe<A>> {
+  ): Promise<Maybe<T>> {
     return await this.map(map, ...parameters).await();
   }
 
-  async await<X>(this: Maybe<MaybePromiseLike<X>>): Promise<Maybe<X>> {
-    return await this.fold<MaybePromiseLike<Maybe<X>>>(
-      async (value) => just(await value),
-      none
+  async await<T>(this: Maybe<MaybePromiseLike<T>>): Promise<Maybe<T>> {
+    return await this.fold<MaybePromiseLike<Maybe<T>>>(none, async (value) =>
+      just(await value)
     );
   }
 
@@ -234,8 +255,8 @@ class Just<T> extends MaybeConstructor<T> implements SerializedJust<T> {
     return new Just(value);
   }
 
-  get [Symbol.toStringTag](): typeof justName {
-    return justName;
+  get [Symbol.toStringTag](): MaybeState.Just {
+    return MaybeState.Just;
   }
 
   get name(): typeof name {
@@ -271,8 +292,8 @@ class None<T = unknown> extends MaybeConstructor<T> implements SerializedNone {
     return undefined;
   }
 
-  get [Symbol.toStringTag](): typeof noneName {
-    return noneName;
+  get [Symbol.toStringTag](): MaybeState.None {
+    return MaybeState.None;
   }
 
   get name(): typeof name {
@@ -346,19 +367,11 @@ export function merge<V1, V2, V3, V4, V5, V6>(
 ): Maybe<[V1, V2, V3, V4, V5, V6]>;
 export function merge<T>(values: Array<Maybe<T>>): Maybe<T[]>;
 export function merge(values: Array<Maybe<unknown>>): Maybe<unknown> {
-  const array: unknown[] = [];
-
-  for (const value of values) {
-    if (value.isJust()) {
-      value.tap((value) => array.push(value));
-
-      continue;
-    }
-
+  if (values.some((maybe) => maybe.isNone())) {
     return none();
   }
 
-  return just(array);
+  return just([...filterMap(values, identity)]);
 }
 
 export function fromNullable<T>(value: Nullable<T>): Maybe<T> {
@@ -385,10 +398,10 @@ export async function* asyncIterator<T>(
   }
 }
 
-export function* filterMap<T, X>(
-  iterable: Iterable<T>,
-  filterMap: (value: T, index: number) => Maybe<X>
-): Generator<X, void, void> {
+export function* filterMap<A, B>(
+  iterable: Iterable<A>,
+  filterMap: (value: A, index: number) => Maybe<B>
+): Generator<B, void, void> {
   let index = 0;
   for (const value of iterable) {
     const processed = filterMap(value, index++);

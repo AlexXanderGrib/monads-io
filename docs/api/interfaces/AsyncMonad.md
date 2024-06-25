@@ -17,6 +17,7 @@
 ## Implemented by
 
 - [`EitherConstructor`](../classes/internal_.EitherConstructor.md)
+- [`Identity`](../classes/internal_.Identity.md)
 
 ## Table of contents
 
@@ -47,7 +48,7 @@
 
 | Name | Type |
 | :------ | :------ |
-| `this` | [`Applicative`](Applicative.md)\<[`Pm`](../modules/internal_.md#pm)\<`A`, `B`, `P`\>\> |
+| `this` | [`Applicative`](Applicative.md)\<[`Mapper`](../modules/internal_.md#mapper)\<`A`, `B`, `P`\>\> |
 | `argument` | [`Applicative`](Applicative.md)\<`A`\> |
 | `...parameters` | `P` |
 
@@ -78,7 +79,7 @@ dist/types.d.ts:19
 | Name | Type |
 | :------ | :------ |
 | `this` | [`Applicative`](Applicative.md)\<`A`\> |
-| `argument` | [`Applicative`](Applicative.md)\<[`Pm`](../modules/internal_.md#pm)\<`A`, `B`, `P`\>\> |
+| `argument` | [`Applicative`](Applicative.md)\<[`Mapper`](../modules/internal_.md#mapper)\<`A`, `B`, `P`\>\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -110,7 +111,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`A`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<[`AsyncMonad`](AsyncMonad.md)\<`B`\>\>, `P`\> |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`A`, [`MaybePromiseLike`](../modules.md#maybepromiselike)\<[`AsyncMonad`](AsyncMonad.md)\<`B`\>\>, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -164,7 +165,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`A`, [`Monad`](Monad.md)\<`B`\>, `P`\> |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`A`, [`Monad`](Monad.md)\<`B`\>, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns
@@ -226,7 +227,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `map` | [`Pm`](../modules/internal_.md#pm)\<`A`, `B`, `P`\> |
+| `map` | [`Mapper`](../modules/internal_.md#mapper)\<`A`, `B`, `P`\> |
 | `...parameters` | `P` |
 
 #### Returns
