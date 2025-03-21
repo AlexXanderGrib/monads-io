@@ -414,14 +414,6 @@ class Right<L, R>
   }
 
   /**
-   * @deprecated This call will never throw, use {@link getRight}() instead
-   * @return {R}
-   */
-  throw(): R {
-    return this.getRight();
-  }
-
-  /**
    * Should be used instead of
    * ```js
    * return right(result.getRight())

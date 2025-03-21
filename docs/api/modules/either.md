@@ -207,10 +207,10 @@ ___
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `L` |
-| `R` |
+| Name | Type |
+| :------ | :------ |
+| `L` | `never` |
+| `R` | `never` |
 
 #### Parameters
 
@@ -415,10 +415,10 @@ ___
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `L` |
-| `T` |
+| Name | Type |
+| :------ | :------ |
+| `L` | `never` |
+| `T` | `never` |
 
 #### Parameters
 
@@ -443,10 +443,10 @@ ___
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `L` |
-| `T` |
+| Name | Type |
+| :------ | :------ |
+| `L` | `never` |
+| `T` | `never` |
 
 #### Parameters
 
@@ -470,10 +470,10 @@ ___
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `L` |
-| `T` |
+| Name | Type |
+| :------ | :------ |
+| `L` | `never` |
+| `T` | `never` |
 
 #### Parameters
 
@@ -498,10 +498,10 @@ ___
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `L` |
-| `R` |
+| Name | Type |
+| :------ | :------ |
+| `L` | `never` |
+| `R` | `never` |
 
 #### Parameters
 

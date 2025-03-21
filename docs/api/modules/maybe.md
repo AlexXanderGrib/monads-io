@@ -128,9 +128,9 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `A` | `A` |
-| `B` | `B` |
-| `P` | extends [`AnyParameters`](index.md#anyparameters) |
+| `A` | `never` |
+| `B` | `never` |
+| `P` | extends [`AnyParameters`](index.md#anyparameters) = [] |
 
 #### Parameters
 
@@ -225,9 +225,9 @@ ___
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `T` |
+| Name | Type |
+| :------ | :------ |
+| `T` | `never` |
 
 #### Parameters
 
@@ -355,9 +355,9 @@ ___
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `T` |
+| Name | Type |
+| :------ | :------ |
+| `T` | `never` |
 
 #### Parameters
 
@@ -528,9 +528,9 @@ dist/maybe.d.ts:88
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `T` |
+| Name | Type |
+| :------ | :------ |
+| `T` | `never` |
 
 #### Parameters
 
