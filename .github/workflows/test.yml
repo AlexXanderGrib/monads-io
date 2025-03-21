@@ -21,10 +21,10 @@ jobs:
       - name: Run jest
         run: npm test -- --coverage
 
-      - name: Upload coverage to Codecov
-        run: npx codecov
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      # - name: Upload coverage to Codecov
+      #   run: npx codecov
+      #   env:
+      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       # Only if needed
       # - name: Upload coverage to Codacy
