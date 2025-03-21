@@ -180,6 +180,13 @@ class EitherConstructor<L, R>
     return this.fold(left, bind(map, parameters));
   }
 
+  chainLeft<A, B, P extends AnyParameters>(
+    map: Mapper<L, Either<A, B>, P>,
+    ...parameters: P
+  ): Either<A, R | B> {
+    return this.fold(bind(map, parameters), right);
+  }
+
   biMap<A, B>(mapLeft: Mapper<L, A>, mapRight: Mapper<R, B>): Either<A, B> {
     return this.fold(combine(mapLeft, left), combine(mapRight, right));
   }
@@ -327,6 +334,24 @@ class Left<L, R> extends EitherConstructor<L, R> implements SerializedLeft<L> {
     return this.left;
   }
 
+  /**
+   * Should be used instead of
+   * ```js
+   * return left(result.getLeft())
+   * ```
+   *
+   * Makes types correct without copying
+   *
+   * @template T
+   * @return {Left<L, T>}
+   *
+   * @example
+   * return result.move()
+   */
+  move<T = never>(): Left<L, T> {
+    return cast(this) as Left<L, never>;
+  }
+
   get type(): EitherType.Left {
     return EitherType.Left;
   }
@@ -388,6 +413,24 @@ class Right<L, R>
     return;
   }
 
+  /**
+   * Should be used instead of
+   * ```js
+   * return right(result.getRight())
+   * ```
+   *
+   * Makes types correct without copying
+   *
+   * @template T
+   * @return {Right<L, T>}
+   *
+   * @example
+   * return result.move()
+   */
+  move<T = never>(): Right<T, R> {
+    return cast(this) as Right<never, R>;
+  }
+
   private constructor(right: R) {
     super();
     this.right = right;
@@ -442,6 +485,15 @@ export function chain<
   return (either) => either.asyncChain(bind(map, parameters));
 }
 
+/**
+ *
+ * @template L
+ * @template R
+ *
+ * @throws {DeserializationError} - {@link DeserializationError}
+ * @param {SerializedEither<L, R>} serialized
+ * @return {Either<L, R>}
+ */
 export function fromJSON<L, R>(
   serialized: SerializedEither<L, R>
 ): Either<L, R> {

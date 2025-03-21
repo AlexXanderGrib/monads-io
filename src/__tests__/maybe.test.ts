@@ -202,7 +202,7 @@ describe("Maybe", () => {
 
     try {
       await $just.asyncApply(just<(a: number) => number>(undefined as any));
-      fail("Dint throw error");
+      fail("Didn't throw error");
     } catch (error) {
       expect(error).toEqual(
         new InvalidStateError(

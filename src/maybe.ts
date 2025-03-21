@@ -337,6 +337,12 @@ export function chain<A, B, P extends AnyParameters>(
   return (maybe) => maybe.asyncChain(bind(map, parameters));
 }
 
+/**
+ * @template T
+ * @param {SerializedMaybe<T>} serialized
+ * @throws {DeserializationError} - {@link DeserializationError}
+ * @return {Maybe<T>}
+ */
 export function fromJSON<T>(serialized: SerializedMaybe<T>): Maybe<T> {
   if (serialized.name !== name) {
     throw new DeserializationError(
@@ -384,7 +390,7 @@ export function* iterator<T>(
   let result: Maybe<T>;
 
   while ((result = callback()).isJust()) {
-    yield result.unwrap();
+    yield result.value;
   }
 }
 
@@ -394,7 +400,7 @@ export async function* asyncIterator<T>(
   let result: Maybe<MaybePromiseLike<T>>;
 
   while ((result = await callback()).isJust()) {
-    yield await result.unwrap();
+    yield await result.value;
   }
 }
 

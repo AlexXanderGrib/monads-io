@@ -58,6 +58,16 @@ describe("Either", () => {
     expect($left.chain((value) => right(value + 1))).toEqual($left);
   });
 
+  test("chainLeft", () => {
+    expect($right.chainLeft(() => $right)).toEqual($right);
+    expect($left.chainLeft((value) => left(value.message))).toEqual(
+      left("left")
+    );
+    expect($left.chainLeft((value) => right(value.message))).toEqual(
+      right("left")
+    );
+  });
+
   test("isRight/isLeft", () => {
     expect([
       $right.isRight(),
@@ -288,4 +298,32 @@ describe("Either", () => {
 
     expect(left<number, number>(10).any()).toBe(10);
   });
+
+  test("move", () => {
+    expect(subject1(right(11))).toEqual(right(11));
+    expect(subject1(left(new RangeError("Pupa")))).toEqual(left(10));
+
+    expect(subject2(right(10))).toEqual(right("10"));
+    expect(subject2(left(new RangeError("Test")))).toEqual(
+      left(new RangeError("Test"))
+    );
+  });
 });
+
+function subject1(either: Either<RangeError, number>): Either<number, number> {
+  if (either.isRight()) {
+    return either.move();
+  }
+
+  return left(10);
+}
+
+function subject2(
+  either: Either<RangeError, number>
+): Either<RangeError, string> {
+  if (either.isLeft()) {
+    return either.move();
+  }
+
+  return right(either.getRight().toString());
+}

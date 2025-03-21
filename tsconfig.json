@@ -30,7 +30,7 @@
     "downlevelIteration": false
   },
   "exclude": [
-    "dist",
-    "examples",
+    "./dist",
+    "./examples",
   ]
 }
