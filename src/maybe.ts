@@ -27,7 +27,7 @@ export function none<T = never>(): Maybe<T> {
   return None.create();
 }
 
-export function just<T>(value: T): Maybe<T> {
+export function just<T = never>(value: T): Maybe<T> {
   return Just.create(value);
 }
 
@@ -251,7 +251,7 @@ type SerializedJust<T> = Readonly<{
 }>;
 
 class Just<T> extends MaybeConstructor<T> implements SerializedJust<T> {
-  static create<T>(value: T): Just<T> {
+  static create<T = never>(value: T): Just<T> {
     return new Just(value);
   }
 
@@ -284,7 +284,7 @@ type SerializedNone = { name: typeof name; type: MaybeState.None };
 
 class None<T = unknown> extends MaybeConstructor<T> implements SerializedNone {
   static readonly instance = new None<never>();
-  static create<T>(): None<T> {
+  static create<T = never>(): None<T> {
     return None.instance;
   }
 
@@ -330,7 +330,7 @@ export const isNone = <T>(value: unknown | Maybe<T>): value is None<T> =>
 export const isMaybe = <T>(value: unknown | Maybe<T>): value is Maybe<T> =>
   isJust(value) || isNone(value);
 
-export function chain<A, B, P extends AnyParameters>(
+export function chain<A = never, B = never, P extends AnyParameters = []>(
   map: (v: A, ...parameters: P) => MaybePromiseLike<Maybe<B>>,
   ...parameters: P
 ): (maybe: Maybe<A>) => Promise<Maybe<B>> {
@@ -371,7 +371,7 @@ export function merge<V1, V2, V3, V4, V5>(
 export function merge<V1, V2, V3, V4, V5, V6>(
   values: [Maybe<V1>, Maybe<V2>, Maybe<V3>, Maybe<V4>, Maybe<V5>, Maybe<V6>]
 ): Maybe<[V1, V2, V3, V4, V5, V6]>;
-export function merge<T>(values: Array<Maybe<T>>): Maybe<T[]>;
+export function merge<T = never>(values: Array<Maybe<T>>): Maybe<T[]>;
 export function merge(values: Array<Maybe<unknown>>): Maybe<unknown> {
   if (values.some((maybe) => maybe.isNone())) {
     return none();
@@ -380,7 +380,7 @@ export function merge(values: Array<Maybe<unknown>>): Maybe<unknown> {
   return just([...filterMap(values, identity)]);
 }
 
-export function fromNullable<T>(value: Nullable<T>): Maybe<T> {
+export function fromNullable<T = never>(value: Nullable<T>): Maybe<T> {
   return value !== null && value !== undefined ? just(value) : none();
 }
 

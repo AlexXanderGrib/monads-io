@@ -93,10 +93,10 @@ describe("Either", () => {
   test("json", async () => {
     expect(fromJSON($right.toJSON())).toEqual($right);
     expect(fromJSON($left.toJSON())).toEqual($left);
-    expect(() => fromJSON({} as any)).toThrowError(
+    expect(() => fromJSON({} as any)).toThrow(
       new DeserializationError(DeserializationError.Messages.EXPECTED_EITHER)
     );
-    expect(() => fromJSON({ name: "Either" } as any)).toThrowError(
+    expect(() => fromJSON({ name: "Either" } as any)).toThrow(
       new DeserializationError(
         DeserializationError.Messages.EITHER_INVALID_STATE
       )
@@ -150,7 +150,7 @@ describe("Either", () => {
   test("unwrap", () => {
     expect($right.unwrap()).toBe(10);
     expect($left.unwrapOr(11)).toBe(11);
-    expect(() => $left.unwrap()).toThrowError(UnwrapCustomError);
+    expect(() => $left.unwrap()).toThrow(UnwrapCustomError);
   });
 
   test("apply", () => {
@@ -164,7 +164,7 @@ describe("Either", () => {
 
     expect(() =>
       $right.apply(right<Error, (a: number) => number>(undefined as any))
-    ).toThrowError(
+    ).toThrow(
       new InvalidStateError(InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION)
     );
   });
@@ -189,10 +189,10 @@ describe("Either", () => {
     const callback = jest.fn();
 
     expect($left.tap(callback)).toEqual($left);
-    expect(callback).toBeCalledTimes(0);
+    expect(callback).toHaveBeenCalledTimes(0);
 
     expect($right.tap(callback)).toEqual($right);
-    expect(callback).toBeCalledTimes(1);
+    expect(callback).toHaveBeenCalledTimes(1);
   });
 
   test("asyncChain", async () => {

@@ -414,6 +414,14 @@ class Right<L, R>
   }
 
   /**
+   * @deprecated This call will never throw, use {@link getRight}() instead
+   * @return {R}
+   */
+  throw(): R {
+    return this.getRight();
+  }
+
+  /**
    * Should be used instead of
    * ```js
    * return right(result.getRight())
@@ -607,7 +615,7 @@ export function mergeInMany(
 }
 
 function allRights<A, B>(array: Either<A, B>[]): array is Right<A, B>[] {
-  return !array.some((value) => value.isLeft());
+  return array.every((value) => value.isRight());
 }
 
 export function aggregateError<T = unknown>(
@@ -716,7 +724,7 @@ export function wrapAsync<L, R, P extends AnyParameters>(
   };
 }
 
-export function catchSync<L, R>(
+export function catchSync<L = never, R = never>(
   method: () => Either<L, R>,
   mapCaught?: MapCaught<L>
 ): Either<L, R> {
@@ -731,14 +739,14 @@ export async function catchAsync<L, R>(
   return caught.join();
 }
 
-export async function fromPromise<L, T>(
+export async function fromPromise<L = never, T = never>(
   promise: MaybePromiseLike<T>,
   mapCaught?: MapCaught<L>
 ): Promise<Either<L, T>> {
   return fromTryAsync(() => promise, mapCaught);
 }
 
-export function fromTry<L, T>(
+export function fromTry<L = never, T = never>(
   callback: () => T,
   mapCaught: MapCaught<L> = anify
 ): Either<L, T> {
@@ -749,7 +757,7 @@ export function fromTry<L, T>(
   }
 }
 
-export async function fromTryAsync<L, R>(
+export async function fromTryAsync<L = never, R = never>(
   callback: () => MaybePromiseLike<R>,
   mapCaught: MapCaught<L> = anify
 ): Promise<Either<L, R>> {
@@ -760,7 +768,7 @@ export async function fromTryAsync<L, R>(
   }
 }
 
-export function fromPromiseSettledResult<L, T>(
+export function fromPromiseSettledResult<L = never, T = never>(
   result: PromiseSettledResult<T>
 ): Either<L, T> {
   return result.status === "fulfilled"

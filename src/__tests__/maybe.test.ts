@@ -56,7 +56,7 @@ describe("Maybe", () => {
   test("json", async () => {
     expect(fromJSON($just.toJSON())).toEqual($just);
     expect(fromJSON($none.toJSON())).toEqual($none);
-    expect(() => fromJSON({} as any)).toThrowError(
+    expect(() => fromJSON({} as any)).toThrow(
       new DeserializationError(DeserializationError.Messages.EXPECTED_MAYBE)
     );
   });
@@ -71,7 +71,7 @@ describe("Maybe", () => {
   test("unwrap", () => {
     expect($just.unwrap()).toBe(10);
     expect($none.unwrapOr(11)).toBe(11);
-    expect(() => $none.unwrap()).toThrowError(UnwrapCustomError);
+    expect(() => $none.unwrap()).toThrow(UnwrapCustomError);
   });
 
   test("apply", () => {
@@ -83,7 +83,7 @@ describe("Maybe", () => {
 
     expect(() =>
       $just.apply(just<(a: number) => number>(undefined as any))
-    ).toThrowError(
+    ).toThrow(
       new InvalidStateError(InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION)
     );
   });
@@ -100,10 +100,10 @@ describe("Maybe", () => {
     const callback = jest.fn();
 
     expect($none.tap(callback)).toEqual($none);
-    expect(callback).toBeCalledTimes(0);
+    expect(callback).toHaveBeenCalledTimes(0);
 
     expect($just.tap(callback)).toEqual($just);
-    expect(callback).toBeCalledTimes(1);
+    expect(callback).toHaveBeenCalledTimes(1);
   });
 
   test("asyncChain", async () => {

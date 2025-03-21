@@ -34,7 +34,7 @@ describe("Identity", () => {
 
     expect(() =>
       $value.apply(from<(a: number) => number>(undefined as any))
-    ).toThrowError(
+    ).toThrow(
       new InvalidStateError(InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION)
     );
   });
@@ -55,7 +55,7 @@ describe("Identity", () => {
     const callback = jest.fn();
 
     expect($value.tap(callback)).toEqual($value);
-    expect(callback).toBeCalledTimes(1);
+    expect(callback).toHaveBeenCalledTimes(1);
   });
 
   test("asyncChain", async () => {
