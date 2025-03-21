@@ -69,7 +69,7 @@ Renames and re-exports [__type](undefined)
 
 #### Defined in
 
-dist/either.d.ts:115
+dist/either.d.ts:146
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:116
+dist/either.d.ts:147
 
 ## Functions
 
@@ -100,7 +100,7 @@ dist/either.d.ts:116
 
 #### Defined in
 
-dist/either.d.ts:172
+dist/either.d.ts:212
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:173
+dist/either.d.ts:213
 
 ___
 
@@ -128,7 +128,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:171
+dist/either.d.ts:211
 
 ___
 
@@ -142,7 +142,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:170
+dist/either.d.ts:210
 
 ___
 
@@ -169,7 +169,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:166
+dist/either.d.ts:206
 
 ___
 
@@ -197,7 +197,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:177
+dist/either.d.ts:217
 
 ___
 
@@ -225,7 +225,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:176
+dist/either.d.ts:216
 
 ___
 
@@ -268,7 +268,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:120
+dist/either.d.ts:151
 
 ▸ **chain**\<`L`, `R`, `NL`, `P`\>(`map`, `...parameters`): (`either`: [`Either`](either.md#either)\<`L`, `R`\>, ...`parameters`: `P`) => `Promise`\<[`Either`](either.md#either)\<`NL` \| `L`, `R`\>\>
 
@@ -307,7 +307,7 @@ dist/either.d.ts:120
 
 #### Defined in
 
-dist/either.d.ts:121
+dist/either.d.ts:152
 
 ▸ **chain**\<`L`, `R`, `NL`, `NR`, `P`\>(`map`, `...parameters`): (`either`: [`Either`](either.md#either)\<`L`, `R`\>, ...`parameters`: `P`) => `Promise`\<[`Either`](either.md#either)\<`NL` \| `L`, `NR`\>\>
 
@@ -347,7 +347,7 @@ dist/either.d.ts:121
 
 #### Defined in
 
-dist/either.d.ts:122
+dist/either.d.ts:153
 
 ___
 
@@ -399,9 +399,13 @@ ___
 
 [`Either`](either.md#either)\<`L`, `R`\>
 
+**`Throws`**
+
+- DeserializationError
+
 #### Defined in
 
-dist/either.d.ts:123
+dist/either.d.ts:163
 
 ___
 
@@ -429,7 +433,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:178
+dist/either.d.ts:218
 
 ___
 
@@ -456,7 +460,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:181
+dist/either.d.ts:221
 
 ___
 
@@ -484,7 +488,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:179
+dist/either.d.ts:219
 
 ___
 
@@ -512,7 +516,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:180
+dist/either.d.ts:220
 
 ___
 
@@ -539,7 +543,7 @@ value is Either\<L, R\>
 
 #### Defined in
 
-dist/either.d.ts:119
+dist/either.d.ts:150
 
 ___
 
@@ -566,7 +570,7 @@ value is Left\<L, R\>
 
 #### Defined in
 
-dist/either.d.ts:117
+dist/either.d.ts:148
 
 ___
 
@@ -593,7 +597,7 @@ value is Right\<L, R\>
 
 #### Defined in
 
-dist/either.d.ts:118
+dist/either.d.ts:149
 
 ___
 
@@ -647,7 +651,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:124
+dist/either.d.ts:164
 
 ▸ **merge**\<`L1`, `R1`, `L2`, `R2`\>(`values`): [`Either`](either.md#either)\<`L1` \| `L2`, [`R1`, `R2`]\>
 
@@ -672,7 +676,7 @@ dist/either.d.ts:124
 
 #### Defined in
 
-dist/either.d.ts:125
+dist/either.d.ts:165
 
 ▸ **merge**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`\>(`values`): [`Either`](either.md#either)\<`L1` \| `L2` \| `L3`, [`R1`, `R2`, `R3`]\>
 
@@ -699,7 +703,7 @@ dist/either.d.ts:125
 
 #### Defined in
 
-dist/either.d.ts:126
+dist/either.d.ts:166
 
 ▸ **merge**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`, `L4`, `R4`\>(`values`): [`Either`](either.md#either)\<`L1` \| `L2` \| `L3` \| `L4`, [`R1`, `R2`, `R3`, `R4`]\>
 
@@ -728,7 +732,7 @@ dist/either.d.ts:126
 
 #### Defined in
 
-dist/either.d.ts:127
+dist/either.d.ts:167
 
 ▸ **merge**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`, `L4`, `R4`, `L5`, `R5`\>(`values`): [`Either`](either.md#either)\<`L1` \| `L2` \| `L3` \| `L4` \| `L5`, [`R1`, `R2`, `R3`, `R4`, `R5`]\>
 
@@ -759,7 +763,7 @@ dist/either.d.ts:127
 
 #### Defined in
 
-dist/either.d.ts:128
+dist/either.d.ts:168
 
 ▸ **merge**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`, `L4`, `R4`, `L5`, `R5`, `L6`, `R6`\>(`values`): [`Either`](either.md#either)\<`L1` \| `L2` \| `L3` \| `L4` \| `L5` \| `L6`, [`R1`, `R2`, `R3`, `R4`, `R5`, `R6`]\>
 
@@ -792,7 +796,7 @@ dist/either.d.ts:128
 
 #### Defined in
 
-dist/either.d.ts:135
+dist/either.d.ts:175
 
 ▸ **merge**\<`L`, `R`\>(`values`): [`Either`](either.md#either)\<`L`, `R`[]\>
 
@@ -815,7 +819,7 @@ dist/either.d.ts:135
 
 #### Defined in
 
-dist/either.d.ts:143
+dist/either.d.ts:183
 
 ___
 
@@ -842,7 +846,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:146
+dist/either.d.ts:186
 
 ▸ **mergeInMany**\<`L1`, `R1`, `L2`, `R2`\>(`values`): [`Either`](either.md#either)\<(`L1` \| `L2`)[], [`R1`, `R2`]\>
 
@@ -867,7 +871,7 @@ dist/either.d.ts:146
 
 #### Defined in
 
-dist/either.d.ts:147
+dist/either.d.ts:187
 
 ▸ **mergeInMany**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`\>(`values`): [`Either`](either.md#either)\<(`L1` \| `L2` \| `L3`)[], [`R1`, `R2`, `R3`]\>
 
@@ -894,7 +898,7 @@ dist/either.d.ts:147
 
 #### Defined in
 
-dist/either.d.ts:148
+dist/either.d.ts:188
 
 ▸ **mergeInMany**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`, `L4`, `R4`\>(`values`): [`Either`](either.md#either)\<(`L1` \| `L2` \| `L3` \| `L4`)[], [`R1`, `R2`, `R3`, `R4`]\>
 
@@ -923,7 +927,7 @@ dist/either.d.ts:148
 
 #### Defined in
 
-dist/either.d.ts:149
+dist/either.d.ts:189
 
 ▸ **mergeInMany**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`, `L4`, `R4`, `L5`, `R5`\>(`values`): [`Either`](either.md#either)\<(`L1` \| `L2` \| `L3` \| `L4` \| `L5`)[], [`R1`, `R2`, `R3`, `R4`, `R5`]\>
 
@@ -954,7 +958,7 @@ dist/either.d.ts:149
 
 #### Defined in
 
-dist/either.d.ts:150
+dist/either.d.ts:190
 
 ▸ **mergeInMany**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`, `L4`, `R4`, `L5`, `R5`, `L6`, `R6`\>(`values`): [`Either`](either.md#either)\<(`L1` \| `L2` \| `L3` \| `L4` \| `L5` \| `L6`)[], [`R1`, `R2`, `R3`, `R4`, `R5`, `R6`]\>
 
@@ -987,7 +991,7 @@ dist/either.d.ts:150
 
 #### Defined in
 
-dist/either.d.ts:157
+dist/either.d.ts:197
 
 ▸ **mergeInMany**\<`L`, `R`\>(`values`): [`Either`](either.md#either)\<`L`[], `R`[]\>
 
@@ -1010,7 +1014,7 @@ dist/either.d.ts:157
 
 #### Defined in
 
-dist/either.d.ts:165
+dist/either.d.ts:205
 
 ___
 
@@ -1037,7 +1041,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:124
+dist/either.d.ts:164
 
 ▸ **mergeInOne**\<`L1`, `R1`, `L2`, `R2`\>(`values`): [`Either`](either.md#either)\<`L1` \| `L2`, [`R1`, `R2`]\>
 
@@ -1062,7 +1066,7 @@ dist/either.d.ts:124
 
 #### Defined in
 
-dist/either.d.ts:125
+dist/either.d.ts:165
 
 ▸ **mergeInOne**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`\>(`values`): [`Either`](either.md#either)\<`L1` \| `L2` \| `L3`, [`R1`, `R2`, `R3`]\>
 
@@ -1089,7 +1093,7 @@ dist/either.d.ts:125
 
 #### Defined in
 
-dist/either.d.ts:126
+dist/either.d.ts:166
 
 ▸ **mergeInOne**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`, `L4`, `R4`\>(`values`): [`Either`](either.md#either)\<`L1` \| `L2` \| `L3` \| `L4`, [`R1`, `R2`, `R3`, `R4`]\>
 
@@ -1118,7 +1122,7 @@ dist/either.d.ts:126
 
 #### Defined in
 
-dist/either.d.ts:127
+dist/either.d.ts:167
 
 ▸ **mergeInOne**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`, `L4`, `R4`, `L5`, `R5`\>(`values`): [`Either`](either.md#either)\<`L1` \| `L2` \| `L3` \| `L4` \| `L5`, [`R1`, `R2`, `R3`, `R4`, `R5`]\>
 
@@ -1149,7 +1153,7 @@ dist/either.d.ts:127
 
 #### Defined in
 
-dist/either.d.ts:128
+dist/either.d.ts:168
 
 ▸ **mergeInOne**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`, `L4`, `R4`, `L5`, `R5`, `L6`, `R6`\>(`values`): [`Either`](either.md#either)\<`L1` \| `L2` \| `L3` \| `L4` \| `L5` \| `L6`, [`R1`, `R2`, `R3`, `R4`, `R5`, `R6`]\>
 
@@ -1182,7 +1186,7 @@ dist/either.d.ts:128
 
 #### Defined in
 
-dist/either.d.ts:135
+dist/either.d.ts:175
 
 ▸ **mergeInOne**\<`L`, `R`\>(`values`): [`Either`](either.md#either)\<`L`, `R`[]\>
 
@@ -1205,7 +1209,7 @@ dist/either.d.ts:135
 
 #### Defined in
 
-dist/either.d.ts:143
+dist/either.d.ts:183
 
 ___
 
@@ -1274,7 +1278,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:174
+dist/either.d.ts:214
 
 ___
 
@@ -1315,4 +1319,4 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:175
+dist/either.d.ts:215

@@ -47,6 +47,7 @@
 - [await](either._internal_.Right.md#await)
 - [biMap](either._internal_.Right.md#bimap)
 - [chain](either._internal_.Right.md#chain)
+- [chainLeft](either._internal_.Right.md#chainleft)
 - [default](either._internal_.Right.md#default)
 - [fold](either._internal_.Right.md#fold)
 - [getLeft](either._internal_.Right.md#getleft)
@@ -57,6 +58,7 @@
 - [map](either._internal_.Right.md#map)
 - [mapLeft](either._internal_.Right.md#mapleft)
 - [mapRight](either._internal_.Right.md#mapright)
+- [move](either._internal_.Right.md#move)
 - [or](either._internal_.Right.md#or)
 - [orAsync](either._internal_.Right.md#orasync)
 - [orLazy](either._internal_.Right.md#orlazy)
@@ -92,7 +94,7 @@
 
 #### Defined in
 
-dist/either.d.ts:112
+dist/either.d.ts:143
 
 ## Properties
 
@@ -118,7 +120,7 @@ SerializedRight.right
 
 #### Defined in
 
-dist/either.d.ts:106
+dist/either.d.ts:122
 
 ## Accessors
 
@@ -132,7 +134,7 @@ dist/either.d.ts:106
 
 #### Defined in
 
-dist/either.d.ts:107
+dist/either.d.ts:123
 
 ___
 
@@ -150,7 +152,7 @@ SerializedRight.name
 
 #### Defined in
 
-dist/either.d.ts:108
+dist/either.d.ts:124
 
 ___
 
@@ -168,7 +170,7 @@ SerializedRight.type
 
 #### Defined in
 
-dist/either.d.ts:109
+dist/either.d.ts:125
 
 ## Methods
 
@@ -198,7 +200,7 @@ dist/either.d.ts:109
 
 #### Defined in
 
-dist/either.d.ts:67
+dist/either.d.ts:68
 
 ___
 
@@ -359,7 +361,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:27
+dist/either.d.ts:28
 
 ___
 
@@ -392,7 +394,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:28
+dist/either.d.ts:29
 
 ___
 
@@ -422,7 +424,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:29
+dist/either.d.ts:30
 
 ___
 
@@ -454,7 +456,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:26
+dist/either.d.ts:27
 
 ___
 
@@ -491,6 +493,39 @@ dist/either.d.ts:25
 
 ___
 
+### chainLeft
+
+▸ **chainLeft**\<`A`, `B`, `P`\>(`map`, `...parameters`): [`Either`](../modules/either.md#either)\<`A`, `R` \| `B`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | `A` |
+| `B` | `B` |
+| `P` | extends [`AnyParameters`](../modules/index.md#anyparameters) |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `map` | [`Mapper`](../modules/types.md#mapper)\<`L`, [`Either`](../modules/either.md#either)\<`A`, `B`\>, `P`\> |
+| `...parameters` | `P` |
+
+#### Returns
+
+[`Either`](../modules/either.md#either)\<`A`, `R` \| `B`\>
+
+#### Inherited from
+
+[EitherConstructor](either._internal_.EitherConstructor.md).[chainLeft](either._internal_.EitherConstructor.md#chainleft)
+
+#### Defined in
+
+dist/either.d.ts:26
+
+___
+
 ### default
 
 ▸ **default**(`value`): [`Either`](../modules/either.md#either)\<`L`, `R`\>
@@ -511,7 +546,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:38
+dist/either.d.ts:39
 
 ___
 
@@ -547,7 +582,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:37
+dist/either.d.ts:38
 
 ___
 
@@ -561,7 +596,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:111
+dist/either.d.ts:127
 
 ___
 
@@ -575,7 +610,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:110
+dist/either.d.ts:126
 
 ___
 
@@ -743,6 +778,39 @@ dist/either.d.ts:19
 
 ___
 
+### move
+
+▸ **move**\<`T`\>(): [`Right`](either._internal_.Right.md)\<`T`, `R`\>
+
+Should be used instead of
+```js
+return right(result.getRight())
+```
+
+Makes types correct without copying
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `never` |
+
+#### Returns
+
+[`Right`](either._internal_.Right.md)\<`T`, `R`\>
+
+**`Example`**
+
+```ts
+return result.move()
+```
+
+#### Defined in
+
+dist/either.d.ts:142
+
+___
+
 ### or
 
 ▸ **or**(`x`): [`Either`](../modules/either.md#either)\<`L`, `R`\>
@@ -763,7 +831,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:39
+dist/either.d.ts:40
 
 ___
 
@@ -787,7 +855,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:41
+dist/either.d.ts:42
 
 ___
 
@@ -811,7 +879,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:40
+dist/either.d.ts:41
 
 ___
 
@@ -861,7 +929,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:52
+dist/either.d.ts:53
 
 ___
 
@@ -934,7 +1002,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:58
+dist/either.d.ts:59
 
 ___
 
@@ -948,7 +1016,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:113
+dist/either.d.ts:144
 
 ___
 
@@ -982,7 +1050,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:51
+dist/either.d.ts:52
 
 ___
 
@@ -1070,7 +1138,7 @@ Return value of Either independent if it is Right or Left
 
 #### Defined in
 
-dist/either.d.ts:66
+dist/either.d.ts:67
 
 ___
 
@@ -1101,7 +1169,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:42
+dist/either.d.ts:43
 
 ___
 
@@ -1128,4 +1196,4 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:98
+dist/either.d.ts:114

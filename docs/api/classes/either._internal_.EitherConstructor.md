@@ -42,6 +42,7 @@
 - [await](either._internal_.EitherConstructor.md#await)
 - [biMap](either._internal_.EitherConstructor.md#bimap)
 - [chain](either._internal_.EitherConstructor.md#chain)
+- [chainLeft](either._internal_.EitherConstructor.md#chainleft)
 - [default](either._internal_.EitherConstructor.md#default)
 - [fold](either._internal_.EitherConstructor.md#fold)
 - [isLeft](either._internal_.EitherConstructor.md#isleft)
@@ -101,7 +102,7 @@
 
 #### Defined in
 
-dist/either.d.ts:67
+dist/either.d.ts:68
 
 ___
 
@@ -254,7 +255,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:27
+dist/either.d.ts:28
 
 ___
 
@@ -283,7 +284,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:28
+dist/either.d.ts:29
 
 ___
 
@@ -313,7 +314,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:29
+dist/either.d.ts:30
 
 ___
 
@@ -341,7 +342,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:26
+dist/either.d.ts:27
 
 ___
 
@@ -378,6 +379,35 @@ dist/either.d.ts:25
 
 ___
 
+### chainLeft
+
+▸ **chainLeft**\<`A`, `B`, `P`\>(`map`, `...parameters`): [`Either`](../modules/either.md#either)\<`A`, `R` \| `B`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | `A` |
+| `B` | `B` |
+| `P` | extends [`AnyParameters`](../modules/index.md#anyparameters) |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `map` | [`Mapper`](../modules/types.md#mapper)\<`L`, [`Either`](../modules/either.md#either)\<`A`, `B`\>, `P`\> |
+| `...parameters` | `P` |
+
+#### Returns
+
+[`Either`](../modules/either.md#either)\<`A`, `R` \| `B`\>
+
+#### Defined in
+
+dist/either.d.ts:26
+
+___
+
 ### default
 
 ▸ **default**(`value`): [`Either`](../modules/either.md#either)\<`L`, `R`\>
@@ -398,7 +428,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:38
+dist/either.d.ts:39
 
 ___
 
@@ -430,7 +460,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:37
+dist/either.d.ts:38
 
 ___
 
@@ -602,7 +632,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:39
+dist/either.d.ts:40
 
 ___
 
@@ -622,7 +652,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:41
+dist/either.d.ts:42
 
 ___
 
@@ -642,7 +672,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:40
+dist/either.d.ts:41
 
 ___
 
@@ -688,7 +718,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:52
+dist/either.d.ts:53
 
 ___
 
@@ -749,7 +779,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:58
+dist/either.d.ts:59
 
 ___
 
@@ -783,7 +813,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:51
+dist/either.d.ts:52
 
 ___
 
@@ -863,7 +893,7 @@ Return value of Either independent if it is Right or Left
 
 #### Defined in
 
-dist/either.d.ts:66
+dist/either.d.ts:67
 
 ___
 
@@ -890,4 +920,4 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:42
+dist/either.d.ts:43

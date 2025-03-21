@@ -46,7 +46,7 @@
 
 #### Defined in
 
-dist/either.d.ts:168
+dist/either.d.ts:208
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:167
+dist/either.d.ts:207
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:169
+dist/either.d.ts:209
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:69
+dist/either.d.ts:70
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 #### Defined in
 
-dist/either.d.ts:92
+dist/either.d.ts:108
 
 ## Variables
 

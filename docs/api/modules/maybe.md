@@ -116,7 +116,7 @@ dist/maybe.d.ts:71
 
 #### Defined in
 
-dist/maybe.d.ts:86
+dist/maybe.d.ts:92
 
 ___
 
@@ -185,7 +185,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:87
+dist/maybe.d.ts:93
 
 ___
 
@@ -209,9 +209,13 @@ ___
 
 [`Maybe`](maybe.md#maybe)\<`T`\>
 
+**`Throws`**
+
+- DeserializationError
+
 #### Defined in
 
-dist/maybe.d.ts:76
+dist/maybe.d.ts:82
 
 ___
 
@@ -237,7 +241,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:84
+dist/maybe.d.ts:90
 
 ___
 
@@ -341,7 +345,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:85
+dist/maybe.d.ts:91
 
 ___
 
@@ -393,7 +397,7 @@ ___
 
 #### Defined in
 
-dist/maybe.d.ts:77
+dist/maybe.d.ts:83
 
 ▸ **merge**\<`V1`, `V2`\>(`values`): [`Maybe`](maybe.md#maybe)\<[`V1`, `V2`]\>
 
@@ -416,7 +420,7 @@ dist/maybe.d.ts:77
 
 #### Defined in
 
-dist/maybe.d.ts:78
+dist/maybe.d.ts:84
 
 ▸ **merge**\<`V1`, `V2`, `V3`\>(`values`): [`Maybe`](maybe.md#maybe)\<[`V1`, `V2`, `V3`]\>
 
@@ -440,7 +444,7 @@ dist/maybe.d.ts:78
 
 #### Defined in
 
-dist/maybe.d.ts:79
+dist/maybe.d.ts:85
 
 ▸ **merge**\<`V1`, `V2`, `V3`, `V4`\>(`values`): [`Maybe`](maybe.md#maybe)\<[`V1`, `V2`, `V3`, `V4`]\>
 
@@ -465,7 +469,7 @@ dist/maybe.d.ts:79
 
 #### Defined in
 
-dist/maybe.d.ts:80
+dist/maybe.d.ts:86
 
 ▸ **merge**\<`V1`, `V2`, `V3`, `V4`, `V5`\>(`values`): [`Maybe`](maybe.md#maybe)\<[`V1`, `V2`, `V3`, `V4`, `V5`]\>
 
@@ -491,7 +495,7 @@ dist/maybe.d.ts:80
 
 #### Defined in
 
-dist/maybe.d.ts:81
+dist/maybe.d.ts:87
 
 ▸ **merge**\<`V1`, `V2`, `V3`, `V4`, `V5`, `V6`\>(`values`): [`Maybe`](maybe.md#maybe)\<[`V1`, `V2`, `V3`, `V4`, `V5`, `V6`]\>
 
@@ -518,7 +522,7 @@ dist/maybe.d.ts:81
 
 #### Defined in
 
-dist/maybe.d.ts:82
+dist/maybe.d.ts:88
 
 ▸ **merge**\<`T`\>(`values`): [`Maybe`](maybe.md#maybe)\<`T`[]\>
 
@@ -540,7 +544,7 @@ dist/maybe.d.ts:82
 
 #### Defined in
 
-dist/maybe.d.ts:83
+dist/maybe.d.ts:89
 
 ___
 

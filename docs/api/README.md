@@ -45,7 +45,7 @@ Huge credit to @JSMonk. This library is based on [`JSMonk/sweet-monads`](https:/
 
 ## Usage
 
-### [Either](./docs/api/)
+### [Either](./docs/api/modules/either.md)
 
 > The Either type represents values with two possibilities: a value of type Either a b is either Left a or Right b.
 > ([source](https://hackage.haskell.org/package/category-extras-0.52.0/docs/Control-Monad-Either.html))
@@ -67,19 +67,10 @@ import {
   right
 } from "monads-io/either";
 
-class NetworkError extends Error {
-  /*  */
-}
-class HttpError extends Error {
-  /* */
-}
-class JsonParsingError extends Error {
-  /* */
-}
-
-class NotFoundError extends Error {
-  /* ... */
-}
+class NetworkError extends Error {}
+class HttpError extends Error {}
+class JsonParsingError extends Error {}
+class NotFoundError extends Error {}
 
 type FetchError = NetworkError | HttpError | JsonParsingError;
 
@@ -106,9 +97,7 @@ async function getJson<T>(url: string): Promise<Either<FetchError, T>> {
 
   const json = await okResponse.asyncChain((response) => {
     return fromTryAsync(
-      async () => {
-        return (await response.json()) as T;
-      },
+      async () => (await response.json()) as T,
       (cause) => new JsonParsingError("Unable to parse JSON", { cause })
     );
   });
@@ -161,7 +150,7 @@ async function getUserPageData(username: string) {
 
 </details>
 
-### Maybe
+### [Maybe](./docs/api/modules/maybe.md)
 
 > The Maybe monad represents computations which might "go wrong" by not returning a value.
 > ([source](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe))
@@ -175,7 +164,7 @@ async function getUserPageData(username: string) {
 ```typescript
 // Real world example
 // This maybe is not tree-shakable. Used in NodeJS code
-import { Maybe } from "monads-io";
+import * as Maybe from "monads-io/maybe";
 
 export async function getTargets(
 api: TelegramAPI,
@@ -223,7 +212,7 @@ return replyTarget ? new Map([replyTarget, ...targets]) : targets;
 
 </details>
 
-### Identity
+### [Identity](./docs/api/modules/identity.md)
 
 > The Identity monad is a monad that does not embody any computational strategy. It simply applies the bound function to its input without any modification.
 > ([source](https://blog.ploeh.dk/2022/05/16/the-identity-monad/))
@@ -231,6 +220,8 @@ return replyTarget ? new Map([replyTarget, ...targets]) : targets;
 Example
 
 ```typescript
+import * as Identity from "monads-io/identity";
+
 // Before
 app.use(express.static(path.resolve(getDirname(import.meta.url), "../public")));
 
