@@ -1,4 +1,3 @@
-/* eslint-disable no-invalid-this */
 import {
   DecorationError,
   DeserializationError,
@@ -556,16 +555,16 @@ export const from = right;
 
 export function mergeInMany<L1, R1>(
   values: [Either<L1, R1>]
-): Either<Array<L1>, [R1]>;
+): Either<L1[], [R1]>;
 export function mergeInMany<L1, R1, L2, R2>(
   values: [Either<L1, R1>, Either<L2, R2>]
-): Either<Array<L1 | L2>, [R1, R2]>;
+): Either<(L1 | L2)[], [R1, R2]>;
 export function mergeInMany<L1, R1, L2, R2, L3, R3>(
   values: [Either<L1, R1>, Either<L2, R2>, Either<L3, R3>]
-): Either<Array<L1 | L2 | L3>, [R1, R2, R3]>;
+): Either<(L1 | L2 | L3)[], [R1, R2, R3]>;
 export function mergeInMany<L1, R1, L2, R2, L3, R3, L4, R4>(
   values: [Either<L1, R1>, Either<L2, R2>, Either<L3, R3>, Either<L4, R4>]
-): Either<Array<L1 | L2 | L3 | L4>, [R1, R2, R3, R4]>;
+): Either<(L1 | L2 | L3 | L4)[], [R1, R2, R3, R4]>;
 export function mergeInMany<L1, R1, L2, R2, L3, R3, L4, R4, L5, R5>(
   values: [
     Either<L1, R1>,
@@ -574,7 +573,7 @@ export function mergeInMany<L1, R1, L2, R2, L3, R3, L4, R4, L5, R5>(
     Either<L4, R4>,
     Either<L5, R5>
   ]
-): Either<Array<L1 | L2 | L3 | L4 | L5>, [R1, R2, R3, R4, R5]>;
+): Either<(L1 | L2 | L3 | L4 | L5)[], [R1, R2, R3, R4, R5]>;
 export function mergeInMany<L1, R1, L2, R2, L3, R3, L4, R4, L5, R5, L6, R6>(
   values: [
     Either<L1, R1>,
@@ -584,12 +583,10 @@ export function mergeInMany<L1, R1, L2, R2, L3, R3, L4, R4, L5, R5, L6, R6>(
     Either<L5, R5>,
     Either<L6, R6>
   ]
-): Either<Array<L1 | L2 | L3 | L4 | L5 | L6>, [R1, R2, R3, R4, R5, R6]>;
-export function mergeInMany<L, R>(
-  values: Array<Either<L, R>>
-): Either<L[], R[]>;
+): Either<(L1 | L2 | L3 | L4 | L5 | L6)[], [R1, R2, R3, R4, R5, R6]>;
+export function mergeInMany<L, R>(values: Either<L, R>[]): Either<L[], R[]>;
 export function mergeInMany(
-  values: Array<Either<unknown, unknown>>
+  values: Either<unknown, unknown>[]
 ): Either<unknown[], unknown[]> {
   if (allRights(values)) {
     return right(values.map((either) => either.getRight()));
@@ -611,7 +608,7 @@ function allRights<A, B>(array: Either<A, B>[]): array is Right<A, B>[] {
 }
 
 export function aggregateError<T = unknown>(
-  values: Array<Either<T, unknown>>,
+  values: Either<T, unknown>[],
   message: string | undefined | ((lefts: T[]) => string | undefined)
 ): AggregateError | undefined {
   const joined = mergeInMany(values);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 export type MaybePromise<T> = T | Promise<T>;
 export type MaybePromiseLike<T> = T | PromiseLike<T>;
 export type Nullable<T> = T | null | undefined;

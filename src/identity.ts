@@ -1,6 +1,6 @@
 import { InvalidStateError } from "./errors";
 import { bind, combine, identity, isWrappedFunction } from "./runtime";
-import {
+import type {
   AnyParameters,
   AsyncMonad,
   Container,
@@ -205,7 +205,7 @@ export function merge<V1, V2, V3, V4, V5, V6>(
     Identity<V6>
   ]
 ): Identity<[V1, V2, V3, V4, V5, V6]>;
-export function merge<T>(values: Array<Identity<T>>): Identity<T[]>;
-export function merge(values: Array<Identity<unknown>>): Identity<unknown[]> {
+export function merge<T>(values: Identity<T>[]): Identity<T[]>;
+export function merge(values: Identity<unknown>[]): Identity<unknown[]> {
   return from(values.map((value) => value.unwrap()));
 }

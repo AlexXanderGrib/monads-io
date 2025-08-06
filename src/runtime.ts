@@ -1,4 +1,9 @@
-import { AnyParameters, Container, MaybePromiseLike, Mapper } from "./types";
+import type {
+  AnyParameters,
+  Container,
+  MaybePromiseLike,
+  Mapper
+} from "./types";
 
 /**
  * Do nothing, return `undefined`

@@ -33,6 +33,7 @@ export function just<T = never>(value: T): Maybe<T> {
 
 export { just as from };
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface MaybeOperation<V, T> {
   maybe(maybe: Maybe<V>): T;
 }
@@ -371,8 +372,8 @@ export function merge<V1, V2, V3, V4, V5>(
 export function merge<V1, V2, V3, V4, V5, V6>(
   values: [Maybe<V1>, Maybe<V2>, Maybe<V3>, Maybe<V4>, Maybe<V5>, Maybe<V6>]
 ): Maybe<[V1, V2, V3, V4, V5, V6]>;
-export function merge<T = never>(values: Array<Maybe<T>>): Maybe<T[]>;
-export function merge(values: Array<Maybe<unknown>>): Maybe<unknown> {
+export function merge<T = never>(values: Maybe<T>[]): Maybe<T[]>;
+export function merge(values: Maybe<unknown>[]): Maybe<unknown> {
   if (values.some((maybe) => maybe.isNone())) {
     return none();
   }

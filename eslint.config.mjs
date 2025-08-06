@@ -58,6 +58,7 @@ export default tseslint.config(
       "new-cap": "off",
       "unicorn/prefer-node-protocol": "off",
       "unicorn/prefer-spread": "off",
+      "unicorn/require-array-join-separator": "off",
       "security/detect-non-literal-fs-filename": "off",
       "@typescript-eslint/consistent-type-definitions": ["error", "type"],
       "@typescript-eslint/no-empty-object-type": [

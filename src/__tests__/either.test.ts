@@ -12,7 +12,7 @@ import {
   chain,
   wrap,
   wrapAsync,
-  Either,
+  type Either,
   fromPromiseSettledResult
 } from "../either.exports";
 import {
@@ -211,7 +211,6 @@ describe("Either", () => {
   });
 
   test("wrap", async () => {
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     const method = (value: number) => {
       if (value > 10) {
         throw new Error("How dare you");

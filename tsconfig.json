@@ -24,7 +24,8 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "stripInternal": true,
-    "downlevelIteration": false
+    "downlevelIteration": false,
+    "verbatimModuleSyntax": true
   },
   "exclude": [
     "./dist",

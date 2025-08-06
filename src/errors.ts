@@ -10,6 +10,7 @@ export class DeserializationError extends Error {
   static readonly Messages = DeserializationErrorMessages;
   override name = "DeserializationError";
 
+  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(message: DeserializationErrorMessages) {
     super(message);
   }
@@ -62,6 +63,7 @@ export class UnwrapCustomError extends Error {
     throw new UnwrapCustomError(message);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(message: string) {
     super(message);
   }

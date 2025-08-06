@@ -1,5 +1,5 @@
-import { Either, left, right } from "./either";
-import { Maybe, just, none } from "./maybe";
+import { type Either, left, right } from "./either";
+import { type Maybe, just, none } from "./maybe";
 
 export function maybeToEither<L, R>(
   maybe: Maybe<R>,
