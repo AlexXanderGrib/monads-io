@@ -1,4 +1,6 @@
-Package / [Modules](modules.md)
+**Package**
+
+***
 
 # Monads IO
 
@@ -52,7 +54,7 @@ Huge credit to @JSMonk. This library is based on [`JSMonk/sweet-monads`](https:/
 
 1. Makes error path of function strongly typed
 2. Separates errors from exceptions
-3. Minimal memory overhead (see [benchmarks](./benchmarks/))
+3. Minimal memory overhead (see [benchmarks](_media/benchmarks))
 
 <details>
   <summary>Example (preparing data to render User page)</summary>
@@ -156,7 +158,7 @@ async function getUserPageData(username: string) {
 > ([source](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe))
 
 1. Allows to separate empty/present state from undefined
-2. Minimal memory overhead (see [benchmarks](./benchmarks/))
+2. Minimal memory overhead (see [benchmarks](_media/benchmarks))
 
 <details>
   <summary>Example (searching mention target)</summary>

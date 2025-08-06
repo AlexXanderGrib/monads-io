@@ -1,3 +1,4 @@
+import { describe, expect, test, vi } from "vitest";
 import {
   left,
   right,
@@ -186,7 +187,7 @@ describe("Either", () => {
   });
 
   test("tap", () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
 
     expect($left.tap(callback)).toEqual($left);
     expect(callback).toHaveBeenCalledTimes(0);
@@ -273,19 +274,11 @@ describe("Either", () => {
       )
     ).toEqual(left(new Error("Test")));
 
-    try {
-      await $right.asyncApply(
-        right<Error, (a: number) => number>(undefined as any)
-      );
-
-      fail("Didn't throw");
-    } catch (error) {
-      expect(error).toEqual(
-        new InvalidStateError(
-          InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION
-        )
-      );
-    }
+    await expect(() =>
+      $right.asyncApply(right<Error, (a: number) => number>(undefined as any))
+    ).rejects.toThrow(
+      new InvalidStateError(InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION)
+    );
   });
 
   test("pipe", () => {

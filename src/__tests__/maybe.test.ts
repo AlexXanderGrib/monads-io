@@ -1,3 +1,4 @@
+import { describe, expect, test, vi } from "vitest";
 import {
   DeserializationError,
   InvalidStateError,
@@ -97,7 +98,7 @@ describe("Maybe", () => {
   });
 
   test("tap", () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
 
     expect($none.tap(callback)).toEqual($none);
     expect(callback).toHaveBeenCalledTimes(0);
@@ -200,16 +201,11 @@ describe("Maybe", () => {
       none()
     );
 
-    try {
-      await $just.asyncApply(just<(a: number) => number>(undefined as any));
-      fail("Didn't throw error");
-    } catch (error) {
-      expect(error).toEqual(
-        new InvalidStateError(
-          InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION
-        )
-      );
-    }
+    await expect(() =>
+      $just.asyncApply(just<(a: number) => number>(undefined as any))
+    ).rejects.toThrow(
+      new InvalidStateError(InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION)
+    );
   });
 
   test("value", () => {

@@ -1,3 +1,4 @@
+import { describe, expect, test, vi } from "vitest";
 import { InvalidStateError } from "../errors";
 import { chain, from, isIdentity, merge } from "../identity";
 
@@ -52,7 +53,7 @@ describe("Identity", () => {
   });
 
   test("tap", () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
 
     expect($value.tap(callback)).toEqual($value);
     expect(callback).toHaveBeenCalledTimes(1);
@@ -78,17 +79,11 @@ describe("Identity", () => {
       from(11)
     );
 
-    try {
-      await $value.asyncApply(from<(a: number) => number>(undefined as any));
-
-      fail("Didn't throw");
-    } catch (error) {
-      expect(error).toEqual(
-        new InvalidStateError(
-          InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION
-        )
-      );
-    }
+    await expect(() =>
+      $value.asyncApply(from<(a: number) => number>(undefined as any))
+    ).rejects.toThrow(
+      new InvalidStateError(InvalidStateError.Messages.APPLY_SHOULD_BE_FUNCTION)
+    );
   });
 
   test("pipe", () => {

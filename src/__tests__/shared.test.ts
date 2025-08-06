@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { left, right } from "../either";
 import { fromMaybe } from "../either.exports";
 import { fromEitherLeft, fromEitherRight, none, just } from "../maybe.exports";
