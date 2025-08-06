@@ -94,8 +94,8 @@ async function getJson<T>(url: string): Promise<Either<FetchError, T>> {
   });
 
   const json = await okResponse.asyncChain((response) => {
-    return fromTryAsync(
-      async () => (await response.json()) as T,
+    return fromTryAsync<T>(
+      () => response.json(),
       (cause) => new JsonParsingError("Unable to parse JSON", { cause })
     );
   });

@@ -66,3 +66,15 @@ export class UnwrapCustomError extends Error {
     super(message);
   }
 }
+
+enum MatchErrorMessages {
+  CASE_NOT_HANDLED = "Match should handle all available cases"
+}
+
+export class MatchError extends Error {
+  static readonly Messages = MatchErrorMessages;
+
+  constructor(public readonly missingCases: string[]) {
+    super(MatchErrorMessages.CASE_NOT_HANDLED);
+  }
+}

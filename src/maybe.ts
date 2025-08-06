@@ -3,7 +3,7 @@ import {
   InvalidStateError,
   UnwrapCustomError
 } from "./errors";
-import { bind, combine, identity, isWrappedFunction, noop } from "./runtime";
+import { bind, combine, isWrappedFunction, noop, identity } from "./runtime";
 import type {
   MaybePromiseLike,
   Nullable,
@@ -46,45 +46,66 @@ function cast<T>(constructor: MaybeConstructor<T>): Maybe<T> {
   throw new InvalidStateError();
 }
 
-class MaybeConstructor<Va>
-  implements Monad<Va>, Alternative<Va>, Container<Va>, Pipe
+class MaybeConstructor<T>
+  implements Monad<T>, Alternative<T>, Container<T>, Pipe
 {
-  unwrapOr<T>(value: T): Va | T {
+  asyncAndThen<A, P extends AnyParameters>(
+    map: Mapper<Awaited<T>, MaybePromiseLike<Maybe<A>>, P>,
+    ...parameters: P
+  ): Promise<Maybe<A>> {
+    return this.asyncChain(map, ...parameters);
+  }
+
+  andThen<A, P extends AnyParameters>(
+    map: Mapper<T, Maybe<A>, P>,
+    ...parameters: P
+  ): Maybe<A> {
+    return this.chain(bind(map, parameters));
+  }
+
+  andTee<P extends AnyParameters>(
+    callback: Mapper<T, void, P>,
+    ...parameters: P
+  ): Maybe<T> {
+    return this.tap(callback, ...parameters);
+  }
+
+  unwrapOr<A>(value: A): T | A {
     return this.unwrapOrElse(() => value);
   }
 
-  unwrapOrElse<T>(value: () => T): Va | T {
+  unwrapOrElse<A>(value: () => A): T | A {
     return this.fold(value, identity);
   }
 
-  isJust(): this is Just<Va> {
+  isJust(): this is Just<T> {
     return isJust(this);
   }
 
-  isNone(): this is None<Va> {
+  isNone(): this is None<T> {
     return isNone(this);
   }
 
-  join<V>(this: Maybe<Maybe<V>>): Maybe<V> {
+  join<A>(this: Maybe<Maybe<A>>): Maybe<A> {
     return this.chain(identity);
   }
 
-  pipe<V, P extends AnyParameters>(
-    pipe: Mapper<Maybe<Va>, V, P>,
+  pipe<A, P extends AnyParameters>(
+    pipe: Mapper<Maybe<T>, A, P>,
     ...parameters: P
-  ): V {
+  ): A {
     return bind(pipe, parameters)(cast(this));
   }
 
   map<V, P extends AnyParameters>(
-    map: Mapper<Va, V, P>,
+    map: Mapper<T, V, P>,
     ...parameters: P
   ): Maybe<V> {
     return this.chain(combine(bind(map, parameters), just));
   }
 
   mapNullable<V, P extends AnyParameters>(
-    map: Mapper<Va, V | null | undefined, P>,
+    map: Mapper<T, V | null | undefined, P>,
     ...parameters: P
   ): Maybe<V> {
     return this.chain(combine(bind(map, parameters), fromNullable));
@@ -120,61 +141,59 @@ class MaybeConstructor<Va>
     });
   }
 
-  filter<T extends Va>(filter: (input: Va) => input is T): Maybe<T>;
-  filter(filter: (input: Va) => boolean): Maybe<Va>;
-  filter(filter: (input: Va) => boolean): Maybe<Va> {
+  filter<A extends T>(filter: (input: T) => input is A): Maybe<A>;
+  filter(filter: (input: T) => boolean): Maybe<T>;
+  filter(filter: (input: T) => boolean): Maybe<T> {
     return this.chain((value) => (filter(value) ? just(value) : none()));
   }
 
   chain<V, P extends AnyParameters>(
-    map: Mapper<Va, Maybe<V>, P>,
+    map: Mapper<T, Maybe<V>, P>,
     ...parameters: P
   ): Maybe<V> {
     return this.fold<Maybe<V>>(none, bind(map, parameters));
   }
 
-  default(value: Va): Maybe<Va> {
+  default(value: T): Maybe<T> {
     return this.or(just(value));
   }
 
-  or(x: Maybe<Va>): Maybe<Va> {
+  or(x: Maybe<T>): Maybe<T> {
     return this.orLazy(() => x);
   }
 
-  orLazy(factory: () => Maybe<Va>): Maybe<Va> {
+  orLazy(factory: () => Maybe<T>): Maybe<T> {
     return this.fold(factory, () => cast(this));
   }
 
-  async orAsync(
-    factory: () => MaybePromiseLike<Maybe<Va>>
-  ): Promise<Maybe<Va>> {
+  async orAsync(factory: () => MaybePromiseLike<Maybe<T>>): Promise<Maybe<T>> {
     return await this.fold(factory, () => cast(this));
   }
 
-  zip<T>(maybe: Maybe<T>): Maybe<Pair<Va, T>> {
+  zip<A>(maybe: Maybe<A>): Maybe<Pair<T, A>> {
     return this.chain((value) => maybe.map((right) => [value, right]));
   }
 
   tap<P extends AnyParameters>(
-    callback: Mapper<Va, void, P>,
+    callback: Mapper<T, void, P>,
     ...parameters: P
-  ): Maybe<Va> {
+  ): Maybe<T> {
     this.map(callback, ...parameters);
     return cast(this);
   }
 
-  flatMap<T, P extends AnyParameters>(
-    map: Mapper<Va, T, P>,
+  flatMap<A, P extends AnyParameters>(
+    map: Mapper<T, A, P>,
     ...parameters: P
-  ): T | undefined {
+  ): A | undefined {
     return this.fold(noop, bind(map, parameters));
   }
 
-  unwrap(message: string = UnwrapCustomError.Messages.MAYBE_IS_NONE): Va {
+  unwrap(message: string = UnwrapCustomError.Messages.MAYBE_IS_NONE): T {
     return this.fold(() => UnwrapCustomError.inlineThrow(message), identity);
   }
 
-  fold<A, B = A>(mapNone: Mapper<void, B>, mapJust: Mapper<Va, A>): A | B {
+  fold<A, B = A>(mapNone: Mapper<void, B>, mapJust: Mapper<T, A>): A | B {
     if (this.isJust()) {
       return mapJust(this.value);
     }
@@ -187,50 +206,52 @@ class MaybeConstructor<Va>
     throw new InvalidStateError();
   }
 
-  async asyncChain<T, P extends AnyParameters>(
-    map: Mapper<Va, MaybePromiseLike<Maybe<T>>, P>,
+  async asyncChain<A, P extends AnyParameters>(
+    map: Mapper<Awaited<T>, MaybePromiseLike<Maybe<A>>, P>,
     ...parameters: P
-  ): Promise<Maybe<T>> {
-    const result = await this.map(map, ...parameters).await();
+  ): Promise<Maybe<A>> {
+    const result = await this.asyncMap(map, ...parameters);
     return result.join();
   }
 
-  async asyncMap<T, P extends AnyParameters>(
-    map: Mapper<Va, MaybePromiseLike<T>, P>,
+  async asyncMap<A, P extends AnyParameters>(
+    map: Mapper<Awaited<T>, MaybePromiseLike<A>, P>,
     ...parameters: P
-  ): Promise<Maybe<T>> {
-    return await this.map(map, ...parameters).await();
+  ): Promise<Maybe<A>> {
+    return await this.map(async (value) =>
+      map(await value, ...parameters)
+    ).await();
   }
 
-  async await<T>(this: Maybe<MaybePromiseLike<T>>): Promise<Maybe<T>> {
-    return await this.fold<MaybePromiseLike<Maybe<T>>>(none, async (value) =>
+  async await<A>(this: Maybe<MaybePromiseLike<A>>): Promise<Maybe<A>> {
+    return await this.fold<MaybePromiseLike<Maybe<A>>>(none, async (value) =>
       just(await value)
     );
   }
 
   asyncApply<A, B, P extends AnyParameters>(
     this: Maybe<Mapper<A, MaybePromiseLike<B>, P>>,
-    argument: Maybe<A>,
+    argument: Maybe<MaybePromiseLike<A>>,
     ...parameters: P
   ): Promise<Maybe<B>>;
   asyncApply<A, B, P extends AnyParameters>(
-    this: Maybe<A>,
+    this: Maybe<MaybePromiseLike<A>>,
     map: Maybe<Mapper<A, MaybePromiseLike<B>, P>>,
     ...parameters: P
   ): Promise<Maybe<B>>;
   async asyncApply<A, B, P extends AnyParameters>(
-    this: Maybe<A | Mapper<A, MaybePromiseLike<B>, P>>,
-    argument: Maybe<A | Mapper<A, MaybePromiseLike<B>, P>>,
+    this: Maybe<MaybePromiseLike<A> | Mapper<A, MaybePromiseLike<B>, P>>,
+    argument: Maybe<MaybePromiseLike<A> | Mapper<A, MaybePromiseLike<B>, P>>,
     ...parameters: P
   ): Promise<Maybe<B>> {
     return await this.zip(argument)
-      .map(([current, argument]): B => {
+      .map(async ([current, argument]): Promise<B> => {
         if (isWrappedFunction<A, B, P>(current)) {
-          return current(argument as A, ...parameters);
+          return await current(await (argument as A), ...parameters);
         }
 
         if (isWrappedFunction<A, B, P>(argument)) {
-          return argument(current as A, ...parameters);
+          return await argument(await (current as A), ...parameters);
         }
 
         throw new InvalidStateError(

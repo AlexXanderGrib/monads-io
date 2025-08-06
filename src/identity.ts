@@ -26,6 +26,27 @@ class Identity<T> implements AsyncMonad<T>, Container<T>, Pipe {
 
   private constructor(public readonly value: T) {}
 
+  asyncAndThen<B, P extends AnyParameters>(
+    map: Mapper<Awaited<T>, MaybePromiseLike<Identity<B>>, P>,
+    ...parameters: P
+  ): Promise<Identity<B>> {
+    return this.asyncChain(map, ...parameters);
+  }
+
+  andThen<B, P extends AnyParameters>(
+    map: Mapper<T, Identity<B>, P>,
+    ...parameters: P
+  ): Identity<B> {
+    return this.chain(map, ...parameters);
+  }
+
+  andTee<P extends AnyParameters>(
+    callback: Mapper<T, void, P>,
+    ...parameters: P
+  ): Identity<T> {
+    return this.tap(callback, ...parameters);
+  }
+
   tap<P extends AnyParameters>(
     callback: Mapper<T, void, P>,
     ...parameters: P
@@ -50,6 +71,10 @@ class Identity<T> implements AsyncMonad<T>, Container<T>, Pipe {
   }
 
   join<A>(this: Identity<Identity<A>>): Identity<A> {
+    return this.chain(identity);
+  }
+
+  flatten<A>(this: Identity<Identity<A>>): Identity<A> {
     return this.chain(identity);
   }
 
@@ -92,27 +117,27 @@ class Identity<T> implements AsyncMonad<T>, Container<T>, Pipe {
 
   asyncApply<A, B, P extends AnyParameters>(
     this: Identity<Mapper<A, MaybePromiseLike<B>, P>>,
-    argument: Identity<A>,
+    argument: Identity<MaybePromiseLike<A>>,
     ...parameters: P
   ): Promise<Identity<B>>;
   asyncApply<A, B, P extends AnyParameters>(
-    this: Identity<A>,
+    this: Identity<MaybePromiseLike<A>>,
     map: Identity<Mapper<A, MaybePromiseLike<B>, P>>,
     ...parameters: P
   ): Promise<Identity<B>>;
   async asyncApply<A, B, P extends AnyParameters>(
-    this: Identity<A | Mapper<A, MaybePromiseLike<B>, P>>,
-    argument: Identity<A | Mapper<A, MaybePromiseLike<B>, P>>,
+    this: Identity<MaybePromiseLike<A> | Mapper<A, MaybePromiseLike<B>, P>>,
+    argument: Identity<MaybePromiseLike<A> | Mapper<A, MaybePromiseLike<B>, P>>,
     ...parameters: P
   ): Promise<Identity<B>> {
     return await this.zip(argument)
-      .map(([current, argument]): B => {
+      .map(async ([current, argument]): Promise<B> => {
         if (isWrappedFunction<A, B, P>(current)) {
-          return current(argument as A, ...parameters);
+          return await current(await (argument as A), ...parameters);
         }
 
         if (isWrappedFunction<A, B, P>(argument)) {
-          return argument(current as A, ...parameters);
+          return await argument(await (current as A), ...parameters);
         }
 
         throw new InvalidStateError(
@@ -130,7 +155,7 @@ class Identity<T> implements AsyncMonad<T>, Container<T>, Pipe {
   }
 
   async asyncChain<B, P extends AnyParameters>(
-    map: Mapper<T, MaybePromiseLike<Identity<B>>, P>,
+    map: Mapper<Awaited<T>, MaybePromiseLike<Identity<B>>, P>,
     ...parameters: P
   ): Promise<Identity<B>> {
     const result = await this.asyncMap<Identity<B>, P>(map, ...parameters);
@@ -140,11 +165,14 @@ class Identity<T> implements AsyncMonad<T>, Container<T>, Pipe {
   }
 
   async asyncMap<B, P extends AnyParameters>(
-    map: Mapper<T, MaybePromiseLike<B>, P>,
+    map: Mapper<Awaited<T>, MaybePromiseLike<B>, P>,
     ...parameters: P
   ): Promise<Identity<B>> {
-    return await this.map(map, ...parameters).await();
+    return await this.map(async (value) =>
+      map(await value, ...parameters)
+    ).await();
   }
+
   async await<X>(this: Identity<MaybePromiseLike<X>>): Promise<Identity<X>> {
     return await this.fold<MaybePromiseLike<Identity<X>>>(async (value) =>
       from(await value)

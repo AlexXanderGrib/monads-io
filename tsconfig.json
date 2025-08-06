@@ -11,6 +11,7 @@
     "rootDir": "./src",
     "noEmit": false,
     "strict": true,
+    "strictNullChecks": true,
     "noImplicitThis": true,
     "alwaysStrict": true,
     "noUnusedLocals": true,
