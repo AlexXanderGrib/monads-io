@@ -38,10 +38,10 @@ export default defineConfig({
       name: "monads-io",
       entry: {
         index: "./src/index.ts",
-        maybe: "./src/maybe.exports.ts",
-        either: "./src/either.exports.ts",
-        identity: "./src/identity.exports.ts",
-        types: "./src/types.ts",
+        "maybe.exports": "./src/maybe.exports.ts",
+        "either.exports": "./src/either.exports.ts",
+        "identity.exports": "./src/identity.exports.ts",
+        // types: "./src/types.ts"
       }
     }
   },

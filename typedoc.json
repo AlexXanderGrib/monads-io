@@ -2,11 +2,11 @@
   "name": "Package",
   "out": "./docs/api",
   "entryPoints": [
-    "./index.d.ts",
-    "./either.d.ts",
-    "./maybe.d.ts",
-    "./identity.d.ts",
-    "./types.d.ts",
+    "./src/index.ts",
+    "./src/either.exports.ts",
+    "./src/maybe.exports.ts",
+    "./src/identity.exports.ts",
+    "./src/types.ts",
   ],
   "exclude": [
     "src/__test__",

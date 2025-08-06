@@ -27,6 +27,9 @@
     "downlevelIteration": false,
     "verbatimModuleSyntax": true
   },
+  "include": [
+    "src"
+  ],
   "exclude": [
     "./dist",
     "./examples",
