@@ -20,6 +20,8 @@ import {
   InvalidStateError,
   UnwrapCustomError
 } from "../errors";
+import { just, none } from "../maybe";
+import { maybeToEither } from "../convert";
 
 // class Test {
 //   @Decorate()
@@ -70,12 +72,15 @@ describe("Either", () => {
   });
 
   test("isRight/isLeft", () => {
-    expect([
-      $right.isRight(),
-      $left.isLeft(),
-      $right.isLeft(),
-      $left.isRight()
-    ]).toEqual([true, true, false, false]);
+    expect($right.isRight()).toBe(true);
+    expect($left.isLeft()).toBe(true);
+    expect($right.isLeft()).toBe(false);
+    expect($left.isRight()).toBe(false);
+    expect($right.isRight((value) => Number.isNaN(value))).toBe(false);
+    expect($right.isRight((value) => value > 0)).toBe(true);
+    expect($left.isLeft((value) => value instanceof Error)).toBe(true);
+    expect($left.isLeft((value) => value instanceof TypeError)).toBe(false);
+    expect($left.isLeft((value) => value.name === "lol")).toBe(false);
   });
 
   test("join", () => {
@@ -196,6 +201,16 @@ describe("Either", () => {
     expect(callback).toHaveBeenCalledTimes(1);
   });
 
+  test("tapLeft", () => {
+    const callback = vi.fn();
+
+    expect($right.tapLeft(callback)).toEqual($right);
+    expect(callback).toHaveBeenCalledTimes(0);
+
+    expect($left.tapLeft(callback)).toEqual($left);
+    expect(callback).toHaveBeenCalledTimes(1);
+  });
+
   test("asyncChain", async () => {
     expect(await $right.asyncChain(() => $left)).toEqual($left);
     expect(await $right.asyncChain(() => right(11))).toEqual(right(11));
@@ -299,6 +314,23 @@ describe("Either", () => {
     expect(subject2(left(new RangeError("Test")))).toEqual(
       left(new RangeError("Test"))
     );
+  });
+
+  test("right.void", () => {
+    expect(right.void()).toMatchInlineSnapshot(`
+      {
+        "name": "Either",
+        "right": undefined,
+        "type": "Right",
+      }
+    `);
+  });
+
+  test("fromMaybe", () => {
+    const error = new Error("no value");
+
+    expect(maybeToEither<Error, number>(just(10), error)).toEqual(right(10));
+    expect(maybeToEither<Error, number>(none(), error)).toEqual(left(error));
   });
 });
 

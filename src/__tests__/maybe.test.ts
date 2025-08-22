@@ -16,6 +16,8 @@ import {
   just,
   filterMap
 } from "../maybe";
+import { left, right } from "../either";
+import { eitherLeft, eitherRight } from "../convert";
 
 describe("Maybe", () => {
   const $just = just<number>(10);
@@ -215,5 +217,13 @@ describe("Maybe", () => {
 
   test("pipe", () => {
     expect($just.pipe(() => 10)).toBe(10);
+  });
+
+  test("fromEitherLeft/fromEitherRight", () => {
+    expect(eitherLeft(left(10))).toEqual(just(10));
+    expect(eitherRight(left(10))).toEqual(none());
+
+    expect(eitherLeft(right(10))).toEqual(none());
+    expect(eitherRight(right(10))).toEqual(just(10));
   });
 });

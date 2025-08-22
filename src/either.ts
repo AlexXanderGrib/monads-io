@@ -30,9 +30,16 @@ export const enum EitherType {
 
 const name = "Either";
 
-export function right<L = never, R = never>(right: R): Either<L, R> {
+function right<L = never, R = never>(right: R): Either<L, R> {
   return Right.create(right);
 }
+
+right.void = function rightVoid<L = never>(): Either<L, void> {
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type, unicorn/no-useless-undefined
+  return Right.create<void, L>(undefined);
+};
+
+export { right };
 
 export function left<L = never, R = never>(value: L): Either<L, R> {
   return Left.create(value);
@@ -58,6 +65,14 @@ class EitherConstructor<L, R>
     return cast(this);
   }
 
+  tapLeft<P extends AnyParameters>(
+    callback: Mapper<L, void, P>,
+    ...parameters: P
+  ): Either<L, R> {
+    this.mapLeft(callback, ...parameters);
+    return cast(this);
+  }
+
   pipe<T, P extends AnyParameters>(
     pipe: Mapper<Either<L, R>, T, P>,
     ...parameters: P
@@ -65,12 +80,18 @@ class EitherConstructor<L, R>
     return bind(pipe, parameters)(cast(this));
   }
 
-  isLeft(): this is Left<L, R> {
-    return isLeft(this);
+  isLeft<T extends L>(predicate: (left: L) => left is T): this is Left<T, R>;
+  isLeft(predicate?: (left: L) => boolean): this is Left<L, R>;
+  isLeft(predicate?: (left: L) => boolean): this is Left<L, R> {
+    return isLeft<L, R>(this) && (!predicate || predicate(this.getLeft()));
   }
 
-  isRight(): this is Right<L, R> {
-    return isRight(this);
+  isRight<T extends R>(
+    predicate?: (right: R) => right is T
+  ): this is Right<L, T>;
+  isRight(predicate?: (right: R) => boolean): this is Right<L, R>;
+  isRight(predicate?: (right: R) => boolean): this is Right<L, R> {
+    return isRight<L, R>(this) && (!predicate || predicate(this.getRight()));
   }
 
   unwrapOrElse<T>(fallback: (value: L) => T): T | R {
@@ -627,7 +648,7 @@ export function aggregateError<T = unknown>(
   );
 }
 
-function anify(value: unknown): any {
+function eraseType(value: unknown): any {
   return value;
 }
 
@@ -721,7 +742,7 @@ export function catchSync<L = never, R = never>(
 }
 
 export async function catchAsync<L, R>(
-  method: () => MaybePromiseLike<Either<L, R>>,
+  method: Promise<Either<L, R>> | (() => MaybePromiseLike<Either<L, R>>),
   mapCaught?: MapCaught<L>
 ): Promise<Either<L, R>> {
   const caught = await fromTryAsync<L, Either<L, R>>(method, mapCaught);
@@ -737,7 +758,7 @@ export async function fromPromise<L = never, T = never>(
 
 export function fromTry<L = never, T = never>(
   callback: () => T,
-  mapCaught: MapCaught<L> = anify
+  mapCaught: MapCaught<L> = eraseType
 ): Either<L, T> {
   try {
     return right(callback());
@@ -747,11 +768,13 @@ export function fromTry<L = never, T = never>(
 }
 
 export async function fromTryAsync<L = never, R = never>(
-  callback: () => MaybePromiseLike<R>,
-  mapCaught: MapCaught<L> = anify
+  callback: Promise<R> | (() => MaybePromiseLike<R>),
+  mapCaught: MapCaught<L> = eraseType
 ): Promise<Either<L, R>> {
   try {
-    return right(await callback());
+    return right(
+      callback instanceof Promise ? await callback : await callback()
+    );
   } catch (error) {
     return left(mapCaught(error));
   }

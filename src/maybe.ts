@@ -58,8 +58,10 @@ class MaybeConstructor<Va>
     return this.fold(value, identity);
   }
 
-  isJust(): this is Just<Va> {
-    return isJust(this);
+  isJust<T extends Va>(predicate: (value: Va) => value is T): this is Just<T>;
+  isJust(predicate?: (value: Va) => boolean): this is Just<Va>;
+  isJust(predicate?: (value: Va) => boolean): this is Just<Va> {
+    return isJust<Va>(this) && (!predicate || predicate(this.value));
   }
 
   isNone(): this is None<Va> {
