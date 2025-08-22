@@ -8,7 +8,7 @@
 
 > **fromTryAsync**\<`L`, `R`\>(`callback`, `mapCaught`): `Promise`\<[`Either`](../type-aliases/Either.md)\<`L`, `R`\>\>
 
-Defined in: [either.ts:749](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L749)
+Defined in: [either.ts:770](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L770)
 
 ## Type Parameters
 
@@ -24,11 +24,11 @@ Defined in: [either.ts:749](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 ### callback
 
-() => [`MaybePromiseLike`](../../types/type-aliases/MaybePromiseLike.md)\<`R`\>
+`Promise`\<`R`\> | () => [`MaybePromiseLike`](../../types/type-aliases/MaybePromiseLike.md)\<`R`\>
 
 ### mapCaught
 
-[`MapCaught`](../-internal-/type-aliases/MapCaught.md)\<`L`\> = `anify`
+[`MapCaught`](../type-aliases/MapCaught.md)\<`L`\> = `eraseType`
 
 ## Returns
 

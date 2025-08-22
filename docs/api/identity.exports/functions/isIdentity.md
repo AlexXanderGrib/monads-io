@@ -8,7 +8,7 @@
 
 > **isIdentity**\<`T`\>(`value`): `value is Identity<T>`
 
-Defined in: [identity.ts:174](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L174)
+Defined in: [identity.ts:174](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L174)
 
 ## Type Parameters
 

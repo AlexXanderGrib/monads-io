@@ -28,7 +28,6 @@
 - [asyncIterator](functions/asyncIterator.md)
 - [chain](functions/chain.md)
 - [filterMap](functions/filterMap.md)
-- [from](functions/from.md)
 - [fromEitherLeft](functions/fromEitherLeft.md)
 - [fromEitherRight](functions/fromEitherRight.md)
 - [fromJSON](functions/fromJSON.md)
@@ -40,3 +39,9 @@
 - [just](functions/just.md)
 - [merge](functions/merge.md)
 - [none](functions/none.md)
+
+## References
+
+### from
+
+Renames and re-exports [just](functions/just.md)

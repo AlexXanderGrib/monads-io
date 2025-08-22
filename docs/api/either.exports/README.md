@@ -17,6 +17,7 @@
 ## Type Aliases
 
 - [Either](type-aliases/Either.md)
+- [MapCaught](type-aliases/MapCaught.md)
 - [SerializedEither](type-aliases/SerializedEither.md)
 
 ## Variables

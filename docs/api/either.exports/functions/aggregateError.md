@@ -8,7 +8,7 @@
 
 > **aggregateError**\<`T`\>(`values`, `message`): `undefined` \| `AggregateError`
 
-Defined in: [either.ts:610](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L610)
+Defined in: [either.ts:631](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L631)
 
 ## Type Parameters
 

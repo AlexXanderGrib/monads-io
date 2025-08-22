@@ -6,7 +6,7 @@
 
 # Interface: Functor\<A\>
 
-Defined in: [types.ts:22](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L22)
+Defined in: [types.ts:22](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L22)
 
 ## Extended by
 
@@ -24,7 +24,7 @@ Defined in: [types.ts:22](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **map**\<`B`, `P`\>(`map`, ...`parameters`): `Functor`\<`B`\>
 
-Defined in: [types.ts:25](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L25)
+Defined in: [types.ts:25](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L25)
 
 #### Type Parameters
 

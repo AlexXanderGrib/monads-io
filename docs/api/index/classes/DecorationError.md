@@ -6,7 +6,7 @@
 
 # Class: DecorationError
 
-Defined in: [errors.ts:26](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L26)
+Defined in: [errors.ts:26](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L26)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [errors.ts:26](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **new DecorationError**(`message`): `DecorationError`
 
-Defined in: [errors.ts:30](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L30)
+Defined in: [errors.ts:30](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L30)
 
 #### Parameters
 
@@ -40,7 +40,7 @@ Defined in: [errors.ts:30](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **name**: `string` = `"DecorationError"`
 
-Defined in: [errors.ts:28](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L28)
+Defined in: [errors.ts:28](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L28)
 
 #### Overrides
 
@@ -52,4 +52,4 @@ Defined in: [errors.ts:28](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > `readonly` `static` **Messages**: *typeof* [`DecorationErrorMessages`](../-internal-/enumerations/DecorationErrorMessages.md) = `DecorationErrorMessages`
 
-Defined in: [errors.ts:27](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L27)
+Defined in: [errors.ts:27](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L27)

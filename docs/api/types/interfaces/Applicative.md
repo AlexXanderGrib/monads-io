@@ -6,7 +6,7 @@
 
 # Interface: Applicative\<A\>
 
-Defined in: [types.ts:31](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L31)
+Defined in: [types.ts:31](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L31)
 
 ## Extends
 
@@ -30,7 +30,7 @@ Defined in: [types.ts:31](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **apply**\<`A`, `B`, `P`\>(`this`, `argument`, ...`parameters`): `Applicative`\<`B`\>
 
-Defined in: [types.ts:35](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L35)
+Defined in: [types.ts:35](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L35)
 
 ##### Type Parameters
 
@@ -68,7 +68,7 @@ Defined in: [types.ts:35](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **apply**\<`A`, `B`, `P`\>(`this`, `argument`, ...`parameters`): `Applicative`\<`B`\>
 
-Defined in: [types.ts:40](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L40)
+Defined in: [types.ts:40](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L40)
 
 ##### Type Parameters
 
@@ -108,7 +108,7 @@ Defined in: [types.ts:40](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **map**\<`B`, `P`\>(`map`, ...`parameters`): [`Functor`](Functor.md)\<`B`\>
 
-Defined in: [types.ts:25](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L25)
+Defined in: [types.ts:25](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L25)
 
 #### Type Parameters
 
@@ -136,4 +136,4 @@ Defined in: [types.ts:25](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 #### Inherited from
 
-[`<internal>`](../../either.exports/-internal-/README.md).[`map`](../../either.exports/-internal-/functions/map-1.md)
+[`Functor`](Functor.md).[`map`](Functor.md#map)

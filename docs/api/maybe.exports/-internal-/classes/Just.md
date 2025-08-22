@@ -6,7 +6,7 @@
 
 # Class: Just\<T\>
 
-Defined in: [maybe.ts:254](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L254)
+Defined in: [maybe.ts:256](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L256)
 
 ## Extends
 
@@ -28,7 +28,7 @@ Defined in: [maybe.ts:254](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > `private` **new Just**\<`T`\>(`value`): `Just`\<`T`\>
 
-Defined in: [maybe.ts:271](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L271)
+Defined in: [maybe.ts:273](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L273)
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: [maybe.ts:271](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > `readonly` **value**: `T`
 
-Defined in: [maybe.ts:271](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L271)
+Defined in: [maybe.ts:273](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L273)
 
 #### Implementation of
 
@@ -64,7 +64,7 @@ Defined in: [maybe.ts:271](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **get** **\[toStringTag\]**(): [`Just`](../../enumerations/MaybeState.md#just)
 
-Defined in: [maybe.ts:259](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L259)
+Defined in: [maybe.ts:261](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L261)
 
 ##### Returns
 
@@ -78,7 +78,7 @@ Defined in: [maybe.ts:259](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **get** **name**(): `"Maybe"`
 
-Defined in: [maybe.ts:263](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L263)
+Defined in: [maybe.ts:265](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L265)
 
 ##### Returns
 
@@ -96,7 +96,7 @@ Defined in: [maybe.ts:263](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **get** **type**(): [`Just`](../../enumerations/MaybeState.md#just)
 
-Defined in: [maybe.ts:267](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L267)
+Defined in: [maybe.ts:269](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L269)
 
 ##### Returns
 
@@ -114,7 +114,7 @@ Defined in: [maybe.ts:267](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **apply**\<`A`, `B`, `P`\>(`this`, `argument`, ...`parameters`): [`Maybe`](../../type-aliases/Maybe.md)\<`B`\>
 
-Defined in: [maybe.ts:94](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L94)
+Defined in: [maybe.ts:96](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L96)
 
 ##### Type Parameters
 
@@ -150,13 +150,13 @@ Defined in: [maybe.ts:94](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 ##### Inherited from
 
-[`<internal>`](../README.md).[`apply`](../functions/apply.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`apply`](MaybeConstructor.md#apply)
 
 #### Call Signature
 
 > **apply**\<`A`, `B`, `P`\>(`this`, `argument`, ...`parameters`): [`Maybe`](../../type-aliases/Maybe.md)\<`B`\>
 
-Defined in: [maybe.ts:99](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L99)
+Defined in: [maybe.ts:101](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L101)
 
 ##### Type Parameters
 
@@ -192,7 +192,7 @@ Defined in: [maybe.ts:99](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 ##### Inherited from
 
-[`<internal>`](../README.md).[`apply`](../functions/apply.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`apply`](MaybeConstructor.md#apply)
 
 ***
 
@@ -202,7 +202,7 @@ Defined in: [maybe.ts:99](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **asyncApply**\<`A`, `B`, `P`\>(`this`, `argument`, ...`parameters`): `Promise`\<[`Maybe`](../../type-aliases/Maybe.md)\<`B`\>\>
 
-Defined in: [maybe.ts:212](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L212)
+Defined in: [maybe.ts:214](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L214)
 
 ##### Type Parameters
 
@@ -238,13 +238,13 @@ Defined in: [maybe.ts:212](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 ##### Inherited from
 
-[`<internal>`](../README.md).[`asyncApply`](../functions/asyncApply.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`asyncApply`](MaybeConstructor.md#asyncapply)
 
 #### Call Signature
 
 > **asyncApply**\<`A`, `B`, `P`\>(`this`, `map`, ...`parameters`): `Promise`\<[`Maybe`](../../type-aliases/Maybe.md)\<`B`\>\>
 
-Defined in: [maybe.ts:217](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L217)
+Defined in: [maybe.ts:219](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L219)
 
 ##### Type Parameters
 
@@ -280,7 +280,7 @@ Defined in: [maybe.ts:217](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 ##### Inherited from
 
-[`<internal>`](../README.md).[`asyncApply`](../functions/asyncApply.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`asyncApply`](MaybeConstructor.md#asyncapply)
 
 ***
 
@@ -288,7 +288,7 @@ Defined in: [maybe.ts:217](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **asyncChain**\<`T`, `P`\>(`map`, ...`parameters`): `Promise`\<[`Maybe`](../../type-aliases/Maybe.md)\<`T`\>\>
 
-Defined in: [maybe.ts:191](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L191)
+Defined in: [maybe.ts:193](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L193)
 
 #### Type Parameters
 
@@ -316,7 +316,7 @@ Defined in: [maybe.ts:191](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`asyncChain`](../functions/asyncChain.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`asyncChain`](MaybeConstructor.md#asyncchain)
 
 ***
 
@@ -324,7 +324,7 @@ Defined in: [maybe.ts:191](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **asyncMap**\<`T`, `P`\>(`map`, ...`parameters`): `Promise`\<[`Maybe`](../../type-aliases/Maybe.md)\<`T`\>\>
 
-Defined in: [maybe.ts:199](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L199)
+Defined in: [maybe.ts:201](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L201)
 
 #### Type Parameters
 
@@ -352,7 +352,7 @@ Defined in: [maybe.ts:199](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`asyncMap`](../functions/asyncMap.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`asyncMap`](MaybeConstructor.md#asyncmap)
 
 ***
 
@@ -360,7 +360,7 @@ Defined in: [maybe.ts:199](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **await**\<`T`\>(`this`): `Promise`\<[`Maybe`](../../type-aliases/Maybe.md)\<`T`\>\>
 
-Defined in: [maybe.ts:206](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L206)
+Defined in: [maybe.ts:208](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L208)
 
 #### Type Parameters
 
@@ -380,7 +380,7 @@ Defined in: [maybe.ts:206](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`await`](../functions/await.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`await`](MaybeConstructor.md#await)
 
 ***
 
@@ -388,7 +388,7 @@ Defined in: [maybe.ts:206](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **chain**\<`V`, `P`\>(`map`, ...`parameters`): [`Maybe`](../../type-aliases/Maybe.md)\<`V`\>
 
-Defined in: [maybe.ts:130](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L130)
+Defined in: [maybe.ts:132](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L132)
 
 #### Type Parameters
 
@@ -416,7 +416,7 @@ Defined in: [maybe.ts:130](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`chain`](../functions/chain.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`chain`](MaybeConstructor.md#chain)
 
 ***
 
@@ -424,7 +424,7 @@ Defined in: [maybe.ts:130](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **default**(`value`): [`Maybe`](../../type-aliases/Maybe.md)\<`T`\>
 
-Defined in: [maybe.ts:137](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L137)
+Defined in: [maybe.ts:139](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L139)
 
 #### Parameters
 
@@ -438,7 +438,7 @@ Defined in: [maybe.ts:137](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`default`](../functions/default.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`default`](MaybeConstructor.md#default)
 
 ***
 
@@ -448,7 +448,7 @@ Defined in: [maybe.ts:137](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **filter**\<`T`\>(`filter`): [`Maybe`](../../type-aliases/Maybe.md)\<`T`\>
 
-Defined in: [maybe.ts:124](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L124)
+Defined in: [maybe.ts:126](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L126)
 
 ##### Type Parameters
 
@@ -468,13 +468,13 @@ Defined in: [maybe.ts:124](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 ##### Inherited from
 
-[`<internal>`](../README.md).[`filter`](../functions/filter.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`filter`](MaybeConstructor.md#filter)
 
 #### Call Signature
 
 > **filter**(`filter`): [`Maybe`](../../type-aliases/Maybe.md)\<`T`\>
 
-Defined in: [maybe.ts:125](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L125)
+Defined in: [maybe.ts:127](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L127)
 
 ##### Parameters
 
@@ -488,7 +488,7 @@ Defined in: [maybe.ts:125](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 ##### Inherited from
 
-[`<internal>`](../README.md).[`filter`](../functions/filter.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`filter`](MaybeConstructor.md#filter)
 
 ***
 
@@ -496,7 +496,7 @@ Defined in: [maybe.ts:125](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **flatMap**\<`T`, `P`\>(`map`, ...`parameters`): `undefined` \| `T`
 
-Defined in: [maybe.ts:167](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L167)
+Defined in: [maybe.ts:169](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L169)
 
 #### Type Parameters
 
@@ -524,7 +524,7 @@ Defined in: [maybe.ts:167](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`flatMap`](../functions/flatMap.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`flatMap`](MaybeConstructor.md#flatmap)
 
 ***
 
@@ -532,7 +532,7 @@ Defined in: [maybe.ts:167](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **fold**\<`A`, `B`\>(`mapNone`, `mapJust`): `A` \| `B`
 
-Defined in: [maybe.ts:178](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L178)
+Defined in: [maybe.ts:180](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L180)
 
 #### Type Parameters
 
@@ -560,23 +560,57 @@ Defined in: [maybe.ts:178](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`fold`](../functions/fold.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`fold`](MaybeConstructor.md#fold)
 
 ***
 
 ### isJust()
 
-> **isJust**(): `this is Just<T>`
+#### Call Signature
 
-Defined in: [maybe.ts:61](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L61)
+> **isJust**\<`T`\>(`predicate`): `this is Just<T>`
 
-#### Returns
+Defined in: [maybe.ts:61](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L61)
+
+##### Type Parameters
+
+###### T
+
+`T`
+
+##### Parameters
+
+###### predicate
+
+(`value`) => `value is T`
+
+##### Returns
 
 `this is Just<T>`
 
-#### Inherited from
+##### Inherited from
 
-[`<internal>`](../README.md).[`isJust`](../functions/isJust.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`isJust`](MaybeConstructor.md#isjust)
+
+#### Call Signature
+
+> **isJust**(`predicate?`): `this is Just<T>`
+
+Defined in: [maybe.ts:62](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L62)
+
+##### Parameters
+
+###### predicate?
+
+(`value`) => `boolean`
+
+##### Returns
+
+`this is Just<T>`
+
+##### Inherited from
+
+[`MaybeConstructor`](MaybeConstructor.md).[`isJust`](MaybeConstructor.md#isjust)
 
 ***
 
@@ -584,7 +618,7 @@ Defined in: [maybe.ts:61](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **isNone**(): `this is None<T>`
 
-Defined in: [maybe.ts:65](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L65)
+Defined in: [maybe.ts:67](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L67)
 
 #### Returns
 
@@ -592,7 +626,7 @@ Defined in: [maybe.ts:65](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`isNone`](../functions/isNone.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`isNone`](MaybeConstructor.md#isnone)
 
 ***
 
@@ -600,7 +634,7 @@ Defined in: [maybe.ts:65](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **join**\<`V`\>(`this`): [`Maybe`](../../type-aliases/Maybe.md)\<`V`\>
 
-Defined in: [maybe.ts:69](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L69)
+Defined in: [maybe.ts:71](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L71)
 
 #### Type Parameters
 
@@ -620,7 +654,7 @@ Defined in: [maybe.ts:69](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`join`](../functions/join.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`join`](MaybeConstructor.md#join)
 
 ***
 
@@ -628,7 +662,7 @@ Defined in: [maybe.ts:69](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **map**\<`V`, `P`\>(`map`, ...`parameters`): [`Maybe`](../../type-aliases/Maybe.md)\<`V`\>
 
-Defined in: [maybe.ts:80](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L80)
+Defined in: [maybe.ts:82](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L82)
 
 #### Type Parameters
 
@@ -656,7 +690,7 @@ Defined in: [maybe.ts:80](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`map`](../functions/map.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`map`](MaybeConstructor.md#map)
 
 ***
 
@@ -664,7 +698,7 @@ Defined in: [maybe.ts:80](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **mapNullable**\<`V`, `P`\>(`map`, ...`parameters`): [`Maybe`](../../type-aliases/Maybe.md)\<`V`\>
 
-Defined in: [maybe.ts:87](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L87)
+Defined in: [maybe.ts:89](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L89)
 
 #### Type Parameters
 
@@ -692,7 +726,7 @@ Defined in: [maybe.ts:87](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`mapNullable`](../functions/mapNullable.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`mapNullable`](MaybeConstructor.md#mapnullable)
 
 ***
 
@@ -700,7 +734,7 @@ Defined in: [maybe.ts:87](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **or**(`x`): [`Maybe`](../../type-aliases/Maybe.md)\<`T`\>
 
-Defined in: [maybe.ts:141](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L141)
+Defined in: [maybe.ts:143](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L143)
 
 #### Parameters
 
@@ -714,7 +748,7 @@ Defined in: [maybe.ts:141](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`or`](../functions/or.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`or`](MaybeConstructor.md#or)
 
 ***
 
@@ -722,7 +756,7 @@ Defined in: [maybe.ts:141](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **orAsync**(`factory`): `Promise`\<[`Maybe`](../../type-aliases/Maybe.md)\<`T`\>\>
 
-Defined in: [maybe.ts:149](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L149)
+Defined in: [maybe.ts:151](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L151)
 
 #### Parameters
 
@@ -736,7 +770,7 @@ Defined in: [maybe.ts:149](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`orAsync`](../functions/orAsync.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`orAsync`](MaybeConstructor.md#orasync)
 
 ***
 
@@ -744,7 +778,7 @@ Defined in: [maybe.ts:149](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **orLazy**(`factory`): [`Maybe`](../../type-aliases/Maybe.md)\<`T`\>
 
-Defined in: [maybe.ts:145](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L145)
+Defined in: [maybe.ts:147](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L147)
 
 #### Parameters
 
@@ -758,7 +792,7 @@ Defined in: [maybe.ts:145](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`orLazy`](../functions/orLazy.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`orLazy`](MaybeConstructor.md#orlazy)
 
 ***
 
@@ -766,7 +800,7 @@ Defined in: [maybe.ts:145](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **pipe**\<`V`, `P`\>(`pipe`, ...`parameters`): `V`
 
-Defined in: [maybe.ts:73](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L73)
+Defined in: [maybe.ts:75](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L75)
 
 #### Type Parameters
 
@@ -794,7 +828,7 @@ Defined in: [maybe.ts:73](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`pipe`](../functions/pipe.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`pipe`](MaybeConstructor.md#pipe)
 
 ***
 
@@ -802,7 +836,7 @@ Defined in: [maybe.ts:73](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **tap**\<`P`\>(`callback`, ...`parameters`): [`Maybe`](../../type-aliases/Maybe.md)\<`T`\>
 
-Defined in: [maybe.ts:159](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L159)
+Defined in: [maybe.ts:161](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L161)
 
 #### Type Parameters
 
@@ -826,7 +860,7 @@ Defined in: [maybe.ts:159](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`tap`](../functions/tap.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`tap`](MaybeConstructor.md#tap)
 
 ***
 
@@ -834,7 +868,7 @@ Defined in: [maybe.ts:159](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **toJSON**(): [`SerializedJust`](../type-aliases/SerializedJust.md)\<`T`\>
 
-Defined in: [maybe.ts:276](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L276)
+Defined in: [maybe.ts:278](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L278)
 
 #### Returns
 
@@ -846,7 +880,7 @@ Defined in: [maybe.ts:276](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **unwrap**(`message`): `T`
 
-Defined in: [maybe.ts:174](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L174)
+Defined in: [maybe.ts:176](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L176)
 
 #### Parameters
 
@@ -860,7 +894,7 @@ Defined in: [maybe.ts:174](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`unwrap`](../functions/unwrap.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`unwrap`](MaybeConstructor.md#unwrap)
 
 ***
 
@@ -868,7 +902,7 @@ Defined in: [maybe.ts:174](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **unwrapOr**\<`T`\>(`value`): `T` \| `T`
 
-Defined in: [maybe.ts:53](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L53)
+Defined in: [maybe.ts:53](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L53)
 
 #### Type Parameters
 
@@ -888,7 +922,7 @@ Defined in: [maybe.ts:53](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`unwrapOr`](../functions/unwrapOr.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`unwrapOr`](MaybeConstructor.md#unwrapor)
 
 ***
 
@@ -896,7 +930,7 @@ Defined in: [maybe.ts:53](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **unwrapOrElse**\<`T`\>(`value`): `T` \| `T`
 
-Defined in: [maybe.ts:57](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L57)
+Defined in: [maybe.ts:57](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L57)
 
 #### Type Parameters
 
@@ -916,7 +950,7 @@ Defined in: [maybe.ts:57](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`unwrapOrElse`](../functions/unwrapOrElse.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`unwrapOrElse`](MaybeConstructor.md#unwraporelse)
 
 ***
 
@@ -924,7 +958,7 @@ Defined in: [maybe.ts:57](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **zip**\<`T`\>(`maybe`): [`Maybe`](../../type-aliases/Maybe.md)\<[`Pair`](../../../types/type-aliases/Pair.md)\<`T`, `T`\>\>
 
-Defined in: [maybe.ts:155](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L155)
+Defined in: [maybe.ts:157](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L157)
 
 #### Type Parameters
 
@@ -944,7 +978,7 @@ Defined in: [maybe.ts:155](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 #### Inherited from
 
-[`<internal>`](../README.md).[`zip`](../functions/zip.md)
+[`MaybeConstructor`](MaybeConstructor.md).[`zip`](MaybeConstructor.md#zip)
 
 ***
 
@@ -952,7 +986,7 @@ Defined in: [maybe.ts:155](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > `static` **create**\<`T`\>(`value`): `Just`\<`T`\>
 
-Defined in: [maybe.ts:255](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L255)
+Defined in: [maybe.ts:257](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L257)
 
 #### Type Parameters
 

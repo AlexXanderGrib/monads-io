@@ -8,7 +8,7 @@
 
 > **catchAsync**\<`L`, `R`\>(`method`, `mapCaught?`): `Promise`\<[`Either`](../type-aliases/Either.md)\<`L`, `R`\>\>
 
-Defined in: [either.ts:723](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L723)
+Defined in: [either.ts:744](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L744)
 
 ## Type Parameters
 
@@ -24,11 +24,11 @@ Defined in: [either.ts:723](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 ### method
 
-() => [`MaybePromiseLike`](../../types/type-aliases/MaybePromiseLike.md)\<[`Either`](../type-aliases/Either.md)\<`L`, `R`\>\>
+`Promise`\<[`Either`](../type-aliases/Either.md)\<`L`, `R`\>\> | () => [`MaybePromiseLike`](../../types/type-aliases/MaybePromiseLike.md)\<[`Either`](../type-aliases/Either.md)\<`L`, `R`\>\>
 
 ### mapCaught?
 
-[`MapCaught`](../-internal-/type-aliases/MapCaught.md)\<`L`\>
+[`MapCaught`](../type-aliases/MapCaught.md)\<`L`\>
 
 ## Returns
 

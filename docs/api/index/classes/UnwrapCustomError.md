@@ -6,7 +6,7 @@
 
 # Class: UnwrapCustomError
 
-Defined in: [errors.ts:58](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L58)
+Defined in: [errors.ts:58](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L58)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [errors.ts:58](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **new UnwrapCustomError**(`message`): `UnwrapCustomError`
 
-Defined in: [errors.ts:67](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L67)
+Defined in: [errors.ts:67](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L67)
 
 #### Parameters
 
@@ -40,7 +40,7 @@ Defined in: [errors.ts:67](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **name**: `string` = `"UnwrapCustomError"`
 
-Defined in: [errors.ts:60](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L60)
+Defined in: [errors.ts:60](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L60)
 
 #### Overrides
 
@@ -52,7 +52,7 @@ Defined in: [errors.ts:60](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > `readonly` `static` **Messages**: *typeof* [`UnwrapCustomErrorMessages`](../-internal-/enumerations/UnwrapCustomErrorMessages.md) = `UnwrapCustomErrorMessages`
 
-Defined in: [errors.ts:59](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L59)
+Defined in: [errors.ts:59](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L59)
 
 ## Methods
 
@@ -60,7 +60,7 @@ Defined in: [errors.ts:59](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > `static` **inlineThrow**(`message`): `never`
 
-Defined in: [errors.ts:62](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L62)
+Defined in: [errors.ts:62](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L62)
 
 #### Parameters
 

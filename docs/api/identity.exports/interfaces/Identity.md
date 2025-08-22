@@ -6,7 +6,7 @@
 
 # Interface: Identity\<T\>
 
-Defined in: [identity.ts:14](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L14)
+Defined in: [identity.ts:14](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L14)
 
 ## Type Parameters
 
@@ -26,7 +26,7 @@ Defined in: [identity.ts:14](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 > `readonly` **value**: `T`
 
-Defined in: [identity.ts:27](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L27)
+Defined in: [identity.ts:27](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L27)
 
 ## Accessors
 
@@ -36,7 +36,7 @@ Defined in: [identity.ts:27](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 > **get** **\[toStringTag\]**(): `"Identity"`
 
-Defined in: [identity.ts:19](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L19)
+Defined in: [identity.ts:19](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L19)
 
 ##### Returns
 
@@ -50,7 +50,7 @@ Defined in: [identity.ts:19](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 > **get** **name**(): `"Identity"`
 
-Defined in: [identity.ts:23](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L23)
+Defined in: [identity.ts:23](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L23)
 
 ##### Returns
 
@@ -64,7 +64,7 @@ Defined in: [identity.ts:23](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 > **apply**\<`A`, `B`, `P`\>(`this`, `argument`, ...`parameters`): `Identity`\<`B`\>
 
-Defined in: [identity.ts:63](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L63)
+Defined in: [identity.ts:63](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L63)
 
 ##### Type Parameters
 
@@ -100,13 +100,13 @@ Defined in: [identity.ts:63](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 ##### Implementation of
 
-[`<internal>`](../../either.exports/-internal-/README.md).[`apply`](../../either.exports/-internal-/functions/apply-1.md)
+`AsyncMonad.apply`
 
 #### Call Signature
 
 > **apply**\<`A`, `B`, `P`\>(`this`, `map`, ...`parameters`): `Identity`\<`B`\>
 
-Defined in: [identity.ts:68](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L68)
+Defined in: [identity.ts:68](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L68)
 
 ##### Type Parameters
 
@@ -142,7 +142,7 @@ Defined in: [identity.ts:68](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 ##### Implementation of
 
-[`<internal>`](../../either.exports/-internal-/README.md).[`apply`](../../either.exports/-internal-/functions/apply-1.md)
+`AsyncMonad.apply`
 
 ***
 
@@ -152,7 +152,7 @@ Defined in: [identity.ts:68](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 > **asyncApply**\<`A`, `B`, `P`\>(`this`, `argument`, ...`parameters`): `Promise`\<`Identity`\<`B`\>\>
 
-Defined in: [identity.ts:93](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L93)
+Defined in: [identity.ts:93](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L93)
 
 ##### Type Parameters
 
@@ -190,7 +190,7 @@ Defined in: [identity.ts:93](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 > **asyncApply**\<`A`, `B`, `P`\>(`this`, `map`, ...`parameters`): `Promise`\<`Identity`\<`B`\>\>
 
-Defined in: [identity.ts:98](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L98)
+Defined in: [identity.ts:98](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L98)
 
 ##### Type Parameters
 
@@ -230,7 +230,7 @@ Defined in: [identity.ts:98](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 > **asyncChain**\<`B`, `P`\>(`map`, ...`parameters`): `Promise`\<`Identity`\<`B`\>\>
 
-Defined in: [identity.ts:132](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L132)
+Defined in: [identity.ts:132](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L132)
 
 #### Type Parameters
 
@@ -258,7 +258,7 @@ Defined in: [identity.ts:132](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 #### Implementation of
 
-[`<internal>`](../../either.exports/-internal-/README.md).[`asyncChain`](../../either.exports/-internal-/functions/asyncChain-1.md)
+`AsyncMonad.asyncChain`
 
 ***
 
@@ -266,7 +266,7 @@ Defined in: [identity.ts:132](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 > **asyncMap**\<`B`, `P`\>(`map`, ...`parameters`): `Promise`\<`Identity`\<`B`\>\>
 
-Defined in: [identity.ts:142](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L142)
+Defined in: [identity.ts:142](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L142)
 
 #### Type Parameters
 
@@ -298,7 +298,7 @@ Defined in: [identity.ts:142](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 > **await**\<`X`\>(`this`): `Promise`\<`Identity`\<`X`\>\>
 
-Defined in: [identity.ts:148](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L148)
+Defined in: [identity.ts:148](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L148)
 
 #### Type Parameters
 
@@ -318,7 +318,7 @@ Defined in: [identity.ts:148](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 #### Implementation of
 
-[`<internal>`](../../either.exports/-internal-/README.md).[`await`](../../either.exports/-internal-/functions/await-1.md)
+`AsyncMonad.await`
 
 ***
 
@@ -326,7 +326,7 @@ Defined in: [identity.ts:148](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 > **chain**\<`B`, `P`\>(`map`, ...`parameters`): `Identity`\<`B`\>
 
-Defined in: [identity.ts:125](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L125)
+Defined in: [identity.ts:125](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L125)
 
 #### Type Parameters
 
@@ -354,7 +354,7 @@ Defined in: [identity.ts:125](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 #### Implementation of
 
-[`<internal>`](../../either.exports/-internal-/README.md).[`chain`](../../either.exports/-internal-/functions/chain-1.md)
+`AsyncMonad.chain`
 
 ***
 
@@ -362,7 +362,7 @@ Defined in: [identity.ts:125](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 > **fold**\<`A`\>(`mapper`): `A`
 
-Defined in: [identity.ts:154](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L154)
+Defined in: [identity.ts:154](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L154)
 
 #### Type Parameters
 
@@ -386,7 +386,7 @@ Defined in: [identity.ts:154](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 > **join**\<`A`\>(`this`): `Identity`\<`A`\>
 
-Defined in: [identity.ts:52](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L52)
+Defined in: [identity.ts:52](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L52)
 
 #### Type Parameters
 
@@ -406,7 +406,7 @@ Defined in: [identity.ts:52](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 #### Implementation of
 
-[`<internal>`](../../either.exports/-internal-/README.md).[`join`](../../either.exports/-internal-/functions/join-1.md)
+`AsyncMonad.join`
 
 ***
 
@@ -414,7 +414,7 @@ Defined in: [identity.ts:52](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 > **map**\<`A`, `P`\>(`map`, ...`parameters`): `Identity`\<`A`\>
 
-Defined in: [identity.ts:56](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L56)
+Defined in: [identity.ts:56](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L56)
 
 #### Type Parameters
 
@@ -442,7 +442,7 @@ Defined in: [identity.ts:56](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 #### Implementation of
 
-[`<internal>`](../../either.exports/-internal-/README.md).[`map`](../../either.exports/-internal-/functions/map-1.md)
+`AsyncMonad.map`
 
 ***
 
@@ -450,7 +450,7 @@ Defined in: [identity.ts:56](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 > **pipe**\<`A`, `P`\>(`pipe`, ...`parameters`): `A`
 
-Defined in: [identity.ts:37](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L37)
+Defined in: [identity.ts:37](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L37)
 
 #### Type Parameters
 
@@ -486,7 +486,7 @@ Defined in: [identity.ts:37](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 > **tap**\<`P`\>(`callback`, ...`parameters`): `Identity`\<`T`\>
 
-Defined in: [identity.ts:29](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L29)
+Defined in: [identity.ts:29](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L29)
 
 #### Type Parameters
 
@@ -514,7 +514,7 @@ Defined in: [identity.ts:29](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 > **unwrap**(): `T`
 
-Defined in: [identity.ts:162](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L162)
+Defined in: [identity.ts:162](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L162)
 
 #### Returns
 
@@ -522,7 +522,7 @@ Defined in: [identity.ts:162](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 #### Implementation of
 
-[`<internal>`](../../either.exports/-internal-/README.md).[`unwrap`](../../either.exports/-internal-/functions/unwrap-1.md)
+`Container.unwrap`
 
 ***
 
@@ -530,7 +530,7 @@ Defined in: [identity.ts:162](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 > **unwrapOr**\<`X`\>(`value`): `T` \| `X`
 
-Defined in: [identity.ts:48](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L48)
+Defined in: [identity.ts:48](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L48)
 
 #### Type Parameters
 
@@ -550,7 +550,7 @@ Defined in: [identity.ts:48](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 #### Implementation of
 
-[`<internal>`](../../either.exports/-internal-/README.md).[`unwrapOr`](../../either.exports/-internal-/functions/unwrapOr-1.md)
+`Container.unwrapOr`
 
 ***
 
@@ -558,7 +558,7 @@ Defined in: [identity.ts:48](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 > **unwrapOrElse**\<`X`\>(`fallback`): `T` \| `X`
 
-Defined in: [identity.ts:44](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L44)
+Defined in: [identity.ts:44](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L44)
 
 #### Type Parameters
 
@@ -582,7 +582,7 @@ Defined in: [identity.ts:44](https://github.com/AlexXanderGrib/monads-io/blob/88
 
 > **zip**\<`A`\>(`either`): `Identity`\<\[`T`, `A`\]\>
 
-Defined in: [identity.ts:158](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L158)
+Defined in: [identity.ts:158](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L158)
 
 #### Type Parameters
 

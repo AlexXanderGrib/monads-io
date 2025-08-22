@@ -6,7 +6,7 @@
 
 # Interface: Container\<A\>
 
-Defined in: [types.ts:68](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L68)
+Defined in: [types.ts:68](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L68)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [types.ts:68](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **unwrap**(): `A`
 
-Defined in: [types.ts:69](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L69)
+Defined in: [types.ts:69](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L69)
 
 #### Returns
 
@@ -32,7 +32,7 @@ Defined in: [types.ts:69](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **unwrapOr**\<`T`\>(`value`): `A` \| `T`
 
-Defined in: [types.ts:70](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L70)
+Defined in: [types.ts:70](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L70)
 
 #### Type Parameters
 

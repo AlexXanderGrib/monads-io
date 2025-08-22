@@ -6,7 +6,7 @@
 
 # Enumeration: UnwrapCustomErrorMessages
 
-Defined in: [errors.ts:51](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L51)
+Defined in: [errors.ts:51](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L51)
 
 ## Enumeration Members
 
@@ -14,7 +14,7 @@ Defined in: [errors.ts:51](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **EITHER\_IS\_LEFT**: `"Either state is Left"`
 
-Defined in: [errors.ts:52](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L52)
+Defined in: [errors.ts:52](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L52)
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: [errors.ts:52](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **MAYBE\_IS\_NONE**: `"Maybe state is None"`
 
-Defined in: [errors.ts:53](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L53)
+Defined in: [errors.ts:53](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L53)

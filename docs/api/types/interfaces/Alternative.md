@@ -6,7 +6,7 @@
 
 # Interface: Alternative\<T\>
 
-Defined in: [types.ts:17](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L17)
+Defined in: [types.ts:17](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L17)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [types.ts:17](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **default**(`value`): `Alternative`\<`T`\>
 
-Defined in: [types.ts:19](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L19)
+Defined in: [types.ts:19](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L19)
 
 #### Parameters
 
@@ -38,7 +38,7 @@ Defined in: [types.ts:19](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **or**(`alternative`): `Alternative`\<`T`\>
 
-Defined in: [types.ts:18](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L18)
+Defined in: [types.ts:18](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L18)
 
 #### Parameters
 

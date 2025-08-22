@@ -652,7 +652,7 @@ function eraseType(value: unknown): any {
   return value;
 }
 
-type MapCaught<L> = Mapper<unknown, L>;
+export type MapCaught<L> = Mapper<unknown, L>;
 
 type LegacyMethodDecorator = (
   target: CallableFunction,

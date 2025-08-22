@@ -8,7 +8,7 @@
 
 > **bind**\<`A`, `B`, `P`\>(`map`, `parameters`): (`input`) => `B`
 
-Defined in: [runtime.ts:48](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/runtime.ts#L48)
+Defined in: [runtime.ts:48](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/runtime.ts#L48)
 
 Binds parameters to mapper function
 

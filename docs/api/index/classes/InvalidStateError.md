@@ -6,7 +6,7 @@
 
 # Class: InvalidStateError
 
-Defined in: [errors.ts:42](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L42)
+Defined in: [errors.ts:42](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L42)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [errors.ts:42](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **new InvalidStateError**(`message`): `InvalidStateError`
 
-Defined in: [errors.ts:46](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L46)
+Defined in: [errors.ts:46](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L46)
 
 #### Parameters
 
@@ -40,7 +40,7 @@ Defined in: [errors.ts:46](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **name**: `string` = `"InvalidStateError"`
 
-Defined in: [errors.ts:44](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L44)
+Defined in: [errors.ts:44](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L44)
 
 #### Overrides
 
@@ -52,4 +52,4 @@ Defined in: [errors.ts:44](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > `readonly` `static` **Messages**: *typeof* [`InvalidStateMessages`](../-internal-/enumerations/InvalidStateMessages.md) = `InvalidStateMessages`
 
-Defined in: [errors.ts:43](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/errors.ts#L43)
+Defined in: [errors.ts:43](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/errors.ts#L43)

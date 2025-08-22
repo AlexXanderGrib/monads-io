@@ -10,7 +10,7 @@
 
 > **merge**\<`V1`\>(`values`): [`Identity`](../interfaces/Identity.md)\<\[`V1`\]\>
 
-Defined in: [identity.ts:185](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L185)
+Defined in: [identity.ts:185](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L185)
 
 ### Type Parameters
 
@@ -32,7 +32,7 @@ Defined in: [identity.ts:185](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 > **merge**\<`V1`, `V2`\>(`values`): [`Identity`](../interfaces/Identity.md)\<\[`V1`, `V2`\]\>
 
-Defined in: [identity.ts:186](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L186)
+Defined in: [identity.ts:186](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L186)
 
 ### Type Parameters
 
@@ -58,7 +58,7 @@ Defined in: [identity.ts:186](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 > **merge**\<`V1`, `V2`, `V3`\>(`values`): [`Identity`](../interfaces/Identity.md)\<\[`V1`, `V2`, `V3`\]\>
 
-Defined in: [identity.ts:189](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L189)
+Defined in: [identity.ts:189](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L189)
 
 ### Type Parameters
 
@@ -88,7 +88,7 @@ Defined in: [identity.ts:189](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 > **merge**\<`V1`, `V2`, `V3`, `V4`\>(`values`): [`Identity`](../interfaces/Identity.md)\<\[`V1`, `V2`, `V3`, `V4`\]\>
 
-Defined in: [identity.ts:192](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L192)
+Defined in: [identity.ts:192](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L192)
 
 ### Type Parameters
 
@@ -122,7 +122,7 @@ Defined in: [identity.ts:192](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 > **merge**\<`V1`, `V2`, `V3`, `V4`, `V5`\>(`values`): [`Identity`](../interfaces/Identity.md)\<\[`V1`, `V2`, `V3`, `V4`, `V5`\]\>
 
-Defined in: [identity.ts:195](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L195)
+Defined in: [identity.ts:195](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L195)
 
 ### Type Parameters
 
@@ -160,7 +160,7 @@ Defined in: [identity.ts:195](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 > **merge**\<`V1`, `V2`, `V3`, `V4`, `V5`, `V6`\>(`values`): [`Identity`](../interfaces/Identity.md)\<\[`V1`, `V2`, `V3`, `V4`, `V5`, `V6`\]\>
 
-Defined in: [identity.ts:198](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L198)
+Defined in: [identity.ts:198](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L198)
 
 ### Type Parameters
 
@@ -202,7 +202,7 @@ Defined in: [identity.ts:198](https://github.com/AlexXanderGrib/monads-io/blob/8
 
 > **merge**\<`T`\>(`values`): [`Identity`](../interfaces/Identity.md)\<`T`[]\>
 
-Defined in: [identity.ts:208](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/identity.ts#L208)
+Defined in: [identity.ts:208](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/identity.ts#L208)
 
 ### Type Parameters
 

@@ -6,7 +6,7 @@
 
 # Enumeration: MaybeState
 
-Defined in: [maybe.ts:19](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L19)
+Defined in: [maybe.ts:19](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L19)
 
 ## Enumeration Members
 
@@ -14,7 +14,7 @@ Defined in: [maybe.ts:19](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **Just**: `"Just"`
 
-Defined in: [maybe.ts:21](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L21)
+Defined in: [maybe.ts:21](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L21)
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: [maybe.ts:21](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **None**: `"None"`
 
-Defined in: [maybe.ts:20](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L20)
+Defined in: [maybe.ts:20](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L20)

@@ -8,7 +8,7 @@
 
 > **asyncIterator**\<`T`\>(`callback`): `AsyncGenerator`\<`T`, `void`, `void`\>
 
-Defined in: [maybe.ts:398](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L398)
+Defined in: [maybe.ts:400](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L400)
 
 ## Type Parameters
 

@@ -2,10 +2,38 @@ import * as either from "./either.exports";
 export type Either<L, R> = either.Either<L, R>;
 export type SerializedEither<L, R> = either.SerializedEither<L, R>;
 
+type EitherExports = {
+  merge: typeof either.merge;
+  mergeInOne: typeof either.mergeInOne;
+  mergeInMany: typeof either.mergeInMany;
+
+  left: typeof either.left;
+  right: typeof either.right;
+  chain: typeof either.chain;
+
+  fromPromise: typeof either.fromPromise;
+  fromTry: typeof either.fromTry;
+  fromTryAsync: typeof either.fromTryAsync;
+  fromJSON: typeof either.fromJSON;
+  from: typeof either.from;
+  fromMaybe: typeof either.fromMaybe;
+  fromPromiseSettledResult: typeof either.fromPromiseSettledResult;
+
+  aggregateError: typeof either.aggregateError;
+  isEither: typeof either.isEither;
+  isRight: typeof either.isRight;
+  isLeft: typeof either.isLeft;
+
+  catch: typeof either.catchSync;
+  catchAsync: typeof either.catchAsync;
+  wrap: typeof either.wrap;
+  wrapAsync: typeof either.wrapAsync;
+}
+
 /**
  * @deprecated This is created only for compatibility with old nodejs. This is not tree-shakable. Prefer importing from `monads-io/either`
  */
-export const Either = Object.freeze({
+export const Either = Object.freeze<EitherExports>({
   merge: either.merge,
   mergeInOne: either.mergeInOne,
   mergeInMany: either.mergeInMany,
@@ -37,10 +65,33 @@ import * as maybe from "./maybe.exports";
 export type Maybe<T> = maybe.Maybe<T>;
 export type SerializedMaybe<T> = maybe.SerializedMaybe<T>;
 
+type MaybeExports = {
+  just: typeof maybe.just;
+  none: typeof maybe.none;
+  from: typeof maybe.from;
+
+  chain: typeof maybe.chain;
+
+  merge: typeof maybe.merge;
+
+  fromNullable: typeof maybe.fromNullable;
+  fromJSON: typeof maybe.fromJSON;
+  isMaybe: typeof maybe.isMaybe;
+  fromEitherRight: typeof maybe.fromEitherRight;
+  fromEitherLeft: typeof maybe.fromEitherLeft;
+
+  isJust: typeof maybe.isJust;
+  isNone: typeof maybe.isNone;
+
+  iterator: typeof maybe.iterator;
+  asyncIterator: typeof maybe.asyncIterator;
+  filterMap: typeof maybe.filterMap;
+}
+
 /**
  * @deprecated This is created only for compatibility with old nodejs. This is not tree-shakable. Prefer importing from `monads-io/maybe`
  */
-export const Maybe = Object.freeze({
+export const Maybe = Object.freeze<MaybeExports>({
   just: maybe.just,
   none: maybe.none,
   from: maybe.from,

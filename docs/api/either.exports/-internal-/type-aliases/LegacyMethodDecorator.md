@@ -8,7 +8,7 @@
 
 > **LegacyMethodDecorator** = (`target`, `property`, `descriptor`) => `void`
 
-Defined in: [either.ts:636](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L636)
+Defined in: [either.ts:657](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L657)
 
 ## Parameters
 

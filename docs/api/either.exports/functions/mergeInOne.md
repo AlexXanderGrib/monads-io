@@ -10,7 +10,7 @@
 
 > **mergeInOne**\<`L1`, `R1`\>(`values`): [`Either`](../type-aliases/Either.md)\<`L1`, \[`R1`\]\>
 
-Defined in: [either.ts:518](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L518)
+Defined in: [either.ts:539](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L539)
 
 ### Type Parameters
 
@@ -36,7 +36,7 @@ Defined in: [either.ts:518](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **mergeInOne**\<`L1`, `R1`, `L2`, `R2`\>(`values`): [`Either`](../type-aliases/Either.md)\<`L1` \| `L2`, \[`R1`, `R2`\]\>
 
-Defined in: [either.ts:519](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L519)
+Defined in: [either.ts:540](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L540)
 
 ### Type Parameters
 
@@ -70,7 +70,7 @@ Defined in: [either.ts:519](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **mergeInOne**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`\>(`values`): [`Either`](../type-aliases/Either.md)\<`L1` \| `L2` \| `L3`, \[`R1`, `R2`, `R3`\]\>
 
-Defined in: [either.ts:522](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L522)
+Defined in: [either.ts:543](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L543)
 
 ### Type Parameters
 
@@ -112,7 +112,7 @@ Defined in: [either.ts:522](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **mergeInOne**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`, `L4`, `R4`\>(`values`): [`Either`](../type-aliases/Either.md)\<`L1` \| `L2` \| `L3` \| `L4`, \[`R1`, `R2`, `R3`, `R4`\]\>
 
-Defined in: [either.ts:525](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L525)
+Defined in: [either.ts:546](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L546)
 
 ### Type Parameters
 
@@ -162,7 +162,7 @@ Defined in: [either.ts:525](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **mergeInOne**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`, `L4`, `R4`, `L5`, `R5`\>(`values`): [`Either`](../type-aliases/Either.md)\<`L1` \| `L2` \| `L3` \| `L4` \| `L5`, \[`R1`, `R2`, `R3`, `R4`, `R5`\]\>
 
-Defined in: [either.ts:528](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L528)
+Defined in: [either.ts:549](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L549)
 
 ### Type Parameters
 
@@ -220,7 +220,7 @@ Defined in: [either.ts:528](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **mergeInOne**\<`L1`, `R1`, `L2`, `R2`, `L3`, `R3`, `L4`, `R4`, `L5`, `R5`, `L6`, `R6`\>(`values`): [`Either`](../type-aliases/Either.md)\<`L1` \| `L2` \| `L3` \| `L4` \| `L5` \| `L6`, \[`R1`, `R2`, `R3`, `R4`, `R5`, `R6`\]\>
 
-Defined in: [either.ts:537](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L537)
+Defined in: [either.ts:558](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L558)
 
 ### Type Parameters
 
@@ -286,7 +286,7 @@ Defined in: [either.ts:537](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **mergeInOne**\<`L`, `R`\>(`values`): [`Either`](../type-aliases/Either.md)\<`L`, `R`[]\>
 
-Defined in: [either.ts:548](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L548)
+Defined in: [either.ts:569](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L569)
 
 ### Type Parameters
 

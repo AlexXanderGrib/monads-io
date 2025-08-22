@@ -6,7 +6,7 @@
 
 # Interface: AsyncMonad\<A\>
 
-Defined in: [types.ts:59](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L59)
+Defined in: [types.ts:59](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L59)
 
 ## Extends
 
@@ -26,7 +26,7 @@ Defined in: [types.ts:59](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **apply**\<`A`, `B`, `P`\>(`this`, `argument`, ...`parameters`): [`Applicative`](Applicative.md)\<`B`\>
 
-Defined in: [types.ts:35](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L35)
+Defined in: [types.ts:35](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L35)
 
 ##### Type Parameters
 
@@ -62,13 +62,13 @@ Defined in: [types.ts:35](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 ##### Inherited from
 
-[`<internal>`](../../either.exports/-internal-/README.md).[`apply`](../../either.exports/-internal-/functions/apply-1.md)
+[`Monad`](Monad.md).[`apply`](Monad.md#apply)
 
 #### Call Signature
 
 > **apply**\<`A`, `B`, `P`\>(`this`, `argument`, ...`parameters`): [`Applicative`](Applicative.md)\<`B`\>
 
-Defined in: [types.ts:40](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L40)
+Defined in: [types.ts:40](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L40)
 
 ##### Type Parameters
 
@@ -104,7 +104,7 @@ Defined in: [types.ts:40](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 ##### Inherited from
 
-[`<internal>`](../../either.exports/-internal-/README.md).[`apply`](../../either.exports/-internal-/functions/apply-1.md)
+[`Monad`](Monad.md).[`apply`](Monad.md#apply)
 
 ***
 
@@ -112,7 +112,7 @@ Defined in: [types.ts:40](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **asyncChain**\<`B`, `P`\>(`map`, ...`parameters`): `Promise`\<`AsyncMonad`\<`B`\>\>
 
-Defined in: [types.ts:60](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L60)
+Defined in: [types.ts:60](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L60)
 
 #### Type Parameters
 
@@ -144,7 +144,7 @@ Defined in: [types.ts:60](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **await**\<`A`\>(`this`): `Promise`\<`AsyncMonad`\<`A`\>\>
 
-Defined in: [types.ts:65](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L65)
+Defined in: [types.ts:65](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L65)
 
 #### Type Parameters
 
@@ -168,7 +168,7 @@ Defined in: [types.ts:65](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **chain**\<`B`, `P`\>(`map`, ...`parameters`): [`Monad`](Monad.md)\<`B`\>
 
-Defined in: [types.ts:51](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L51)
+Defined in: [types.ts:51](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L51)
 
 #### Type Parameters
 
@@ -196,7 +196,7 @@ Defined in: [types.ts:51](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 #### Inherited from
 
-[`<internal>`](../../either.exports/-internal-/README.md).[`chain`](../../either.exports/-internal-/functions/chain-1.md)
+[`Monad`](Monad.md).[`chain`](Monad.md#chain)
 
 ***
 
@@ -204,7 +204,7 @@ Defined in: [types.ts:51](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **join**\<`A`\>(`this`): [`Monad`](Monad.md)\<`A`\>
 
-Defined in: [types.ts:56](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L56)
+Defined in: [types.ts:56](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L56)
 
 #### Type Parameters
 
@@ -224,7 +224,7 @@ Defined in: [types.ts:56](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 #### Inherited from
 
-[`<internal>`](../../either.exports/-internal-/README.md).[`join`](../../either.exports/-internal-/functions/join-1.md)
+[`Monad`](Monad.md).[`join`](Monad.md#join)
 
 ***
 
@@ -232,7 +232,7 @@ Defined in: [types.ts:56](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 > **map**\<`B`, `P`\>(`map`, ...`parameters`): [`Functor`](Functor.md)\<`B`\>
 
-Defined in: [types.ts:25](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/types.ts#L25)
+Defined in: [types.ts:25](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/types.ts#L25)
 
 #### Type Parameters
 
@@ -260,4 +260,4 @@ Defined in: [types.ts:25](https://github.com/AlexXanderGrib/monads-io/blob/88cc2
 
 #### Inherited from
 
-[`<internal>`](../../either.exports/-internal-/README.md).[`map`](../../either.exports/-internal-/functions/map-1.md)
+[`Monad`](Monad.md).[`map`](Monad.md#map)

@@ -6,7 +6,7 @@
 
 # Class: EitherConstructor\<L, R\>
 
-Defined in: [either.ts:50](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L50)
+Defined in: [either.ts:57](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L57)
 
 ## Extended by
 
@@ -46,7 +46,7 @@ Defined in: [either.ts:50](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **any**\<`T`\>(`this`): `T`
 
-Defined in: [either.ts:292](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L292)
+Defined in: [either.ts:313](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L313)
 
 #### Type Parameters
 
@@ -72,7 +72,7 @@ Defined in: [either.ts:292](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **apply**\<`A`, `B`, `P`\>(`this`, `argument`, ...`parameters`): [`Either`](../../type-aliases/Either.md)\<`L`, `B`\>
 
-Defined in: [either.ts:109](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L109)
+Defined in: [either.ts:130](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L130)
 
 ##### Type Parameters
 
@@ -114,7 +114,7 @@ Defined in: [either.ts:109](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **apply**\<`A`, `B`, `P`\>(`this`, `map`, ...`parameters`): [`Either`](../../type-aliases/Either.md)\<`L`, `B`\>
 
-Defined in: [either.ts:114](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L114)
+Defined in: [either.ts:135](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L135)
 
 ##### Type Parameters
 
@@ -160,7 +160,7 @@ Defined in: [either.ts:114](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **asyncApply**\<`A`, `B`, `P`\>(`this`, `argument`, ...`parameters`): `Promise`\<[`Either`](../../type-aliases/Either.md)\<`L`, `B`\>\>
 
-Defined in: [either.ts:139](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L139)
+Defined in: [either.ts:160](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L160)
 
 ##### Type Parameters
 
@@ -198,7 +198,7 @@ Defined in: [either.ts:139](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **asyncApply**\<`A`, `B`, `P`\>(`this`, `map`, ...`parameters`): `Promise`\<[`Either`](../../type-aliases/Either.md)\<`L`, `B`\>\>
 
-Defined in: [either.ts:144](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L144)
+Defined in: [either.ts:165](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L165)
 
 ##### Type Parameters
 
@@ -238,7 +238,7 @@ Defined in: [either.ts:144](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **asyncChain**\<`A`, `B`, `P`\>(`map`, ...`parameters`): `Promise`\<[`Either`](../../type-aliases/Either.md)\<`L` \| `A`, `B`\>\>
 
-Defined in: [either.ts:193](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L193)
+Defined in: [either.ts:214](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L214)
 
 #### Type Parameters
 
@@ -278,7 +278,7 @@ Defined in: [either.ts:193](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **asyncMap**\<`A`, `B`, `P`\>(`map`, ...`parameters`): `Promise`\<[`Either`](../../type-aliases/Either.md)\<`L` \| `A`, `B`\>\>
 
-Defined in: [either.ts:201](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L201)
+Defined in: [either.ts:222](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L222)
 
 #### Type Parameters
 
@@ -314,7 +314,7 @@ Defined in: [either.ts:201](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **await**\<`T`\>(`this`): `Promise`\<[`Either`](../../type-aliases/Either.md)\<`L`, `T`\>\>
 
-Defined in: [either.ts:207](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L207)
+Defined in: [either.ts:228](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L228)
 
 #### Type Parameters
 
@@ -342,7 +342,7 @@ Defined in: [either.ts:207](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **biMap**\<`A`, `B`\>(`mapLeft`, `mapRight`): [`Either`](../../type-aliases/Either.md)\<`A`, `B`\>
 
-Defined in: [either.ts:189](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L189)
+Defined in: [either.ts:210](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L210)
 
 #### Type Parameters
 
@@ -374,7 +374,7 @@ Defined in: [either.ts:189](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **chain**\<`A`, `B`, `P`\>(`map`, ...`parameters`): [`Either`](../../type-aliases/Either.md)\<`L` \| `A`, `B`\>
 
-Defined in: [either.ts:175](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L175)
+Defined in: [either.ts:196](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L196)
 
 #### Type Parameters
 
@@ -414,7 +414,7 @@ Defined in: [either.ts:175](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **chainLeft**\<`A`, `B`, `P`\>(`map`, ...`parameters`): [`Either`](../../type-aliases/Either.md)\<`A`, `R` \| `B`\>
 
-Defined in: [either.ts:182](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L182)
+Defined in: [either.ts:203](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L203)
 
 #### Type Parameters
 
@@ -450,7 +450,7 @@ Defined in: [either.ts:182](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **default**(`value`): [`Either`](../../type-aliases/Either.md)\<`L`, `R`\>
 
-Defined in: [either.ts:234](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L234)
+Defined in: [either.ts:255](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L255)
 
 #### Parameters
 
@@ -472,7 +472,7 @@ Defined in: [either.ts:234](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **fold**\<`A`, `B`\>(`mapLeft`, `mapRight`): `A` \| `B`
 
-Defined in: [either.ts:221](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L221)
+Defined in: [either.ts:242](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L242)
 
 #### Type Parameters
 
@@ -506,11 +506,41 @@ Defined in: [either.ts:221](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 ### isLeft()
 
-> **isLeft**(): `this is Left<L, R>`
+#### Call Signature
 
-Defined in: [either.ts:68](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L68)
+> **isLeft**\<`T`\>(`predicate`): `this is Left<T, R>`
 
-#### Returns
+Defined in: [either.ts:83](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L83)
+
+##### Type Parameters
+
+###### T
+
+`T`
+
+##### Parameters
+
+###### predicate
+
+(`left`) => `left is T`
+
+##### Returns
+
+`this is Left<T, R>`
+
+#### Call Signature
+
+> **isLeft**(`predicate?`): `this is Left<L, R>`
+
+Defined in: [either.ts:84](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L84)
+
+##### Parameters
+
+###### predicate?
+
+(`left`) => `boolean`
+
+##### Returns
 
 `this is Left<L, R>`
 
@@ -518,11 +548,41 @@ Defined in: [either.ts:68](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 ### isRight()
 
-> **isRight**(): `this is Right<L, R>`
+#### Call Signature
 
-Defined in: [either.ts:72](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L72)
+> **isRight**\<`T`\>(`predicate?`): `this is Right<L, T>`
 
-#### Returns
+Defined in: [either.ts:89](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L89)
+
+##### Type Parameters
+
+###### T
+
+`T`
+
+##### Parameters
+
+###### predicate?
+
+(`right`) => `right is T`
+
+##### Returns
+
+`this is Right<L, T>`
+
+#### Call Signature
+
+> **isRight**(`predicate?`): `this is Right<L, R>`
+
+Defined in: [either.ts:92](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L92)
+
+##### Parameters
+
+###### predicate?
+
+(`right`) => `boolean`
+
+##### Returns
 
 `this is Right<L, R>`
 
@@ -532,7 +592,7 @@ Defined in: [either.ts:72](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **join**\<`L1`, `L2`, `R`\>(`this`): [`Either`](../../type-aliases/Either.md)\<`L1` \| `L2`, `R`\>
 
-Defined in: [either.ts:84](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L84)
+Defined in: [either.ts:105](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L105)
 
 #### Type Parameters
 
@@ -568,7 +628,7 @@ Defined in: [either.ts:84](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **map**\<`T`, `P`\>(`map`, ...`parameters`): [`Either`](../../type-aliases/Either.md)\<`L`, `T`\>
 
-Defined in: [either.ts:95](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L95)
+Defined in: [either.ts:116](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L116)
 
 #### Type Parameters
 
@@ -604,7 +664,7 @@ Defined in: [either.ts:95](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **mapLeft**\<`T`, `P`\>(`map`, ...`parameters`): [`Either`](../../type-aliases/Either.md)\<`T`, `R`\>
 
-Defined in: [either.ts:88](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L88)
+Defined in: [either.ts:109](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L109)
 
 #### Type Parameters
 
@@ -636,7 +696,7 @@ Defined in: [either.ts:88](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **mapRight**\<`T`, `P`\>(`map`, ...`parameters`): [`Either`](../../type-aliases/Either.md)\<`L`, `T`\>
 
-Defined in: [either.ts:102](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L102)
+Defined in: [either.ts:123](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L123)
 
 #### Type Parameters
 
@@ -668,7 +728,7 @@ Defined in: [either.ts:102](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **or**(`x`): [`Either`](../../type-aliases/Either.md)\<`L`, `R`\>
 
-Defined in: [either.ts:238](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L238)
+Defined in: [either.ts:259](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L259)
 
 #### Parameters
 
@@ -690,7 +750,7 @@ Defined in: [either.ts:238](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **orAsync**(`factory`): `Promise`\<[`Either`](../../type-aliases/Either.md)\<`L`, `R`\>\>
 
-Defined in: [either.ts:246](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L246)
+Defined in: [either.ts:267](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L267)
 
 #### Parameters
 
@@ -708,7 +768,7 @@ Defined in: [either.ts:246](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **orLazy**(`factory`): [`Either`](../../type-aliases/Either.md)\<`L`, `R`\>
 
-Defined in: [either.ts:242](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L242)
+Defined in: [either.ts:263](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L263)
 
 #### Parameters
 
@@ -726,7 +786,7 @@ Defined in: [either.ts:242](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **pipe**\<`T`, `P`\>(`pipe`, ...`parameters`): `T`
 
-Defined in: [either.ts:61](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L61)
+Defined in: [either.ts:76](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L76)
 
 #### Type Parameters
 
@@ -762,7 +822,7 @@ Defined in: [either.ts:61](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **promise**(): `Promise`\<`R`\>
 
-Defined in: [either.ts:268](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L268)
+Defined in: [either.ts:289](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L289)
 
 #### Returns
 
@@ -774,7 +834,7 @@ Defined in: [either.ts:268](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **swap**(): [`Either`](../../type-aliases/Either.md)\<`R`, `L`\>
 
-Defined in: [either.ts:171](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L171)
+Defined in: [either.ts:192](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L192)
 
 #### Returns
 
@@ -786,7 +846,7 @@ Defined in: [either.ts:171](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **tap**\<`P`\>(`callback`, ...`parameters`): [`Either`](../../type-aliases/Either.md)\<`L`, `R`\>
 
-Defined in: [either.ts:53](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L53)
+Defined in: [either.ts:60](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L60)
 
 #### Type Parameters
 
@@ -810,11 +870,39 @@ Defined in: [either.ts:53](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 ***
 
+### tapLeft()
+
+> **tapLeft**\<`P`\>(`callback`, ...`parameters`): [`Either`](../../type-aliases/Either.md)\<`L`, `R`\>
+
+Defined in: [either.ts:68](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L68)
+
+#### Type Parameters
+
+##### P
+
+`P` *extends* [`AnyParameters`](../../../types/type-aliases/AnyParameters.md)
+
+#### Parameters
+
+##### callback
+
+[`Mapper`](../../../types/type-aliases/Mapper.md)\<`L`, `void`, `P`\>
+
+##### parameters
+
+...`P`
+
+#### Returns
+
+[`Either`](../../type-aliases/Either.md)\<`L`, `R`\>
+
+***
+
 ### throw()
 
 > **throw**(): `R`
 
-Defined in: [either.ts:277](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L277)
+Defined in: [either.ts:298](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L298)
 
 #### Returns
 
@@ -832,7 +920,7 @@ Defined in: [either.ts:277](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **unwrap**(`message?`): `R`
 
-Defined in: [either.ts:264](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L264)
+Defined in: [either.ts:285](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L285)
 
 #### Parameters
 
@@ -850,7 +938,7 @@ Error message, if either is left. By default "Either state is Left"
 
 #### Deprecated
 
-- **If Left value is Error use [throw](../functions/throw.md) instead**
+- **If Left value is Error use [throw](#throw) instead**
 
 #### Throws
 
@@ -866,7 +954,7 @@ Error message, if either is left. By default "Either state is Left"
 
 > **unwrapOr**\<`T`\>(`value`): `R` \| `T`
 
-Defined in: [either.ts:80](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L80)
+Defined in: [either.ts:101](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L101)
 
 #### Type Parameters
 
@@ -894,7 +982,7 @@ Defined in: [either.ts:80](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **unwrapOrElse**\<`T`\>(`fallback`): `R` \| `T`
 
-Defined in: [either.ts:76](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L76)
+Defined in: [either.ts:97](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L97)
 
 #### Type Parameters
 
@@ -918,7 +1006,7 @@ Defined in: [either.ts:76](https://github.com/AlexXanderGrib/monads-io/blob/88cc
 
 > **value**(): `L` \| `R`
 
-Defined in: [either.ts:288](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L288)
+Defined in: [either.ts:309](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L309)
 
 Return value of Either independent if it is Right or Left
 
@@ -928,11 +1016,11 @@ Return value of Either independent if it is Right or Left
 
 #### Deprecated
 
-- probably should not be used, please refactor code or use [fold](../functions/fold.md)
+- probably should not be used, please refactor code or use [fold](#fold)
 
 #### See
 
-[fold](../functions/fold.md)
+[fold](#fold)
 
 ***
 
@@ -940,7 +1028,7 @@ Return value of Either independent if it is Right or Left
 
 > **zip**\<`A`, `B`\>(`either`): [`Either`](../../type-aliases/Either.md)\<`L` \| `A`, [`Pair`](../../../types/type-aliases/Pair.md)\<`R`, `B`\>\>
 
-Defined in: [either.ts:252](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L252)
+Defined in: [either.ts:273](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L273)
 
 #### Type Parameters
 

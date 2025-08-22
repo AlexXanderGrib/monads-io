@@ -10,7 +10,7 @@
 
 > **chain**\<`L`, `R`, `NR`, `P`\>(`map`, ...`parameters`): (`either`, ...`parameters`) => `Promise`\<[`Either`](../type-aliases/Either.md)\<`L`, `NR`\>\>
 
-Defined in: [either.ts:462](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L462)
+Defined in: [either.ts:483](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L483)
 
 ### Type Parameters
 
@@ -62,7 +62,7 @@ Defined in: [either.ts:462](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **chain**\<`L`, `R`, `NL`, `P`\>(`map`, ...`parameters`): (`either`, ...`parameters`) => `Promise`\<[`Either`](../type-aliases/Either.md)\<`L` \| `NL`, `R`\>\>
 
-Defined in: [either.ts:466](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L466)
+Defined in: [either.ts:487](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L487)
 
 ### Type Parameters
 
@@ -114,7 +114,7 @@ Defined in: [either.ts:466](https://github.com/AlexXanderGrib/monads-io/blob/88c
 
 > **chain**\<`L`, `R`, `NL`, `NR`, `P`\>(`map`, ...`parameters`): (`either`, ...`parameters`) => `Promise`\<[`Either`](../type-aliases/Either.md)\<`L` \| `NL`, `NR`\>\>
 
-Defined in: [either.ts:470](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/either.ts#L470)
+Defined in: [either.ts:491](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/either.ts#L491)
 
 ### Type Parameters
 

@@ -8,7 +8,7 @@
 
 > **chain**\<`A`, `B`, `P`\>(`map`, ...`parameters`): (`maybe`) => `Promise`\<[`Maybe`](../type-aliases/Maybe.md)\<`B`\>\>
 
-Defined in: [maybe.ts:334](https://github.com/AlexXanderGrib/monads-io/blob/88cc2f22cfbd8717d7e52da6913dd270216344b1/src/maybe.ts#L334)
+Defined in: [maybe.ts:336](https://github.com/AlexXanderGrib/monads-io/blob/d65e47796764202dffd7314b61c2ea9cedbb26e8/src/maybe.ts#L336)
 
 ## Type Parameters
 
