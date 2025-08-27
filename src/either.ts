@@ -742,7 +742,7 @@ export function catchSync<L = never, R = never>(
 }
 
 export async function catchAsync<L, R>(
-  method: Promise<Either<L, R>> | (() => MaybePromiseLike<Either<L, R>>),
+  method: PromiseLike<Either<L, R>> | (() => MaybePromiseLike<Either<L, R>>),
   mapCaught?: MapCaught<L>
 ): Promise<Either<L, R>> {
   const caught = await fromTryAsync<L, Either<L, R>>(method, mapCaught);
@@ -768,13 +768,15 @@ export function fromTry<L = never, T = never>(
 }
 
 export async function fromTryAsync<L = never, R = never>(
-  callback: Promise<R> | (() => MaybePromiseLike<R>),
+  callback: PromiseLike<R> | (() => MaybePromiseLike<R>),
   mapCaught: MapCaught<L> = eraseType
 ): Promise<Either<L, R>> {
   try {
-    return right(
-      callback instanceof Promise ? await callback : await callback()
-    );
+    const result = await (typeof callback === "function"
+      ? callback()
+      : callback);
+
+    return right(result);
   } catch (error) {
     return left(mapCaught(error));
   }

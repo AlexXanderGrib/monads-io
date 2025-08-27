@@ -13,7 +13,8 @@ import {
   wrap,
   wrapAsync,
   type Either,
-  fromPromiseSettledResult
+  fromPromiseSettledResult,
+  fromTryAsync
 } from "../either.exports";
 import {
   DeserializationError,
@@ -329,8 +330,29 @@ describe("Either", () => {
   test("fromMaybe", () => {
     const error = new Error("no value");
 
-    expect(maybeToEither<Error, number>(just(10), error)).toEqual(right(10));
-    expect(maybeToEither<Error, number>(none(), error)).toEqual(left(error));
+    expect(maybeToEither<Error, number>(just(10), error)).toStrictEqual(
+      right(10)
+    );
+    expect(maybeToEither<Error, number>(none(), error)).toStrictEqual(
+      left(error)
+    );
+  });
+
+  test("fromTryAsync", async () => {
+    await Promise.all([
+      expect(fromTryAsync<Error, number>(() => 10)).resolves.toStrictEqual(
+        right(10)
+      ),
+      expect(
+        fromTryAsync<Error, number>(async () => 10)
+      ).resolves.toStrictEqual(right(10)),
+      expect(
+        fromTryAsync<Error, number>(Promise.resolve(10))
+      ).resolves.toStrictEqual(right(10)),
+      expect(
+        fromTryAsync<Error, number>(Promise.reject(new Error("error")))
+      ).resolves.toStrictEqual(left(new Error("error")))
+    ]);
   });
 });
 
